@@ -3,6 +3,7 @@ name: Deploy demo-inmo
 on:
   push:
     branches: [main]
+  workflow_dispatch:
 
 jobs:
   deploy:
@@ -58,6 +59,6 @@ jobs:
               -l "traefik.http.routers.demo-inmo.tls=true" \
               -l "traefik.http.routers.demo-inmo.tls.certresolver=letsencrypt" \
               -l "traefik.http.services.demo-inmo.loadbalancer.server.port=3000" \
-              --network traefik-network \
+              --network traefik_network \
               severant/demo-inmo:latest
             docker system prune -f
