@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..600&family=Playfair+Display:ital,wght@0,400..700;1,400..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,200..600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Playfair+Display:ital,wght@0,400..700;1,400..700&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -9,29 +9,29 @@
     scroll-behavior: smooth;
   }
   body {
-    @apply bg-white text-gray-900 font-sans antialiased;
+    @apply bg-background text-foreground font-sans antialiased;
   }
 
   :root {
-    --background: 0 0% 100%;
+    --background: 42 20% 97%;
     --foreground: 0 0% 9%;
     --card: 0 0% 100%;
     --card-foreground: 0 0% 9%;
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 9%;
-    --primary: 174 100% 29%;
+    --primary: 174 56% 21%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 0 0% 96%;
-    --secondary-foreground: 0 0% 9%;
-    --muted: 0 0% 96%;
+    --secondary: 42 20% 94%;
+    --secondary-foreground: 174 56% 21%;
+    --muted: 42 15% 92%;
     --muted-foreground: 0 0% 45%;
-    --accent: 174 54% 93%;
-    --accent-foreground: 174 100% 29%;
+    --accent: 42 54% 54%;
+    --accent-foreground: 0 0% 100%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
-    --border: 0 0% 90%;
-    --input: 0 0% 90%;
-    --ring: 174 100% 29%;
+    --border: 42 15% 86%;
+    --input: 42 15% 86%;
+    --ring: 174 56% 21%;
     --radius: 0.5rem;
   }
 }
@@ -40,11 +40,57 @@
   .text-balance {
     text-wrap: balance;
   }
+
+  .bg-noise {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 200px 200px;
+  }
+
   .bg-subtle-grid {
     background-image:
       linear-gradient(rgba(0,0,0,0.03) 1px, transparent 1px),
       linear-gradient(90deg, rgba(0,0,0,0.03) 1px, transparent 1px);
     background-size: 60px 60px;
   }
+
+  .text-gold {
+    color: hsl(42 54% 54%);
+  }
+
+  .border-gold {
+    border-color: hsl(42 54% 54%);
+  }
 }
 
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes scale-in {
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse-soft {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+/* Gold focus ring for inputs */
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  @apply outline-none ring-2 ring-accent/60 ring-offset-1;
+}

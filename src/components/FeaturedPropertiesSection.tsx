@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import PropertyCard from "./PropertyCard";
 import { getLang } from "@/lib/utils";
+import { staggerContainer, springUp } from "@/lib/animations";
 import type { Property } from "@/lib/properties";
 
 interface FeaturedProps {
@@ -26,39 +27,69 @@ export default function FeaturedPropertiesSection({ title_en, title_es, subtitle
   const title = lang === "en" ? title_en : title_es;
   const subtitle = lang === "en" ? subtitle_en : subtitle_es;
 
+  const [first, ...rest] = properties;
+
   return (
-    <section className="py-16 sm:py-24 bg-gray-50">
+    <section className="py-20 sm:py-28 bg-[hsl(42,20%,96%)]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        {/* Heading */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-12"
+          transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
+          className="text-center mb-14"
         >
-          <h2 className="text-3xl sm:text-4xl font-serif font-bold text-gray-900 mb-3">{title}</h2>
-          <p className="text-gray-500 max-w-xl mx-auto">{subtitle}</p>
+          <div className="w-12 h-px bg-gold-500/60 mx-auto mb-5" />
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-gray-900 mb-4 tracking-wide">
+            {title}
+          </h2>
+          <p className="text-gray-500 max-w-xl mx-auto text-sm sm:text-base">{subtitle}</p>
         </motion.div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-10">
-          {properties.map((p, i) => (
-            <PropertyCard key={p.id} property={p} index={i} />
-          ))}
-        </div>
+        {/* Featured grid — asymmetric */}
+        <motion.div
+          variants={staggerContainer}
+          initial="initial"
+          whileInView="animate"
+          viewport={{ once: true }}
+          className="mb-12"
+        >
+          {/* First property — featured, larger */}
+          {first && (
+            <motion.div variants={springUp} className="mb-6 sm:mb-8 lg:col-span-2">
+              <div className="max-w-2xl mx-auto lg:mx-0">
+                <PropertyCard property={first} />
+              </div>
+            </motion.div>
+          )}
 
+          {/* Rest in regular grid */}
+          {rest.length > 0 && (
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+              {rest.map((p) => (
+                <motion.div key={p.id} variants={springUp}>
+                  <PropertyCard property={p} />
+                </motion.div>
+              ))}
+            </div>
+          )}
+        </motion.div>
+
+        {/* View all link */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
+          transition={{ delay: 0.3 }}
           className="text-center"
         >
           <a
             href="/properties"
-            className="inline-flex items-center gap-2 text-teal-600 font-medium text-sm hover:text-teal-700 transition-colors"
+            className="inline-flex items-center gap-2 text-sm font-medium text-gray-700 hover:text-teal-700 transition-colors group"
           >
-            {lang === "en" ? "View All Properties" : "Ver Todas las Propiedades"}
-            <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M5 12h14M12 5l7 7-7 7" />
-            </svg>
+            <span className="tracking-wider uppercase text-xs">{lang === "en" ? "View All Properties" : "Ver Todas las Propiedades"}</span>
+            <span className="w-8 h-px bg-gray-300 group-hover:bg-teal-700 transition-colors" />
           </a>
         </motion.div>
       </div>

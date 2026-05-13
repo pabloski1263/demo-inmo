@@ -28,7 +28,7 @@ export default function Navbar() {
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
-    window.addEventListener("scroll", onScroll);
+    window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
@@ -49,8 +49,8 @@ export default function Navbar() {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
-          ? "bg-white/95 backdrop-blur-xl shadow-sm border-b border-gray-100"
-          : "bg-transparent"
+          ? "bg-white/80 backdrop-blur-xl shadow-sm border-b border-gray-100/80"
+          : "bg-white/5 backdrop-blur-sm"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between">
@@ -59,38 +59,43 @@ export default function Navbar() {
           {content?.site?.logo ? (
             <img src={content.site.logo} alt={content.site.name} className="w-8 h-8 sm:w-10 sm:h-10 object-contain" />
           ) : (
-            <div className="w-8 h-8 sm:w-10 sm:h-10 bg-teal-600 rounded flex items-center justify-center">
-              <span className="text-white font-bold text-sm sm:text-lg">{initials}</span>
+            <div className="w-9 h-9 sm:w-11 sm:h-11 bg-teal-700 rounded-lg flex items-center justify-center group-hover:bg-teal-600 transition-colors">
+              <span className="text-white font-bold text-sm sm:text-lg tracking-wider">{initials}</span>
             </div>
           )}
           <div className="hidden sm:block">
-            <p className={`text-sm font-semibold leading-tight ${scrolled ? "text-gray-900" : "text-white"}`}>
+            <p
+              className={`font-serif text-lg font-semibold leading-tight tracking-wide transition-colors ${
+                scrolled ? "text-teal-700" : "text-white"
+              }`}
+            >
               {content?.site?.name || "INMO"}
             </p>
           </div>
         </a>
 
         {/* Desktop nav */}
-        <div className="hidden md:flex items-center gap-6 lg:gap-8">
+        <div className="hidden md:flex items-center gap-7 lg:gap-9">
           {navItems.map((item) => (
             <a
               key={item.key}
               href={item.href}
-              className={`text-sm transition-colors duration-300 ${
-                scrolled ? "text-gray-600 hover:text-teal-600" : "text-white/80 hover:text-white"
+              className={`relative text-sm tracking-wider font-medium transition-colors duration-300 group ${
+                scrolled ? "text-gray-700 hover:text-teal-700" : "text-white/85 hover:text-white"
               }`}
             >
               {t(item.key)}
+              <span className="absolute -bottom-0.5 left-0 w-0 h-px bg-current transition-all duration-300 group-hover:w-full" />
             </a>
           ))}
 
           {/* Language switcher */}
           <button
             onClick={handleLangToggle}
-            className={`text-xs font-medium px-2.5 py-1.5 rounded border transition-all ${
+            className={`text-xs font-medium px-3 py-1.5 rounded-full border transition-all ${
               scrolled
-                ? "text-teal-600 border-teal-600 hover:bg-teal-50"
-                : "text-white border-white/40 hover:border-white"
+                ? "border-gray-300 text-gray-600 hover:border-teal-600 hover:text-teal-700"
+                : "border-white/40 text-white/80 hover:border-white hover:text-white"
             }`}
           >
             {lang === "es" ? "EN" : "ES"}
@@ -98,7 +103,11 @@ export default function Navbar() {
 
           <a
             href="#contact"
-            className="px-5 py-2.5 bg-teal-600 text-white text-sm font-medium rounded-lg hover:bg-teal-700 transition-all duration-300 shadow-sm"
+            className={`px-5 py-2.5 text-sm font-medium rounded-lg transition-all duration-300 ${
+              scrolled
+                ? "bg-teal-700 text-white hover:bg-teal-600 shadow-sm"
+                : "bg-white/10 text-white border border-white/20 hover:bg-white/20 backdrop-blur-sm"
+            }`}
           >
             {t("common.contact_agent")}
           </a>
@@ -108,18 +117,18 @@ export default function Navbar() {
         <div className="flex md:hidden items-center gap-3">
           <button
             onClick={handleLangToggle}
-            className={`text-xs font-medium px-2 py-1 rounded border ${
-              scrolled ? "text-teal-600 border-teal-600" : "text-white border-white/50"
+            className={`text-xs font-medium px-2 py-1 rounded-full border ${
+              scrolled ? "border-gray-300 text-gray-600" : "border-white/50 text-white/80"
             }`}
           >
             {lang === "es" ? "EN" : "ES"}
           </button>
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className={`p-2 ${scrolled ? "text-gray-900" : "text-white"}`}
+            className={`p-2 transition-colors ${scrolled ? "text-gray-800" : "text-white"}`}
             aria-label="Menú"
           >
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
               {mobileOpen ? (
                 <path d="M6 18L18 6M6 6l12 12" />
               ) : (
@@ -137,15 +146,16 @@ export default function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-white border-t border-gray-100 shadow-lg"
+            transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+            className="md:hidden bg-white/90 backdrop-blur-xl border-t border-gray-100"
           >
-            <div className="px-4 py-4 space-y-1">
+            <div className="px-4 py-5 space-y-1">
               {navItems.map((item) => (
                 <a
                   key={item.key}
                   href={item.href}
                   onClick={() => setMobileOpen(false)}
-                  className="block text-sm text-gray-700 hover:text-teal-600 transition-colors py-2.5 px-3 rounded-lg hover:bg-teal-50"
+                  className="block text-sm tracking-wider text-gray-700 hover:text-teal-700 transition-colors py-3 px-3 rounded-lg hover:bg-teal-50/50"
                 >
                   {t(item.key)}
                 </a>
@@ -153,7 +163,7 @@ export default function Navbar() {
               <a
                 href="#contact"
                 onClick={() => setMobileOpen(false)}
-                className="block text-center px-5 py-3 bg-teal-600 text-white text-sm font-medium rounded-lg mt-3"
+                className="block text-center px-5 py-3 bg-teal-700 text-white text-sm font-medium rounded-lg mt-4 hover:bg-teal-600 transition-colors"
               >
                 {t("common.contact_agent")}
               </a>

@@ -357,8 +357,8 @@ export default function PropertyDetailPage({ params }: { params: Promise<{ slug:
           <section className="mt-16 mb-10">
             <h2 className="text-2xl font-serif font-bold text-gray-900 mb-6">{l("Similar Properties", "Propiedades Similares")}</h2>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {similar.map((p, i) => (
-                <PropertyCard key={p.id} property={p} index={i} />
+              {similar.map((p) => (
+                <PropertyCard key={p.id} property={p} />
               ))}
             </div>
           </section>

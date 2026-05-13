@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { getLang } from "@/lib/utils";
+import { staggerContainer, springUp } from "@/lib/animations";
 import type { ServiceItem } from "@/lib/content";
 
 interface ServicesSectionProps {
@@ -39,40 +40,47 @@ export default function ServicesSection({ title_en, title_es, items }: ServicesS
   const title = lang === "en" ? title_en : title_es;
 
   return (
-    <section className="py-16 sm:py-24 bg-gray-50">
+    <section className="py-20 sm:py-28">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-3xl sm:text-4xl font-serif font-bold text-gray-900 text-center mb-12"
+          transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
+          className="text-center mb-14"
         >
-          {title}
-        </motion.h2>
+          <div className="w-12 h-px bg-gold-500/60 mx-auto mb-5" />
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-gray-900 mb-4 tracking-wide">
+            {title}
+          </h2>
+        </motion.div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {items.map((item, i) => {
+        <motion.div
+          variants={staggerContainer}
+          initial="initial"
+          whileInView="animate"
+          viewport={{ once: true }}
+          className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6"
+        >
+          {items.map((item) => {
             const serviceTitle = lang === "en" ? item.title_en : item.title_es;
             const description = lang === "en" ? item.description_en : item.description_es;
 
             return (
               <motion.div
                 key={item.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="text-center p-6 sm:p-8 bg-white rounded-xl border border-gray-100 hover:border-teal-100 hover:shadow-md transition-all duration-300 group"
+                variants={springUp}
+                className="group text-center p-8 rounded-xl bg-white border border-gray-100/60 shadow-sm hover:shadow-lg hover:border-transparent transition-all duration-500"
               >
-                <div className="w-14 h-14 rounded-xl bg-teal-50 text-teal-600 flex items-center justify-center mx-auto mb-5 group-hover:bg-teal-100 transition-colors">
+                <div className="w-14 h-14 rounded-xl bg-gold-50 text-gold-500 flex items-center justify-center mx-auto mb-5 group-hover:bg-teal-700 group-hover:text-white transition-all duration-500">
                   {iconMap[item.icon] || iconMap.search}
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">{serviceTitle}</h3>
+                <h3 className="text-lg font-serif font-semibold text-gray-900 mb-2.5 tracking-wide">{serviceTitle}</h3>
                 <p className="text-sm text-gray-500 leading-relaxed">{description}</p>
               </motion.div>
             );
           })}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
