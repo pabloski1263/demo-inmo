@@ -2,7 +2,7 @@
   "site": {
     "name": "Sebastian Acosta",
     "subtitle": "Sebastian Acosta — Miami Luxury Real Estate",
-    "logo": "",
+    "logo": "https://media.pandaidx.com/app/6695753d31ff4215132235d0/settings/logo/8913c688-89be-44fd-b45a-ea07d679665d.png",
     "favicon": "",
     "legal_name": "Sebastian Acosta | ONE Sotheby's International Realty"
   },
@@ -11,7 +11,7 @@
     "last_name": "Acosta",
     "title_en": "Luxury Real Estate Advisor in Miami | Brickell Specialist",
     "title_es": "Asesor de Bienes Raíces de Lujo en Miami | Especialista en Brickell",
-    "photo": "",
+    "photo": "https://media.pandaidx.com/users/669575327e7b8e8fba62a266/avatar/1777949307513-image.png",
     "bio_en": "Sebastian Acosta is widely recognized as one of the top Miami real estate advisors and leading luxury real estate agents in Brickell, with more than 22 years of experience helping buyers, sellers, and investors navigate South Florida's dynamic property market. As a Senior Luxury Property Consultant with ONE Sotheby's International Realty, Sebastian specializes in representing high-net-worth clients in some of Miami's most desirable neighborhoods including Brickell, Coconut Grove, Coral Gables, Miami Beach, Edgewater, and Key Biscayne. Sebastian has built a reputation for delivering strategic guidance, powerful marketing exposure, and exceptional negotiation results. His listings benefit from a combination of global luxury marketing through the Sotheby's International Realty network, advanced digital media strategies, and targeted international buyer outreach, allowing properties to reach qualified buyers locally and worldwide. Beyond brokerage, Sebastian is also a real estate investor, author, and media entrepreneur. He is the author of Make Millions with Foreclosures and Short Sales and The Million Dollar Listing Social Media, and founded Brickell News, a growing digital media platform covering Miami real estate, business, and lifestyle developments.",
     "bio_es": "Sebastian Acosta es ampliamente reconocido como uno de los mejores asesores de bienes raíces de Miami y uno de los agentes de lujo líderes en Brickell, con más de 22 años de experiencia ayudando a compradores, vendedores e inversores a navegar el dinámico mercado inmobiliario del sur de Florida. Como Consultor Senior de Propiedades de Lujo en ONE Sotheby's International Realty, Sebastian se especializa en representar a clientes de alto patrimonio neto en los vecindarios más deseables de Miami, incluyendo Brickell, Coconut Grove, Coral Gables, Miami Beach, Edgewater y Key Biscayne. Sebastian se ha ganado una reputación por brindar orientación estratégica, exposición de marketing poderosa y resultados de negociación excepcionales. Sus listados se benefician de una combinación de marketing global de lujo a través de la red de Sotheby's International Realty, estrategias avanzadas de medios digitales y alcance dirigido a compradores internacionales. Más allá de la correduría, Sebastian también es inversionista inmobiliario, autor y emprendedor de medios. Es autor de Make Millions with Foreclosures and Short Sales y The Million Dollar Listing Social Media, y fundó Brickell News, una plataforma de medios digitales sobre bienes raíces, negocios y estilo de vida en Miami.",
     "credentials": [
@@ -87,7 +87,7 @@
     },
     "brokerage": {
       "name": "ONE Sotheby's International Realty",
-      "logo": "",
+      "logo": "https://media.pandaidx.com/users/669575327e7b8e8fba62a266/broker-logo/26e0cb62-783a-4054-8b93-7b936b051895.png",
       "website": "https://www.onesothebysrealty.com"
     },
     "mls_badge": "",
