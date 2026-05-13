@@ -41,8 +41,10 @@ export default function Navbar() {
     setLang(next);
   };
 
-  const initials = content?.site?.name
-    ? content.site.name.split(" ").map((w: string) => w[0]).join("").slice(0, 2).toUpperCase()
+  const agent = content?.agent;
+  const fullName = agent ? `${agent.first_name} ${agent.last_name}` : "";
+  const initials = agent
+    ? `${agent.first_name[0]}${agent.last_name[0]}`
     : "IN";
 
   return (
@@ -54,13 +56,13 @@ export default function Navbar() {
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between">
-        {/* Logo */}
+        {/* Logo — Agent photo + name */}
         <a href="/" className="flex items-center gap-2 sm:gap-3 group shrink-0">
-          {content?.site?.logo ? (
-            <img src={content.site.logo} alt={content.site.name} className="w-8 h-8 sm:w-10 sm:h-10 object-contain" />
+          {agent?.photo ? (
+            <img src={agent.photo} alt={fullName} className="w-9 h-9 sm:w-11 sm:h-11 rounded-full object-cover ring-2 ring-teal-700/20" />
           ) : (
-            <div className="w-9 h-9 sm:w-11 sm:h-11 bg-teal-700 rounded-lg flex items-center justify-center group-hover:bg-teal-600 transition-colors">
-              <span className="text-white font-bold text-sm sm:text-lg tracking-wider">{initials}</span>
+            <div className="w-9 h-9 sm:w-11 sm:h-11 bg-gradient-to-br from-teal-700 to-teal-800 rounded-full flex items-center justify-center group-hover:from-teal-600 transition-all">
+              <span className="text-white font-bold text-xs sm:text-sm tracking-wider">{initials}</span>
             </div>
           )}
           <div className="hidden sm:block">
@@ -69,7 +71,7 @@ export default function Navbar() {
                 scrolled ? "text-teal-700" : "text-white"
               }`}
             >
-              {content?.site?.name || "INMO"}
+              {fullName || content?.site?.name || "INMO"}
             </p>
           </div>
         </a>

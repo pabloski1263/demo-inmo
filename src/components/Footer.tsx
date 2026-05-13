@@ -9,47 +9,67 @@ interface FooterProps {
 
 export default function Footer({ content }: FooterProps) {
   const { lang, t } = useLangTranslations(content.translations);
-  const description = lang === "en" ? content.footer.description_en : content.footer.description_es;
+  const agent = content.agent;
 
-  const initials = content.site.name
-    .split(" ")
-    .map((w) => w[0])
-    .join("")
-    .slice(0, 2)
-    .toUpperCase();
+  const fullName = `${agent.first_name} ${agent.last_name}`;
+  const initials = `${agent.first_name[0]}${agent.last_name[0]}`;
+  const description = lang === "en" ? content.footer.description_en : content.footer.description_es;
 
   return (
     <footer className="bg-gray-900 text-gray-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-16 sm:py-24">
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-12">
-          {/* Brand */}
+          {/* Brand — Agent */}
           <div className="lg:pr-8">
             <div className="flex items-center gap-3 mb-4">
-              {content.site.logo ? (
-                <img src={content.site.logo} alt={content.site.name} className="w-8 h-8 object-contain" />
+              {agent.photo ? (
+                <img src={agent.photo} alt={fullName} className="w-9 h-9 rounded-full object-cover ring-2 ring-teal-700/30" />
               ) : (
-                <div className="w-9 h-9 bg-teal-700 rounded-lg flex items-center justify-center">
+                <div className="w-10 h-10 bg-gradient-to-br from-teal-700 to-teal-800 rounded-full flex items-center justify-center">
                   <span className="text-white font-bold text-xs tracking-wider">{initials}</span>
                 </div>
               )}
-              <span className="text-white font-serif text-base font-semibold tracking-wide">{content.site.name}</span>
+              <div>
+                <span className="text-white font-serif text-base font-semibold tracking-wide block">{fullName}</span>
+                <span className="text-[10px] text-gray-500 uppercase tracking-[1px]">
+                  {lang === "en" ? agent.title_en : agent.title_es}
+                </span>
+              </div>
             </div>
             <p className="text-sm text-gray-500 leading-relaxed">{description}</p>
+
+            {/* Affiliations */}
+            <div className="mt-5 space-y-1">
+              {agent.brokerage.name && (
+                <p className="text-xs text-gray-600 tracking-wide">
+                  {agent.brokerage.name}
+                </p>
+              )}
+              {agent.mls_badge && (
+                <p className="text-xs text-gray-600">{agent.mls_badge}</p>
+              )}
+            </div>
+
             {/* Social */}
             <div className="flex items-center gap-3 mt-6">
-              {content.footer.social.instagram && (
-                <a href={content.footer.social.instagram} className="w-8 h-8 rounded-full border border-gray-700 flex items-center justify-center text-gray-500 hover:text-white hover:border-gray-500 transition-all" aria-label="Instagram">
+              {agent.social.instagram && (
+                <a href={agent.social.instagram} className="w-8 h-8 rounded-full border border-gray-700 flex items-center justify-center text-gray-500 hover:text-white hover:border-gray-500 transition-all" aria-label="Instagram">
                   <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="2" y="2" width="20" height="20" rx="5" /><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z" /><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" /></svg>
                 </a>
               )}
-              {content.footer.social.facebook && (
-                <a href={content.footer.social.facebook} className="w-8 h-8 rounded-full border border-gray-700 flex items-center justify-center text-gray-500 hover:text-white hover:border-gray-500 transition-all" aria-label="Facebook">
+              {agent.social.facebook && (
+                <a href={agent.social.facebook} className="w-8 h-8 rounded-full border border-gray-700 flex items-center justify-center text-gray-500 hover:text-white hover:border-gray-500 transition-all" aria-label="Facebook">
                   <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" /></svg>
                 </a>
               )}
-              {content.footer.social.linkedin && (
-                <a href={content.footer.social.linkedin} className="w-8 h-8 rounded-full border border-gray-700 flex items-center justify-center text-gray-500 hover:text-white hover:border-gray-500 transition-all" aria-label="LinkedIn">
+              {agent.social.linkedin && (
+                <a href={agent.social.linkedin} className="w-8 h-8 rounded-full border border-gray-700 flex items-center justify-center text-gray-500 hover:text-white hover:border-gray-500 transition-all" aria-label="LinkedIn">
                   <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z" /><rect x="2" y="9" width="4" height="12" /><circle cx="4" cy="4" r="2" /></svg>
+                </a>
+              )}
+              {agent.social.youtube && (
+                <a href={agent.social.youtube} className="w-8 h-8 rounded-full border border-gray-700 flex items-center justify-center text-gray-500 hover:text-white hover:border-gray-500 transition-all" aria-label="YouTube">
+                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M22.54 6.42a2.78 2.78 0 00-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 00-1.94 2A29 29 0 001 11.75a29 29 0 00.46 5.33 2.78 2.78 0 001.94 2c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 001.94-2 29 29 0 00.46-5.25 29 29 0 00-.46-5.33z" /><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" /></svg>
                 </a>
               )}
             </div>
@@ -91,7 +111,7 @@ export default function Footer({ content }: FooterProps) {
         {/* Bottom bar */}
         <div className="border-t border-gray-800/60 mt-14 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs text-gray-600">
-            &copy; {new Date().getFullYear()} {content.site.legal_name || content.site.name}. {t("footer.rights")}
+            &copy; {new Date().getFullYear()} {content.site.legal_name || fullName}. {t("footer.rights")}
           </p>
           <div className="flex items-center gap-5">
             {content.footer.legal_links.map((link) => (

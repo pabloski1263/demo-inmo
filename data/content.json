@@ -1,10 +1,83 @@
 {
   "site": {
-    "name": "INMO Inmobiliaria",
-    "subtitle": "INMO Real Estate",
+    "name": "Alejandro Vargas",
+    "subtitle": "Alejandro Vargas — Miami Luxury Real Estate",
     "logo": "",
     "favicon": "",
-    "legal_name": "INMO SpA"
+    "legal_name": "Alejandro Vargas | ONE Sotheby's International Realty"
+  },
+  "agent": {
+    "first_name": "Alejandro",
+    "last_name": "Vargas",
+    "title_en": "Miami Luxury Property Specialist",
+    "title_es": "Especialista en Propiedades de Lujo de Miami",
+    "photo": "",
+    "bio_en": "With over 15 years of experience in Miami's luxury real estate market, Alejandro Vargas has established himself as one of the city's most trusted advisors. Born in Caracas and raised between Miami and Madrid, Alejandro brings a unique international perspective to every transaction. His deep understanding of Miami's diverse neighborhoods — from Brickell's soaring condos to Coral Gables' estate homes — allows him to match discerning clients with properties that truly resonate. Alejandro has facilitated over 500 transactions totaling more than $350 million in volume, earning recognition as a Top Producer by ONE Sotheby's International Realty and consistently ranking in the top 2% of Miami-Dade agents. His philosophy is simple: listen first, then deliver beyond expectations.",
+    "bio_es": "Con más de 15 años de experiencia en el mercado inmobiliario de lujo de Miami, Alejandro Vargas se ha consolidado como uno de los asesores más confiables de la ciudad. Nacido en Caracas y criado entre Miami y Madrid, Alejandro aporta una perspectiva internacional única a cada transacción. Su profundo conocimiento de los diversos vecindarios de Miami — desde los imponentes condominios de Brickell hasta las casas señoriales de Coral Gables — le permite conectar a clientes exigentes con propiedades que realmente resuenan con ellos. Alejandro ha facilitado más de 500 transacciones por un volumen superior a $350 millones, obteniendo reconocimiento como Top Producer de ONE Sotheby's International Realty y clasificándose consistentemente en el top 2% de los agentes de Miami-Dade. Su filosofía es simple: primero escuchar, luego superar las expectativas.",
+    "credentials": [
+      "Top Producer — ONE Sotheby's International Realty",
+      "Certified Luxury Home Marketing Specialist (CLHMS)",
+      "Miami Association of Realtors® — Million Dollar Guild",
+      "Accredited Buyer's Representative (ABR®)",
+      "International Real Estate Specialist (IRES)"
+    ],
+    "languages": ["English", "Spanish", "Portuguese"],
+    "expertise_areas": [
+      {
+        "id": "waterfront",
+        "title_en": "Luxury Waterfront Properties",
+        "title_es": "Propiedades Frente al Agua",
+        "description_en": "Exclusive waterfront estates and condos with direct ocean, bay, and intracoastal views across Miami Beach, Coconut Grove, and Key Biscayne.",
+        "description_es": "Exclusivas propiedades y condominios frente al agua con vistas directas al océano, la bahía y el intracoastal en Miami Beach, Coconut Grove y Key Biscayne.",
+        "icon": "search"
+      },
+      {
+        "id": "brickell",
+        "title_en": "Brickell & Downtown Condos",
+        "title_es": "Condominios en Brickell y Downtown",
+        "description_en": "High-rise luxury condominiums in Miami's financial district, featuring world-class amenities and stunning skyline views.",
+        "description_es": "Condominios de lujo en el distrito financiero de Miami, con amenidades de clase mundial y espectaculares vistas al skyline.",
+        "icon": "tag"
+      },
+      {
+        "id": "coral-gables",
+        "title_en": "Coral Gables Estates",
+        "title_es": "Propiedades en Coral Gables",
+        "description_en": "Mediterranean-style estates and family homes in one of Miami's most prestigious and tree-lined communities.",
+        "description_es": "Quintas de estilo mediterráneo y hogares familiares en una de las comunidades más prestigiosas y arboladas de Miami.",
+        "icon": "key"
+      },
+      {
+        "id": "international",
+        "title_en": "International & Relocation",
+        "title_es": "Clientes Internacionales y Reubicación",
+        "description_en": "Comprehensive relocation services for international buyers, handling every aspect of the Miami real estate investment process.",
+        "description_es": "Servicios completos de reubicación para compradores internacionales, manejando cada aspecto del proceso de inversión inmobiliaria en Miami.",
+        "icon": "chart"
+      }
+    ],
+    "stats": [
+      { "label_en": "Years Experience", "label_es": "Años de Experiencia", "value": "15+" },
+      { "label_en": "Properties Sold", "label_es": "Propiedades Vendidas", "value": "500+" },
+      { "label_en": "Total Volume", "label_es": "Volumen Total", "value": "$350M+" },
+      { "label_en": "Client Satisfaction", "label_es": "Satisfacción del Cliente", "value": "98%" }
+    ],
+    "social": {
+      "instagram": "",
+      "facebook": "",
+      "linkedin": "",
+      "youtube": "",
+      "whatsapp": ""
+    },
+    "brokerage": {
+      "name": "ONE Sotheby's International Realty",
+      "logo": "",
+      "website": "https://www.onesothebysrealty.com"
+    },
+    "mls_badge": "",
+    "review_link": "",
+    "review_text_en": "Read my reviews on Zillow",
+    "review_text_es": "Lee mis reseñas en Zillow"
   },
   "hero": {
     "title_en": "Find Your Dream Home",
@@ -15,70 +88,70 @@
     "search_placeholder": "City, neighborhood or address..."
   },
   "featured": {
-    "title_en": "Featured Properties",
+    "title_en": "Active Listings",
     "title_es": "Propiedades Destacadas",
-    "subtitle_en": "Handpicked selections for discerning buyers",
-    "subtitle_es": "Selecciones exclusivas para compradores exigentes"
+    "subtitle_en": "Curated selection of Miami's finest properties",
+    "subtitle_es": "Selección exclusiva de las mejores propiedades de Miami"
   },
   "about": {
-    "title_en": "About INMO",
-    "title_es": "Sobre INMO",
-    "description_en": "INMO is a premier real estate agency dedicated to helping you find the perfect property. With years of experience in the Chilean market, we offer personalized service and expert guidance every step of the way.",
-    "description_es": "INMO es una agencia inmobiliaria premier dedicada a ayudarte a encontrar la propiedad perfecta. Con años de experiencia en el mercado chileno, ofrecemos servicio personalizado y asesoría experta en cada paso.",
+    "title_en": "About Alejandro",
+    "title_es": "Sobre Alejandro",
+    "description_en": "",
+    "description_es": "",
     "image": ""
   },
   "services": {
-    "title_en": "Our Services",
-    "title_es": "Nuestros Servicios",
+    "title_en": "Areas of Expertise",
+    "title_es": "Áreas de Especialización",
     "items": [
       {
-        "id": "buy",
-        "title_en": "Buy a Home",
-        "title_es": "Comprar",
-        "description_en": "Find your dream property with our expert guidance and extensive portfolio.",
-        "description_es": "Encuentra la propiedad de tus sueños con nuestra asesoría experta y amplio portafolio.",
+        "id": "waterfront",
+        "title_en": "Luxury Waterfront Properties",
+        "title_es": "Propiedades Frente al Agua",
+        "description_en": "Exclusive waterfront estates and condos with direct ocean, bay, and intracoastal views across Miami Beach, Coconut Grove, and Key Biscayne.",
+        "description_es": "Exclusivas propiedades y condominios frente al agua con vistas directas al océano, la bahía y el intracoastal en Miami Beach, Coconut Grove y Key Biscayne.",
         "icon": "search"
       },
       {
-        "id": "sell",
-        "title_en": "Sell a Property",
-        "title_es": "Vender",
-        "description_en": "Get the best value for your property with our strategic marketing approach.",
-        "description_es": "Obtén el mejor valor para tu propiedad con nuestro enfoque estratégico de marketing.",
+        "id": "brickell",
+        "title_en": "Brickell & Downtown Condos",
+        "title_es": "Condominios en Brickell y Downtown",
+        "description_en": "High-rise luxury condominiums in Miami's financial district, featuring world-class amenities and stunning skyline views.",
+        "description_es": "Condominios de lujo en el distrito financiero de Miami, con amenidades de clase mundial y espectaculares vistas al skyline.",
         "icon": "tag"
       },
       {
-        "id": "rent",
-        "title_en": "Rent",
-        "title_es": "Arrendar",
-        "description_en": "Discover premium rental properties tailored to your lifestyle and needs.",
-        "description_es": "Descubre propiedades en arriendo premium adaptadas a tu estilo de vida y necesidades.",
+        "id": "coral-gables",
+        "title_en": "Coral Gables Estates",
+        "title_es": "Propiedades en Coral Gables",
+        "description_en": "Mediterranean-style estates and family homes in one of Miami's most prestigious and tree-lined communities.",
+        "description_es": "Quintas de estilo mediterráneo y hogares familiares en una de las comunidades más prestigiosas y arboladas de Miami.",
         "icon": "key"
       },
       {
-        "id": "advise",
-        "title_en": "Real Estate Advice",
-        "title_es": "Asesoría",
-        "description_en": "Professional advice on market trends, investments, and property valuation.",
-        "description_es": "Asesoría profesional sobre tendencias del mercado, inversiones y valoración de propiedades.",
+        "id": "international",
+        "title_en": "International & Relocation",
+        "title_es": "Clientes Internacionales y Reubicación",
+        "description_en": "Comprehensive relocation services for international buyers, handling every aspect of the Miami real estate investment process.",
+        "description_es": "Servicios completos de reubicación para compradores internacionales, manejando cada aspecto del proceso de inversión inmobiliaria en Miami.",
         "icon": "chart"
       }
     ]
   },
   "contact": {
-    "title_en": "Contact Us",
-    "title_es": "Contáctenos",
-    "address": "Av. Apoquindo 4500, Las Condes, Santiago",
-    "phone": "+56 2 2345 6789",
-    "email": "info@inmo.cl",
-    "hours_en": "Mon-Fri: 9:00 - 18:00",
-    "hours_es": "Lun-Vie: 9:00 - 18:00",
-    "map_lat": -33.4163,
-    "map_lng": -70.5766
+    "title_en": "Let's Connect",
+    "title_es": "Conectemos",
+    "address": "1441 Brickell Ave, Suite 1400, Miami, FL 33131",
+    "phone": "+1 (305) 555-0147",
+    "email": "alejandro@vargasmiami.com",
+    "hours_en": "Mon-Fri: 9:00 AM - 7:00 PM | Sat: 10:00 AM - 5:00 PM",
+    "hours_es": "Lun-Vie: 9:00 AM - 7:00 PM | Sáb: 10:00 AM - 5:00 PM",
+    "map_lat": 25.7617,
+    "map_lng": -80.1918
   },
   "footer": {
-    "description_en": "INMO is a modern real estate agency providing exceptional service across Chile.",
-    "description_es": "INMO es una agencia inmobiliaria moderna que brinda un servicio excepcional en todo Chile.",
+    "description_en": "Alejandro Vargas is a Miami luxury real estate specialist affiliated with ONE Sotheby's International Realty, providing exceptional service to buyers and sellers across South Florida.",
+    "description_es": "Alejandro Vargas es un especialista en bienes raíces de lujo de Miami afiliado a ONE Sotheby's International Realty, brindando un servicio excepcional a compradores y vendedores en todo el sur de la Florida.",
     "social": {
       "instagram": "",
       "facebook": "",
@@ -98,19 +171,19 @@
     ]
   },
   "admin": {
-    "email": "admin@inmo.cl",
-    "password": "inmo2025"
+    "email": "admin@vargasmiami.com",
+    "password": "miami2025"
   },
   "translations": {
     "en": {
-      "nav.properties": "Properties",
+      "nav.properties": "Listings",
       "nav.buy": "Buy",
       "nav.rent": "Rent",
       "nav.about": "About",
       "nav.contact": "Contact",
       "property.beds": "beds",
       "property.baths": "baths",
-      "property.sqft": "m²",
+      "property.sqft": "sq. ft.",
       "property.for_sale": "For Sale",
       "property.for_rent": "For Rent",
       "property.sold": "Sold",
@@ -127,8 +200,8 @@
       "common.view_all": "View All Properties",
       "common.loading": "Loading...",
       "common.no_results": "No properties found",
-      "common.schedule_visit": "Schedule a Visit",
-      "common.contact_agent": "Contact Agent",
+      "common.schedule_visit": "Schedule a Tour",
+      "common.contact_agent": "Contact Alejandro",
       "common.details": "Details",
       "common.features": "Features",
       "common.description": "Description",
@@ -145,7 +218,7 @@
       "nav.properties": "Propiedades",
       "nav.buy": "Comprar",
       "nav.rent": "Arrendar",
-      "nav.about": "Nosotros",
+      "nav.about": "Sobre Mí",
       "nav.contact": "Contacto",
       "property.beds": "dorm.",
       "property.baths": "baños",
@@ -166,8 +239,8 @@
       "common.view_all": "Ver Todas las Propiedades",
       "common.loading": "Cargando...",
       "common.no_results": "No se encontraron propiedades",
-      "common.schedule_visit": "Agendar Visita",
-      "common.contact_agent": "Contactar Agente",
+      "common.schedule_visit": "Agendar una Visita",
+      "common.contact_agent": "Contactar a Alejandro",
       "common.details": "Detalles",
       "common.features": "Características",
       "common.description": "Descripción",

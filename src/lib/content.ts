@@ -11,6 +11,7 @@ export interface SiteContent {
     favicon: string;
     legal_name: string;
   };
+  agent: AgentProfile;
   hero: {
     title_en: string;
     title_es: string;
@@ -63,6 +64,51 @@ export interface SiteContent {
     en: Record<string, string>;
     es: Record<string, string>;
   };
+}
+
+export interface AgentProfile {
+  first_name: string;
+  last_name: string;
+  title_en: string;
+  title_es: string;
+  photo: string;
+  bio_en: string;
+  bio_es: string;
+  credentials: string[];
+  languages: string[];
+  expertise_areas: ExpertiseArea[];
+  stats: AgentStat[];
+  social: {
+    instagram: string;
+    facebook: string;
+    linkedin: string;
+    youtube: string;
+    whatsapp: string;
+  };
+  brokerage: {
+    name: string;
+    logo: string;
+    website: string;
+  };
+  mls_badge: string;
+  review_link: string;
+  review_text_en: string;
+  review_text_es: string;
+}
+
+export interface ExpertiseArea {
+  id: string;
+  title_en: string;
+  title_es: string;
+  description_en: string;
+  description_es: string;
+  icon: string;
+}
+
+export interface AgentStat {
+  label_en: string;
+  label_es: string;
+  value: string;
 }
 
 export interface ServiceItem {

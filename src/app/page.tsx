@@ -16,11 +16,9 @@ export default function HomePage() {
     <>
       <Navbar />
       <HeroSection
-        title_en={content.hero.title_en}
-        title_es={content.hero.title_es}
-        subtitle_en={content.hero.subtitle_en}
-        subtitle_es={content.hero.subtitle_es}
-        background_image={content.hero.background_image}
+        agent={content.agent}
+        phone={content.contact.phone}
+        email={content.contact.email}
       />
       <FeaturedPropertiesSection
         title_en={content.featured.title_en}
@@ -42,6 +40,10 @@ export default function HomePage() {
         email={content.contact.email}
         hours_en={content.contact.hours_en}
         hours_es={content.contact.hours_es}
+        whatsapp={content.agent.social.whatsapp}
+        review_link={content.agent.review_link}
+        review_text_en={content.agent.review_text_en}
+        review_text_es={content.agent.review_text_es}
       />
       <Footer content={content} />
     </>

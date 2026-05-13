@@ -12,13 +12,40 @@ interface AboutSectionProps {
 export default function AboutSection({ content }: AboutSectionProps) {
   const { lang } = useLangTranslations(content.translations);
 
+  const agent = content.agent;
   const title = lang === "en" ? content.about.title_en : content.about.title_es;
-  const description = lang === "en" ? content.about.description_en : content.about.description_es;
+  const bio = lang === "en" ? agent.bio_en : agent.bio_es;
+  const credentials = agent.credentials;
+  const languages = agent.languages;
+  const photo = agent.photo;
+  const initials = `${agent.first_name[0]}${agent.last_name[0]}`;
 
   return (
     <section id="about" className="py-20 sm:py-28">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="grid md:grid-cols-2 gap-14 sm:gap-20 items-center">
+        <div className="grid md:grid-cols-2 gap-14 sm:gap-20 items-start">
+          {/* Image */}
+          <motion.div
+            variants={slideRight}
+            initial="initial"
+            whileInView="animate"
+            viewport={{ once: true }}
+            className="relative"
+          >
+            <div className="absolute -bottom-4 -right-4 w-full h-full border-2 border-gray-100 rounded-xl -z-10" />
+            {photo ? (
+              <img
+                src={photo}
+                alt={title}
+                className="w-full h-[28rem] object-cover rounded-xl shadow-sm"
+              />
+            ) : (
+              <div className="w-full h-[28rem] bg-gradient-to-br from-teal-50 via-white to-gold-50 rounded-xl flex items-center justify-center border border-gray-100">
+                <span className="text-7xl font-serif font-bold text-teal-300">{initials}</span>
+              </div>
+            )}
+          </motion.div>
+
           {/* Text */}
           <motion.div
             variants={slideLeft}
@@ -30,54 +57,68 @@ export default function AboutSection({ content }: AboutSectionProps) {
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-gray-900 mb-6 tracking-wide">
               {title}
             </h2>
-            <p className="text-gray-600 leading-relaxed text-sm sm:text-base">
-              {description}
-            </p>
+
+            {bio && (
+              <p className="text-gray-600 leading-relaxed text-sm sm:text-base mb-8">
+                {bio}
+              </p>
+            )}
+
+            {/* Credentials */}
+            {credentials.length > 0 && (
+              <div className="mb-8">
+                <h3 className="text-sm font-semibold text-gray-900 uppercase tracking-wider mb-3">
+                  {lang === "en" ? "Credentials" : "Credenciales"}
+                </h3>
+                <ul className="space-y-2">
+                  {credentials.map((cred, i) => (
+                    <li key={i} className="flex items-start gap-2 text-sm text-gray-600">
+                      <svg className="w-4 h-4 text-gold-500 mt-0.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <polyline points="20 6 9 17 4 12" />
+                      </svg>
+                      {cred}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {/* Languages */}
+            {languages.length > 0 && (
+              <div>
+                <h3 className="text-sm font-semibold text-gray-900 uppercase tracking-wider mb-3">
+                  {lang === "en" ? "Languages" : "Idiomas"}
+                </h3>
+                <div className="flex flex-wrap gap-2">
+                  {languages.map((language) => (
+                    <span
+                      key={language}
+                      className="px-3 py-1.5 bg-gray-50 border border-gray-100 rounded-lg text-xs font-medium text-gray-700"
+                    >
+                      {language}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
 
             {/* Stats */}
-            <div className="grid grid-cols-3 gap-6 mt-10 pt-10 border-t border-gray-100">
-              {[
-                { number: "15+", label_en: "Years Experience", label_es: "Años de Experiencia" },
-                { number: "500+", label_en: "Properties Sold", label_es: "Propiedades Vendidas" },
-                { number: "98%", label_en: "Client Satisfaction", label_es: "Satisfacción del Cliente" },
-              ].map((stat) => (
+            <div className="grid grid-cols-4 gap-4 mt-10 pt-10 border-t border-gray-100">
+              {agent.stats.map((stat) => (
                 <motion.div
-                  key={stat.number}
+                  key={stat.label_en}
                   initial={{ opacity: 0, y: 10 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.2 }}
                 >
-                  <p className="text-2xl sm:text-3xl font-bold text-teal-700">{stat.number}</p>
-                  <p className="text-xs text-gray-500 mt-1">{lang === "en" ? stat.label_en : stat.label_es}</p>
+                  <p className="text-xl sm:text-2xl font-bold text-teal-700">{stat.value}</p>
+                  <p className="text-[10px] text-gray-500 mt-1 uppercase tracking-[1px]">
+                    {lang === "en" ? stat.label_en : stat.label_es}
+                  </p>
                 </motion.div>
               ))}
             </div>
-          </motion.div>
-
-          {/* Image */}
-          <motion.div
-            variants={slideRight}
-            initial="initial"
-            whileInView="animate"
-            viewport={{ once: true }}
-            className="relative"
-          >
-            <div className="absolute -bottom-4 -right-4 w-full h-full border-2 border-gray-100 rounded-xl -z-10" />
-            {content.about.image ? (
-              <img
-                src={content.about.image}
-                alt={title}
-                className="w-full h-[28rem] object-cover rounded-xl shadow-sm"
-              />
-            ) : (
-              <div className="w-full h-[28rem] bg-gradient-to-br from-teal-50 via-white to-gold-50 rounded-xl flex items-center justify-center border border-gray-100">
-                <svg className="w-20 h-20 text-teal-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
-                  <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
-                  <polyline points="9 22 9 12 15 12 15 22" />
-                </svg>
-              </div>
-            )}
           </motion.div>
         </div>
       </div>

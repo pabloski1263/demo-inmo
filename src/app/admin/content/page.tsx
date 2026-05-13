@@ -7,6 +7,7 @@ import toast from "react-hot-toast";
 import type { SiteContent } from "@/lib/content";
 
 const sections = [
+  { key: "perfil", label: "Perfil" },
   { key: "hero", label: "Hero" },
   { key: "featured", label: "Propiedades Destacadas" },
   { key: "about", label: "Nosotros" },
@@ -15,10 +16,21 @@ const sections = [
   { key: "footer", label: "Footer" },
 ] as const;
 
+const iconOptions = [
+  { value: "search", label: "Búsqueda" },
+  { value: "tag", label: "Etiqueta" },
+  { value: "key", label: "Llave" },
+  { value: "chart", label: "Gráfico" },
+  { value: "home", label: "Casa" },
+  { value: "shield", label: "Escudo" },
+  { value: "star", label: "Estrella" },
+  { value: "heart", label: "Corazón" },
+];
+
 export default function AdminContentPage() {
   const [content, setContent] = useState<SiteContent | null>(null);
   const [loading, setLoading] = useState(true);
-  const [activeSection, setActiveSection] = useState<string>("hero");
+  const [activeSection, setActiveSection] = useState<string>("perfil");
   const [saving, setSaving] = useState(false);
 
   const load = async () => {
@@ -43,6 +55,84 @@ export default function AdminContentPage() {
     setContent(updated);
   };
 
+  // ---- Agent helpers ----
+  const updateCredential = (index: number, value: string) => {
+    if (!content) return;
+    const credentials = [...content.agent.credentials];
+    credentials[index] = value;
+    setContent({ ...content, agent: { ...content.agent, credentials } });
+  };
+
+  const addCredential = () => {
+    if (!content) return;
+    const credentials = [...content.agent.credentials, ""];
+    setContent({ ...content, agent: { ...content.agent, credentials } });
+  };
+
+  const removeCredential = (index: number) => {
+    if (!content) return;
+    const credentials = content.agent.credentials.filter((_, i) => i !== index);
+    setContent({ ...content, agent: { ...content.agent, credentials } });
+  };
+
+  const updateLanguage = (index: number, value: string) => {
+    if (!content) return;
+    const languages = [...content.agent.languages];
+    languages[index] = value;
+    setContent({ ...content, agent: { ...content.agent, languages } });
+  };
+
+  const addLanguage = () => {
+    if (!content) return;
+    const languages = [...content.agent.languages, ""];
+    setContent({ ...content, agent: { ...content.agent, languages } });
+  };
+
+  const removeLanguage = (index: number) => {
+    if (!content) return;
+    const languages = content.agent.languages.filter((_, i) => i !== index);
+    setContent({ ...content, agent: { ...content.agent, languages } });
+  };
+
+  const updateExpertiseArea = (index: number, field: string, value: string) => {
+    if (!content) return;
+    const areas = [...content.agent.expertise_areas];
+    areas[index] = { ...areas[index], [field]: value };
+    setContent({ ...content, agent: { ...content.agent, expertise_areas: areas } });
+  };
+
+  const addExpertiseArea = () => {
+    if (!content) return;
+    const areas = [...content.agent.expertise_areas, { id: `e${Date.now()}`, title_en: "", title_es: "", description_en: "", description_es: "", icon: "search" }];
+    setContent({ ...content, agent: { ...content.agent, expertise_areas: areas } });
+  };
+
+  const removeExpertiseArea = (index: number) => {
+    if (!content) return;
+    const areas = content.agent.expertise_areas.filter((_, i) => i !== index);
+    setContent({ ...content, agent: { ...content.agent, expertise_areas: areas } });
+  };
+
+  const updateStat = (index: number, field: string, value: string) => {
+    if (!content) return;
+    const stats = [...content.agent.stats];
+    stats[index] = { ...stats[index], [field]: value };
+    setContent({ ...content, agent: { ...content.agent, stats } });
+  };
+
+  const addStat = () => {
+    if (!content) return;
+    const stats = [...content.agent.stats, { label_en: "", label_es: "", value: "" }];
+    setContent({ ...content, agent: { ...content.agent, stats } });
+  };
+
+  const removeStat = (index: number) => {
+    if (!content) return;
+    const stats = content.agent.stats.filter((_, i) => i !== index);
+    setContent({ ...content, agent: { ...content.agent, stats } });
+  };
+
+  // ---- Service item helpers ----
   const updateServiceItem = (index: number, field: string, value: string) => {
     if (!content) return;
     const items = [...content.services.items];
@@ -62,6 +152,7 @@ export default function AdminContentPage() {
     setContent({ ...content, services: { ...content.services, items } });
   };
 
+  // ---- Legal link helpers ----
   const updateLegalLink = (index: number, field: string, value: string) => {
     if (!content) return;
     const links = [...content.footer.legal_links];
@@ -105,6 +196,8 @@ export default function AdminContentPage() {
   const labelClass = "text-xs font-medium text-gray-500 uppercase tracking-wider block mb-1";
   const textAreaClass = "w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 resize-y";
 
+  const agent = content.agent;
+
   return (
     <div>
       <div className="flex items-center justify-between mb-6">
@@ -134,6 +227,199 @@ export default function AdminContentPage() {
           </button>
         ))}
       </div>
+
+      {/* === Perfil === */}
+      {activeSection === "perfil" && (
+        <div className="space-y-4">
+          {/* Basic info */}
+          <div className="bg-white border border-gray-200 rounded-xl p-6 space-y-4">
+            <h3 className="text-sm font-semibold text-gray-900">Información del Agente</h3>
+            <div className="grid sm:grid-cols-2 gap-4">
+              <div>
+                <label className={labelClass}>Nombre</label>
+                <input className={inputClass} value={agent.first_name} onChange={(e) => update("agent.first_name", e.target.value)} />
+              </div>
+              <div>
+                <label className={labelClass}>Apellido</label>
+                <input className={inputClass} value={agent.last_name} onChange={(e) => update("agent.last_name", e.target.value)} />
+              </div>
+              <div>
+                <label className={labelClass}>Título Profesional (EN)</label>
+                <input className={inputClass} value={agent.title_en} onChange={(e) => update("agent.title_en", e.target.value)} />
+              </div>
+              <div>
+                <label className={labelClass}>Título Profesional (ES)</label>
+                <input className={inputClass} value={agent.title_es} onChange={(e) => update("agent.title_es", e.target.value)} />
+              </div>
+              <div className="sm:col-span-2">
+                <label className={labelClass}>Foto</label>
+                <ImageUploader
+                  currentImage={agent.photo}
+                  onUpload={(url) => update("agent.photo", url)}
+                />
+              </div>
+              <div className="sm:col-span-2">
+                <label className={labelClass}>Bio (EN)</label>
+                <textarea rows={4} className={textAreaClass} value={agent.bio_en} onChange={(e) => update("agent.bio_en", e.target.value)} />
+              </div>
+              <div className="sm:col-span-2">
+                <label className={labelClass}>Bio (ES)</label>
+                <textarea rows={4} className={textAreaClass} value={agent.bio_es} onChange={(e) => update("agent.bio_es", e.target.value)} />
+              </div>
+            </div>
+          </div>
+
+          {/* Credentials */}
+          <div className="bg-white border border-gray-200 rounded-xl p-6 space-y-4">
+            <h3 className="text-sm font-semibold text-gray-900">Credenciales</h3>
+            {agent.credentials.map((cred, i) => (
+              <div key={i} className="flex gap-2 items-start">
+                <input className={`${inputClass} flex-1`} value={cred} onChange={(e) => updateCredential(i, e.target.value)} placeholder="Ej: Top Producer — ONE Sotheby's" />
+                <button onClick={() => removeCredential(i)} className="text-red-400 hover:text-red-600 text-sm px-2 mt-2">×</button>
+              </div>
+            ))}
+            <button onClick={addCredential} className="text-xs text-teal-600 hover:text-teal-700">+ Agregar credencial</button>
+          </div>
+
+          {/* Languages */}
+          <div className="bg-white border border-gray-200 rounded-xl p-6 space-y-4">
+            <h3 className="text-sm font-semibold text-gray-900">Idiomas</h3>
+            {agent.languages.map((lang, i) => (
+              <div key={i} className="flex gap-2 items-start">
+                <input className={`${inputClass} flex-1`} value={lang} onChange={(e) => updateLanguage(i, e.target.value)} placeholder="Ej: English" />
+                <button onClick={() => removeLanguage(i)} className="text-red-400 hover:text-red-600 text-sm px-2 mt-2">×</button>
+              </div>
+            ))}
+            <button onClick={addLanguage} className="text-xs text-teal-600 hover:text-teal-700">+ Agregar idioma</button>
+          </div>
+
+          {/* Expertise areas */}
+          <div className="bg-white border border-gray-200 rounded-xl p-6 space-y-4">
+            <h3 className="text-sm font-semibold text-gray-900">Áreas de Especialización</h3>
+            {agent.expertise_areas.map((area, i) => (
+              <div key={area.id} className="border border-gray-100 rounded-lg p-4 space-y-3">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-medium text-gray-500">Área {i + 1}</span>
+                  <button onClick={() => removeExpertiseArea(i)} className="text-xs text-red-400 hover:text-red-600">Eliminar</button>
+                </div>
+                <div className="grid sm:grid-cols-2 gap-3">
+                  <div>
+                    <label className={labelClass}>Título (EN)</label>
+                    <input className={inputClass} value={area.title_en} onChange={(e) => updateExpertiseArea(i, "title_en", e.target.value)} />
+                  </div>
+                  <div>
+                    <label className={labelClass}>Título (ES)</label>
+                    <input className={inputClass} value={area.title_es} onChange={(e) => updateExpertiseArea(i, "title_es", e.target.value)} />
+                  </div>
+                  <div>
+                    <label className={labelClass}>Descripción (EN)</label>
+                    <textarea rows={2} className={textAreaClass} value={area.description_en} onChange={(e) => updateExpertiseArea(i, "description_en", e.target.value)} />
+                  </div>
+                  <div>
+                    <label className={labelClass}>Descripción (ES)</label>
+                    <textarea rows={2} className={textAreaClass} value={area.description_es} onChange={(e) => updateExpertiseArea(i, "description_es", e.target.value)} />
+                  </div>
+                  <div>
+                    <label className={labelClass}>Icono</label>
+                    <select className={inputClass} value={area.icon} onChange={(e) => updateExpertiseArea(i, "icon", e.target.value)}>
+                      {iconOptions.map((opt) => (
+                        <option key={opt.value} value={opt.value}>{opt.label}</option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+              </div>
+            ))}
+            <button onClick={addExpertiseArea} className="text-xs text-teal-600 hover:text-teal-700">+ Agregar área</button>
+          </div>
+
+          {/* Stats */}
+          <div className="bg-white border border-gray-200 rounded-xl p-6 space-y-4">
+            <h3 className="text-sm font-semibold text-gray-900">Estadísticas</h3>
+            {agent.stats.map((stat, i) => (
+              <div key={i} className="flex gap-2 items-start">
+                <input className={inputClass} value={stat.value} onChange={(e) => updateStat(i, "value", e.target.value)} placeholder="Valor (15+, 500+, etc.)" />
+                <input className={inputClass} value={stat.label_en} onChange={(e) => updateStat(i, "label_en", e.target.value)} placeholder="Label (EN)" />
+                <input className={inputClass} value={stat.label_es} onChange={(e) => updateStat(i, "label_es", e.target.value)} placeholder="Label (ES)" />
+                <button onClick={() => removeStat(i)} className="text-red-400 hover:text-red-600 text-sm px-2 mt-2">×</button>
+              </div>
+            ))}
+            <button onClick={addStat} className="text-xs text-teal-600 hover:text-teal-700">+ Agregar estadística</button>
+          </div>
+
+          {/* Social */}
+          <div className="bg-white border border-gray-200 rounded-xl p-6 space-y-4">
+            <h3 className="text-sm font-semibold text-gray-900">Redes Sociales</h3>
+            <div className="grid sm:grid-cols-2 gap-4">
+              <div>
+                <label className={labelClass}>Instagram URL</label>
+                <input className={inputClass} value={agent.social.instagram} onChange={(e) => update("agent.social.instagram", e.target.value)} />
+              </div>
+              <div>
+                <label className={labelClass}>Facebook URL</label>
+                <input className={inputClass} value={agent.social.facebook} onChange={(e) => update("agent.social.facebook", e.target.value)} />
+              </div>
+              <div>
+                <label className={labelClass}>LinkedIn URL</label>
+                <input className={inputClass} value={agent.social.linkedin} onChange={(e) => update("agent.social.linkedin", e.target.value)} />
+              </div>
+              <div>
+                <label className={labelClass}>YouTube URL</label>
+                <input className={inputClass} value={agent.social.youtube} onChange={(e) => update("agent.social.youtube", e.target.value)} />
+              </div>
+              <div>
+                <label className={labelClass}>WhatsApp (número completo con código país)</label>
+                <input className={inputClass} value={agent.social.whatsapp} onChange={(e) => update("agent.social.whatsapp", e.target.value)} placeholder="+1 (305) 555-0147" />
+              </div>
+            </div>
+          </div>
+
+          {/* Brokerage */}
+          <div className="bg-white border border-gray-200 rounded-xl p-6 space-y-4">
+            <h3 className="text-sm font-semibold text-gray-900">Brokerage / Afiliación</h3>
+            <div className="grid sm:grid-cols-2 gap-4">
+              <div>
+                <label className={labelClass}>Nombre de la Inmobiliaria</label>
+                <input className={inputClass} value={agent.brokerage.name} onChange={(e) => update("agent.brokerage.name", e.target.value)} />
+              </div>
+              <div>
+                <label className={labelClass}>Website</label>
+                <input className={inputClass} value={agent.brokerage.website} onChange={(e) => update("agent.brokerage.website", e.target.value)} />
+              </div>
+              <div className="sm:col-span-2">
+                <label className={labelClass}>Logo de la Inmobiliaria</label>
+                <ImageUploader
+                  currentImage={agent.brokerage.logo}
+                  onUpload={(url) => update("agent.brokerage.logo", url)}
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Zillow / Review */}
+          <div className="bg-white border border-gray-200 rounded-xl p-6 space-y-4">
+            <h3 className="text-sm font-semibold text-gray-900">Reseñas</h3>
+            <div className="grid sm:grid-cols-2 gap-4">
+              <div>
+                <label className={labelClass}>MLS Badge (texto)</label>
+                <input className={inputClass} value={agent.mls_badge} onChange={(e) => update("agent.mls_badge", e.target.value)} />
+              </div>
+              <div>
+                <label className={labelClass}>Review Link URL</label>
+                <input className={inputClass} value={agent.review_link} onChange={(e) => update("agent.review_link", e.target.value)} />
+              </div>
+              <div>
+                <label className={labelClass}>Review Text (EN)</label>
+                <input className={inputClass} value={agent.review_text_en} onChange={(e) => update("agent.review_text_en", e.target.value)} />
+              </div>
+              <div>
+                <label className={labelClass}>Review Text (ES)</label>
+                <input className={inputClass} value={agent.review_text_es} onChange={(e) => update("agent.review_text_es", e.target.value)} />
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Hero */}
       {activeSection === "hero" && (
@@ -271,14 +557,9 @@ export default function AdminContentPage() {
                 <div>
                   <label className={labelClass}>Icono</label>
                   <select className={inputClass} value={item.icon} onChange={(e) => updateServiceItem(i, "icon", e.target.value)}>
-                    <option value="search">Búsqueda</option>
-                    <option value="tag">Etiqueta</option>
-                    <option value="key">Llave</option>
-                    <option value="chart">Gráfico</option>
-                    <option value="home">Casa</option>
-                    <option value="shield">Escudo</option>
-                    <option value="star">Estrella</option>
-                    <option value="heart">Corazón</option>
+                    {iconOptions.map((opt) => (
+                      <option key={opt.value} value={opt.value}>{opt.label}</option>
+                    ))}
                   </select>
                 </div>
               </div>

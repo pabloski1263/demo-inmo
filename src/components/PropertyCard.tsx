@@ -79,7 +79,7 @@ export default function PropertyCard({ property, isActive, onHover, onClick, com
             <span className="text-gray-300">·</span>
             <span>{property.baths} ba</span>
             <span className="text-gray-300">·</span>
-            <span>{formatArea(property.sqft)}</span>
+            <span>{formatArea(property.sqft, property.currency)}</span>
           </div>
         </div>
       </div>
@@ -145,7 +145,7 @@ export default function PropertyCard({ property, isActive, onHover, onClick, com
             <svg className="w-4 h-4 text-gray-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
               <rect x="3" y="3" width="18" height="18" rx="2" />
             </svg>
-            {formatArea(property.sqft)}
+            {formatArea(property.sqft, property.currency)}
           </span>
         </div>
       </div>

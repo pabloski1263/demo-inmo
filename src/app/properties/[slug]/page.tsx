@@ -149,12 +149,12 @@ export default function PropertyDetailPage({ params }: { params: Promise<{ slug:
                   <p className="text-xs text-gray-500">{l("baths", "baños")}</p>
                 </div>
                 <div className="text-center">
-                  <p className="text-lg font-semibold text-gray-900">{formatArea(property.sqft)}</p>
+                  <p className="text-lg font-semibold text-gray-900">{formatArea(property.sqft, property.currency)}</p>
                   <p className="text-xs text-gray-500">{l("Sq. Ft.", "m² const.")}</p>
                 </div>
                 {property.lot_size > 0 && (
                   <div className="text-center">
-                    <p className="text-lg font-semibold text-gray-900">{formatArea(property.lot_size)}</p>
+                    <p className="text-lg font-semibold text-gray-900">{formatArea(property.lot_size, property.currency)}</p>
                     <p className="text-xs text-gray-500">{l("Lot", "Terreno")}</p>
                   </div>
                 )}
