@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 import { useRouter, useSearchParams } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import PropertyCard from "@/components/PropertyCard";
-import { getLang, formatPrice, lt, type Lang } from "@/lib/utils";
+import { useReactiveLang, formatPrice, lt } from "@/lib/utils";
 import type { Property } from "@/lib/properties";
 
 const PropertyMap = dynamic(() => import("@/components/PropertyMap"), {
@@ -21,11 +21,7 @@ const SORT_OPTIONS = [
 ];
 
 export default function PropertiesPage() {
-  const [lang, setLang] = useState<Lang>("es");
-
-  useEffect(() => {
-    setLang(getLang());
-  }, []);
+  const lang = useReactiveLang();
 
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -184,8 +180,10 @@ export default function PropertiesPage() {
           from { opacity: 0; transform: translateY(16px); }
           to   { opacity: 1; transform: translateY(0); }
         }
+        .scrollbar-none { -ms-overflow-style: none; scrollbar-width: none; }
+        .scrollbar-none::-webkit-scrollbar { display: none; }
       `}</style>
-      <div className="pt-16 sm:pt-20 h-screen flex flex-col bg-white">
+      <div className="pt-16 sm:pt-20 h-[100dvh] flex flex-col bg-white">
         {/* Top bar with filters */}
         <div className="shrink-0 bg-white border-b border-gray-200 px-4 sm:px-6 py-3">
           <div className="max-w-full mx-auto">
@@ -197,8 +195,8 @@ export default function PropertiesPage() {
               </span>
             </div>
 
-            {/* Filter bar */}
-            <div className="flex flex-wrap items-center gap-2">
+            {/* Filter bar — horizontal scroll en mobile */}
+            <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none -mx-1 px-1">
               <select value={status} onChange={(e) => updateFilter("status", e.target.value)} className={inputClass}>
                 <option value="">{t("all_status")}</option>
                 <option value="for-sale">{t("for_sale")}</option>
@@ -252,6 +250,20 @@ export default function PropertiesPage() {
                   {loading ? t("loading") : `${properties.length} ${t("results")}`}
                 </span>
               </div>
+            </div>
+
+            {/* Mobile toggle: list → map */}
+            <div className="lg:hidden px-4 pt-2 pb-1 border-b border-gray-100 bg-gray-50">
+              <button
+                onClick={() => setShowMobileList(false)}
+                className="w-full flex items-center justify-center gap-2 text-xs font-medium text-teal-700 bg-teal-50 hover:bg-teal-100 rounded-lg py-2 transition-colors"
+              >
+                <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+                  <circle cx="12" cy="10" r="3" />
+                </svg>
+                {t("map")}
+              </button>
             </div>
 
             {/* Scrollable list */}
@@ -390,13 +402,16 @@ export default function PropertiesPage() {
               </div>
             )}
 
-            {/* Mobile toggle */}
+            {/* Mobile toggle: map → list */}
             <div className="lg:hidden absolute top-4 left-4 z-[1000]">
               <button
-                onClick={() => setShowMobileList(!showMobileList)}
-                className="bg-white border border-gray-200 rounded-lg shadow-lg px-4 py-2 text-sm font-medium text-gray-700"
+                onClick={() => setShowMobileList(true)}
+                className="flex items-center gap-2 bg-white border border-gray-200 rounded-lg shadow-lg px-4 py-2.5 text-sm font-semibold text-teal-700 hover:bg-teal-50 transition-colors"
               >
-                {showMobileList ? t("map") : t("list")}
+                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
+                </svg>
+                {t("list")}
               </button>
             </div>
           </div>
