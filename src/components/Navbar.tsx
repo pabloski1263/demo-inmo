@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { usePathname } from "next/navigation";
 import { getLang, switchLang } from "@/lib/utils";
 import type { SiteContent } from "@/lib/content";
 
@@ -18,6 +19,8 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [content, setContent] = useState<SiteContent | null>(null);
   const [lang, setLang] = useState<"en" | "es">("es");
+  const pathname = usePathname();
+  const isHome = pathname === "/";
 
   useEffect(() => {
     setLang(getLang());
@@ -41,6 +44,8 @@ export default function Navbar() {
     setLang(next);
   };
 
+  const isSolid = isHome ? scrolled : true;
+
   const agent = content?.agent;
   const fullName = agent ? `${agent.first_name} ${agent.last_name}` : "";
   const initials = agent
@@ -50,7 +55,7 @@ export default function Navbar() {
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled
+        isSolid
           ? "bg-white/80 backdrop-blur-xl shadow-sm border-b border-gray-100/80"
           : "bg-white/5 backdrop-blur-sm"
       }`}
@@ -68,7 +73,7 @@ export default function Navbar() {
           <div className="hidden sm:block">
             <p
               className={`font-serif text-lg font-semibold leading-tight tracking-wide transition-colors ${
-                scrolled ? "text-teal-700" : "text-white"
+                isSolid ? "text-teal-700" : "text-white"
               }`}
             >
               {fullName || content?.site?.name || "INMO"}
@@ -83,7 +88,7 @@ export default function Navbar() {
               key={item.key}
               href={item.href}
               className={`relative text-sm tracking-wider font-medium transition-colors duration-300 group ${
-                scrolled ? "text-gray-700 hover:text-teal-700" : "text-white/85 hover:text-white"
+                isSolid ? "text-gray-700 hover:text-teal-700" : "text-white/85 hover:text-white"
               }`}
             >
               {t(item.key)}
@@ -95,7 +100,7 @@ export default function Navbar() {
           <button
             onClick={handleLangToggle}
             className={`text-xs font-medium px-3 py-1.5 rounded-full border transition-all ${
-              scrolled
+              isSolid
                 ? "border-gray-300 text-gray-600 hover:border-teal-600 hover:text-teal-700"
                 : "border-white/40 text-white/80 hover:border-white hover:text-white"
             }`}
@@ -106,7 +111,7 @@ export default function Navbar() {
           <a
             href="#contact"
             className={`px-5 py-2.5 text-sm font-medium rounded-lg transition-all duration-300 ${
-              scrolled
+              isSolid
                 ? "bg-teal-700 text-white hover:bg-teal-600 shadow-sm"
                 : "bg-white/10 text-white border border-white/20 hover:bg-white/20 backdrop-blur-sm"
             }`}
@@ -120,14 +125,14 @@ export default function Navbar() {
           <button
             onClick={handleLangToggle}
             className={`text-xs font-medium px-2 py-1 rounded-full border ${
-              scrolled ? "border-gray-300 text-gray-600" : "border-white/50 text-white/80"
+              isSolid ? "border-gray-300 text-gray-600" : "border-white/50 text-white/80"
             }`}
           >
             {lang === "es" ? "EN" : "ES"}
           </button>
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className={`p-2 transition-colors ${scrolled ? "text-gray-800" : "text-white"}`}
+            className={`p-2 transition-colors ${isSolid ? "text-gray-800" : "text-white"}`}
             aria-label="Menú"
           >
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
