@@ -1,66 +1,184 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
-import L from "leaflet";
-import "leaflet/dist/leaflet.css";
-import { formatPrice } from "@/lib/utils";
+import { LngLatBounds } from "maplibre-gl";
+import { Map, useMap, MapMarker, MarkerContent, MarkerPopup, MapControls } from "@/components/ui/map";
+import { formatPrice, getLang } from "@/lib/utils";
 import type { Property } from "@/lib/properties";
-
-// Fix Leaflet default icon
-delete (L.Icon.Default.prototype as unknown as Record<string, unknown>)._getIconUrl;
-L.Icon.Default.mergeOptions({
-  iconRetinaUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
-  iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
-  shadowUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
-});
-
-function createPriceIcon(price: string, isActive: boolean) {
-  return L.divIcon({
-    className: "bg-transparent",
-    html: `<div style="
-      background:${isActive ? "#0d9488" : "white"};
-      color:${isActive ? "white" : "#1a1a1a"};
-      padding:5px 10px;
-      border-radius:8px;
-      font-size:12px;
-      font-weight:600;
-      white-space:nowrap;
-      box-shadow:0 2px 8px rgba(0,0,0,0.15);
-      border:2px solid ${isActive ? "#0d9488" : "#e5e7eb"};
-      transition:all 0.2s;
-      font-family:system-ui,-apple-system,sans-serif;
-    ">${price}</div>`,
-    iconSize: [0, 0],
-    iconAnchor: [40, 20],
-  });
-}
 
 interface PropertyMapProps {
   properties: Property[];
-  center?: [number, number];
-  zoom?: number;
   onMarkerClick?: (slug: string) => void;
   height?: string;
   activeSlug?: string | null;
 }
 
+/* ─── Map bounds: auto-fit on property change ─── */
 function MapBoundsUpdater({ properties }: { properties: Property[] }) {
-  const map = useMap();
-  const fitted = useRef(false);
+  const { map, isLoaded } = useMap();
+  const prevKey = useRef("");
 
   useEffect(() => {
-    if (properties.length > 1 && !fitted.current) {
-      const bounds = L.latLngBounds(properties.map((p) => [p.lat, p.lng]));
-      map.fitBounds(bounds, { padding: [40, 40] });
-      fitted.current = true;
+    if (!isLoaded || !map || properties.length === 0) return;
+
+    const key = properties.map((p) => p.id).join(",");
+    if (key === prevKey.current) return;
+    prevKey.current = key;
+
+    if (properties.length === 1) {
+      map.flyTo({ center: [properties[0].lng, properties[0].lat], zoom: 14, duration: 1500 });
+    } else {
+      const bounds = new LngLatBounds();
+      properties.forEach((p) => bounds.extend([p.lng, p.lat]));
+      map.fitBounds(bounds, { padding: 50, duration: 1000 });
     }
-  }, [properties, map]);
+  }, [map, isLoaded, properties]);
 
   return null;
 }
 
-export default function PropertyMap({ properties, onMarkerClick, height = "100%", activeSlug = null }: PropertyMapProps) {
+/* ─── Fly to active property when selected ─── */
+function MapFlyToUpdater({ activeSlug, properties }: { activeSlug: string | null; properties: Property[] }) {
+  const { map, isLoaded } = useMap();
+  const prev = useRef<string | null>(null);
+
+  useEffect(() => {
+    if (!isLoaded || !map || !activeSlug || activeSlug === prev.current) return;
+    prev.current = activeSlug;
+
+    const prop = properties.find((p) => p.slug === activeSlug);
+    if (prop) {
+      map.flyTo({ center: [prop.lng, prop.lat], zoom: 15, duration: 1200 });
+    }
+  }, [map, isLoaded, activeSlug, properties]);
+
+  return null;
+}
+
+/* ─── Price marker with glassmorphism + arrow ─── */
+function PriceMarker({
+  price,
+  currency,
+  isActive,
+  index = 0,
+}: {
+  price: number;
+  currency: string;
+  isActive: boolean;
+  index?: number;
+}) {
+  return (
+    <div
+      className="relative"
+      style={{ animation: `marker-in 0.35s ease-out ${index * 0.025}s both` }}
+    >
+      {/* Badge */}
+      <div
+        className={`
+          px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap
+          transition-all duration-300 ease-out relative z-10 cursor-pointer
+          ${isActive
+            ? "bg-teal-600 text-white scale-110 shadow-lg shadow-teal-600/30"
+            : "bg-white/90 backdrop-blur-sm text-gray-900 border border-gray-200/80 shadow-md hover:shadow-lg hover:border-teal-300 hover:scale-105"
+          }
+        `}
+      >
+        {formatPrice(price, currency)}
+      </div>
+      {/* Arrow pointer */}
+      <div
+        className={`
+          absolute left-1/2 -translate-x-1/2 -bottom-1 w-2 h-2 rotate-45 z-0
+          transition-all duration-300
+          ${isActive
+            ? "bg-teal-600"
+            : "bg-white border-r border-b border-gray-200/80"
+          }
+        `}
+      />
+    </div>
+  );
+}
+
+/* ─── Rich popup card ─── */
+function RichPopup({ property }: { property: Property }) {
+  const lang = getLang();
+  const title = lang === "en" ? property.title_en : property.title_es;
+
+  const statusLabel: Record<string, Record<string, string>> = {
+    en: { "for-sale": "For Sale", "for-rent": "For Rent", sold: "Sold", pending: "Pending" },
+    es: { "for-sale": "En Venta", "for-rent": "En Arriendo", sold: "Vendido", pending: "Pendiente" },
+  };
+
+  return (
+    <div className="w-64 overflow-hidden rounded-xl shadow-xl border border-gray-100 bg-white">
+      {/* Image */}
+      <div className="relative h-36 bg-gray-100">
+        {property.images?.[0] ? (
+          <img
+            src={property.images[0]}
+            alt={title}
+            className="w-full h-full object-cover"
+          />
+        ) : (
+          <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-teal-50 to-gray-100">
+            <svg className="w-8 h-8 text-teal-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+              <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+              <polyline points="9 22 9 12 15 12 15 22" />
+            </svg>
+          </div>
+        )}
+        <span className="absolute top-3 left-3 bg-white/90 backdrop-blur-sm text-[10px] font-semibold px-2 py-0.5 rounded-full text-gray-700 uppercase tracking-wider shadow-sm">
+          {statusLabel[lang]?.[property.status] || property.status}
+        </span>
+      </div>
+
+      {/* Details */}
+      <div className="p-3.5">
+        <p className="text-lg font-bold text-gray-900 leading-tight">
+          {formatPrice(property.price, property.currency)}
+        </p>
+        <p className="text-xs text-gray-500 mt-1 line-clamp-1">{title}</p>
+
+        <div className="flex items-center gap-3 text-xs text-gray-600 mt-2">
+          <span className="flex items-center gap-1">
+            <svg className="w-3.5 h-3.5 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" /><polyline points="9 22 9 12 15 12 15 22" />
+            </svg>
+            {property.beds}
+          </span>
+          <span className="flex items-center gap-1">
+            <svg className="w-3.5 h-3.5 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M2 15v3h20v-3M4 15V9a2 2 0 012-2h12a2 2 0 012 2v6M2 18h20" />
+            </svg>
+            {property.baths}
+          </span>
+          <span className="flex items-center gap-1">
+            <svg className="w-3.5 h-3.5 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <rect x="3" y="3" width="18" height="18" rx="2" />
+            </svg>
+            {property.sqft} m²
+          </span>
+        </div>
+
+        <a
+          href={`/properties/${property.slug}`}
+          className="mt-3 block w-full text-center text-xs font-semibold text-white bg-teal-600 hover:bg-teal-700 active:bg-teal-800 rounded-lg py-2 transition-colors"
+        >
+          {lang === "en" ? "View Details" : "Ver Detalle"} →
+        </a>
+      </div>
+    </div>
+  );
+}
+
+/* ─── Main export ─── */
+export default function PropertyMap({
+  properties,
+  onMarkerClick,
+  height = "100%",
+  activeSlug = null,
+}: PropertyMapProps) {
   const mapCenter: [number, number] =
     properties.length > 0
       ? [properties[0].lat, properties[0].lng]
@@ -68,43 +186,47 @@ export default function PropertyMap({ properties, onMarkerClick, height = "100%"
 
   return (
     <div style={{ height, width: "100%" }}>
-      <MapContainer
+      {/* Marker entrance keyframes */}
+      <style jsx global>{`
+        @keyframes marker-in {
+          from { opacity: 0; transform: translateY(8px) scale(0.7); }
+          to   { opacity: 1; transform: translateY(0) scale(1); }
+        }
+      `}</style>
+
+      <Map
         center={mapCenter}
         zoom={12}
-        className="h-full w-full"
-        scrollWheelZoom={true}
-        zoomControl={false}
+        scrollZoom={true}
+        attributionControl={false}
+        dragRotate={false}
+        touchZoomRotate={false}
       >
-        <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
         <MapBoundsUpdater properties={properties} />
-        {properties.map((p) => (
-          <Marker
+        <MapFlyToUpdater activeSlug={activeSlug} properties={properties} />
+        <MapControls showZoom showLocate position="top-right" />
+
+        {properties.map((p, i) => (
+          <MapMarker
             key={p.id}
-            position={[p.lat, p.lng]}
-            icon={createPriceIcon(formatPrice(p.price, p.currency), activeSlug === p.slug)}
-            eventHandlers={{
-              click: () => onMarkerClick?.(p.slug),
-            }}
+            longitude={p.lng}
+            latitude={p.lat}
+            onClick={() => onMarkerClick?.(p.slug)}
           >
-            <Popup>
-              <div style={{ maxWidth: 220, fontFamily: "system-ui,sans-serif" }}>
-                <div style={{ fontWeight: 600, fontSize: 14, marginBottom: 4 }}>
-                  {formatPrice(p.price, p.currency)}
-                </div>
-                <div style={{ fontSize: 12, color: "#666", marginBottom: 2 }}>
-                  {p.beds} beds &bull; {p.baths} baths &bull; {p.sqft} m²
-                </div>
-                <div style={{ fontSize: 12, color: "#666" }}>
-                  {p.address}
-                </div>
-              </div>
-            </Popup>
-          </Marker>
+            <MarkerContent>
+              <PriceMarker
+                price={p.price}
+                currency={p.currency}
+                isActive={activeSlug === p.slug}
+                index={i}
+              />
+            </MarkerContent>
+            <MarkerPopup>
+              <RichPopup property={p} />
+            </MarkerPopup>
+          </MapMarker>
         ))}
-      </MapContainer>
+      </Map>
     </div>
   );
 }

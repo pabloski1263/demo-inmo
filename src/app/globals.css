@@ -11,6 +11,29 @@
   body {
     @apply bg-white text-gray-900 font-sans antialiased;
   }
+
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 9%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 9%;
+    --primary: 174 100% 29%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 0 0% 9%;
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 45%;
+    --accent: 174 54% 93%;
+    --accent-foreground: 174 100% 29%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 90%;
+    --input: 0 0% 90%;
+    --ring: 174 100% 29%;
+    --radius: 0.5rem;
+  }
 }
 
 @layer utilities {
@@ -25,7 +48,3 @@
   }
 }
 
-/* Leaflet z-index fix */
-.leaflet-container {
-  z-index: 1;
-}

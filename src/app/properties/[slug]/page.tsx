@@ -281,7 +281,6 @@ export default function PropertyDetailPage({ params }: { params: Promise<{ slug:
               <div className="h-72 rounded-xl overflow-hidden border border-gray-200">
                 <PropertyMap
                   properties={[property]}
-                  zoom={15}
                   height="100%"
                 />
               </div>

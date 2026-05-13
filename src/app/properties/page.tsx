@@ -138,6 +138,12 @@ export default function PropertiesPage() {
   return (
     <>
       <Navbar />
+      <style>{`
+        @keyframes slide-up {
+          from { opacity: 0; transform: translateY(16px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+      `}</style>
       <div className="pt-16 sm:pt-20 h-screen flex flex-col bg-white">
         {/* Top bar with filters */}
         <div className="shrink-0 bg-white border-b border-gray-200 px-4 sm:px-6 py-3">
@@ -286,46 +292,60 @@ export default function PropertiesPage() {
               height="100%"
             />
 
-            {/* Active property popup overlay (desktop) */}
+            {/* Active property card overlay (desktop) */}
             {activeProperty && (
-              <div className="hidden lg:block absolute bottom-6 left-6 z-[1000] bg-white rounded-xl shadow-2xl border border-gray-200 p-4 w-80 animate-in">
-                <div className="flex gap-3">
-                  <div className="w-20 h-16 shrink-0 rounded-lg overflow-hidden bg-gray-100">
+              <div
+                key={activeProperty.slug}
+                className="hidden lg:block absolute bottom-6 left-6 z-[1000] w-80 animate-slide-up"
+                style={{ animation: "slide-up 0.3s ease-out" }}
+              >
+                <div className="bg-white rounded-xl shadow-2xl border border-gray-100 overflow-hidden">
+                  {/* Image */}
+                  <div className="relative h-32 bg-gray-100">
                     {activeProperty.images?.[0] ? (
                       <img src={activeProperty.images[0]} alt="" className="w-full h-full object-cover" />
                     ) : (
-                      <div className="w-full h-full bg-gradient-to-br from-teal-50 to-gray-100 flex items-center justify-center">
-                        <svg className="w-6 h-6 text-teal-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                      <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-teal-50 to-gray-100">
+                        <svg className="w-8 h-8 text-teal-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                           <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
                           <polyline points="9 22 9 12 15 12 15 22" />
                         </svg>
                       </div>
                     )}
+                    <button
+                      onClick={() => setActiveProperty(null)}
+                      className="absolute top-2 right-2 size-6 flex items-center justify-center rounded-full bg-black/40 text-white hover:bg-black/60 transition-colors text-sm"
+                    >
+                      ✕
+                    </button>
                   </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="text-base font-bold text-gray-900">
-                      {formatPrice(activeProperty.price, activeProperty.currency)}
-                    </p>
-                    <p className="text-xs text-gray-600 mt-0.5 truncate">
-                      {lang === "en" ? activeProperty.title_en : activeProperty.title_es}
-                    </p>
-                    <p className="text-xs text-gray-400 mt-0.5">
-                      {activeProperty.beds} bd &middot; {activeProperty.baths} ba &middot; {activeProperty.sqft} m²
-                    </p>
+                  {/* Details */}
+                  <div className="p-3.5">
+                    <div className="flex items-start justify-between">
+                      <div>
+                        <p className="text-lg font-bold text-gray-900 leading-tight">
+                          {formatPrice(activeProperty.price, activeProperty.currency)}
+                        </p>
+                        <p className="text-xs text-gray-500 mt-0.5 line-clamp-1">
+                          {lang === "en" ? activeProperty.title_en : activeProperty.title_es}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-3 text-xs text-gray-600 mt-2">
+                      <span>{activeProperty.beds} {lang === "en" ? "beds" : "dorm."}</span>
+                      <span className="text-gray-300">·</span>
+                      <span>{activeProperty.baths} {lang === "en" ? "baths" : "baños"}</span>
+                      <span className="text-gray-300">·</span>
+                      <span>{activeProperty.sqft} m²</span>
+                    </div>
                     <a
                       href={`/properties/${activeProperty.slug}`}
-                      className="inline-block mt-2 text-xs text-teal-600 hover:text-teal-700 font-medium"
+                      className="mt-3 block w-full text-center text-xs font-semibold text-white bg-teal-600 hover:bg-teal-700 active:bg-teal-800 rounded-lg py-2 transition-colors"
                     >
                       {t("view_details")} →
                     </a>
                   </div>
                 </div>
-                <button
-                  onClick={() => setActiveProperty(null)}
-                  className="absolute top-2 right-2 text-gray-400 hover:text-gray-600 text-sm"
-                >
-                  ×
-                </button>
               </div>
             )}
 
