@@ -1,73 +1,89 @@
 {
   "site": {
-    "name": "Alejandro Vargas",
-    "subtitle": "Alejandro Vargas — Miami Luxury Real Estate",
+    "name": "Sebastian Acosta",
+    "subtitle": "Sebastian Acosta — Miami Luxury Real Estate",
     "logo": "",
     "favicon": "",
-    "legal_name": "Alejandro Vargas | ONE Sotheby's International Realty"
+    "legal_name": "Sebastian Acosta | ONE Sotheby's International Realty"
   },
   "agent": {
-    "first_name": "Alejandro",
-    "last_name": "Vargas",
-    "title_en": "Miami Luxury Property Specialist",
-    "title_es": "Especialista en Propiedades de Lujo de Miami",
+    "first_name": "Sebastian",
+    "last_name": "Acosta",
+    "title_en": "Luxury Real Estate Advisor in Miami | Brickell Specialist",
+    "title_es": "Asesor de Bienes Raíces de Lujo en Miami | Especialista en Brickell",
     "photo": "",
-    "bio_en": "With over 15 years of experience in Miami's luxury real estate market, Alejandro Vargas has established himself as one of the city's most trusted advisors. Born in Caracas and raised between Miami and Madrid, Alejandro brings a unique international perspective to every transaction. His deep understanding of Miami's diverse neighborhoods — from Brickell's soaring condos to Coral Gables' estate homes — allows him to match discerning clients with properties that truly resonate. Alejandro has facilitated over 500 transactions totaling more than $350 million in volume, earning recognition as a Top Producer by ONE Sotheby's International Realty and consistently ranking in the top 2% of Miami-Dade agents. His philosophy is simple: listen first, then deliver beyond expectations.",
-    "bio_es": "Con más de 15 años de experiencia en el mercado inmobiliario de lujo de Miami, Alejandro Vargas se ha consolidado como uno de los asesores más confiables de la ciudad. Nacido en Caracas y criado entre Miami y Madrid, Alejandro aporta una perspectiva internacional única a cada transacción. Su profundo conocimiento de los diversos vecindarios de Miami — desde los imponentes condominios de Brickell hasta las casas señoriales de Coral Gables — le permite conectar a clientes exigentes con propiedades que realmente resuenan con ellos. Alejandro ha facilitado más de 500 transacciones por un volumen superior a $350 millones, obteniendo reconocimiento como Top Producer de ONE Sotheby's International Realty y clasificándose consistentemente en el top 2% de los agentes de Miami-Dade. Su filosofía es simple: primero escuchar, luego superar las expectativas.",
+    "bio_en": "Sebastian Acosta is widely recognized as one of the top Miami real estate advisors and leading luxury real estate agents in Brickell, with more than 22 years of experience helping buyers, sellers, and investors navigate South Florida's dynamic property market. As a Senior Luxury Property Consultant with ONE Sotheby's International Realty, Sebastian specializes in representing high-net-worth clients in some of Miami's most desirable neighborhoods including Brickell, Coconut Grove, Coral Gables, Miami Beach, Edgewater, and Key Biscayne. Sebastian has built a reputation for delivering strategic guidance, powerful marketing exposure, and exceptional negotiation results. His listings benefit from a combination of global luxury marketing through the Sotheby's International Realty network, advanced digital media strategies, and targeted international buyer outreach, allowing properties to reach qualified buyers locally and worldwide. Beyond brokerage, Sebastian is also a real estate investor, author, and media entrepreneur. He is the author of Make Millions with Foreclosures and Short Sales and The Million Dollar Listing Social Media, and founded Brickell News, a growing digital media platform covering Miami real estate, business, and lifestyle developments.",
+    "bio_es": "Sebastian Acosta es ampliamente reconocido como uno de los mejores asesores de bienes raíces de Miami y uno de los agentes de lujo líderes en Brickell, con más de 22 años de experiencia ayudando a compradores, vendedores e inversores a navegar el dinámico mercado inmobiliario del sur de Florida. Como Consultor Senior de Propiedades de Lujo en ONE Sotheby's International Realty, Sebastian se especializa en representar a clientes de alto patrimonio neto en los vecindarios más deseables de Miami, incluyendo Brickell, Coconut Grove, Coral Gables, Miami Beach, Edgewater y Key Biscayne. Sebastian se ha ganado una reputación por brindar orientación estratégica, exposición de marketing poderosa y resultados de negociación excepcionales. Sus listados se benefician de una combinación de marketing global de lujo a través de la red de Sotheby's International Realty, estrategias avanzadas de medios digitales y alcance dirigido a compradores internacionales. Más allá de la correduría, Sebastian también es inversionista inmobiliario, autor y emprendedor de medios. Es autor de Make Millions with Foreclosures and Short Sales y The Million Dollar Listing Social Media, y fundó Brickell News, una plataforma de medios digitales sobre bienes raíces, negocios y estilo de vida en Miami.",
     "credentials": [
-      "Top Producer — ONE Sotheby's International Realty",
-      "Certified Luxury Home Marketing Specialist (CLHMS)",
-      "Miami Association of Realtors® — Million Dollar Guild",
-      "Accredited Buyer's Representative (ABR®)",
-      "International Real Estate Specialist (IRES)"
+      "Senior Luxury Property Consultant — ONE Sotheby's International Realty",
+      "Top Producing Agent — Engel & Völkers",
+      "Author: Make Millions with Foreclosures and Short Sales",
+      "Author: The Million Dollar Listing Social Media",
+      "Founder — Brickell News"
     ],
-    "languages": ["English", "Spanish", "Portuguese"],
+    "languages": ["English", "Spanish", "Portuguese", "French"],
     "expertise_areas": [
       {
-        "id": "waterfront",
-        "title_en": "Luxury Waterfront Properties",
-        "title_es": "Propiedades Frente al Agua",
-        "description_en": "Exclusive waterfront estates and condos with direct ocean, bay, and intracoastal views across Miami Beach, Coconut Grove, and Key Biscayne.",
-        "description_es": "Exclusivas propiedades y condominios frente al agua con vistas directas al océano, la bahía y el intracoastal en Miami Beach, Coconut Grove y Key Biscayne.",
+        "id": "luxury-residential",
+        "title_en": "Luxury Residential Sales",
+        "title_es": "Ventas Residenciales de Lujo",
+        "description_en": "Premium residential properties across Miami's most desirable neighborhoods, from Brickell to Coral Gables and Miami Beach.",
+        "description_es": "Propiedades residenciales premium en los vecindarios más deseables de Miami, desde Brickell hasta Coral Gables y Miami Beach.",
         "icon": "search"
       },
       {
         "id": "brickell",
-        "title_en": "Brickell & Downtown Condos",
-        "title_es": "Condominios en Brickell y Downtown",
-        "description_en": "High-rise luxury condominiums in Miami's financial district, featuring world-class amenities and stunning skyline views.",
-        "description_es": "Condominios de lujo en el distrito financiero de Miami, con amenidades de clase mundial y espectaculares vistas al skyline.",
+        "title_en": "Brickell Luxury Condos & Penthouses",
+        "title_es": "Condominios y Penthouses de Lujo en Brickell",
+        "description_en": "High-rise luxury condominiums and penthouses in Miami's financial district with world-class amenities and skyline views.",
+        "description_es": "Condominios de lujo y penthouses en el distrito financiero de Miami con amenidades de clase mundial y vistas al skyline.",
         "icon": "tag"
       },
       {
-        "id": "coral-gables",
-        "title_en": "Coral Gables Estates",
-        "title_es": "Propiedades en Coral Gables",
-        "description_en": "Mediterranean-style estates and family homes in one of Miami's most prestigious and tree-lined communities.",
-        "description_es": "Quintas de estilo mediterráneo y hogares familiares en una de las comunidades más prestigiosas y arboladas de Miami.",
+        "id": "waterfront",
+        "title_en": "High-End Waterfront Properties",
+        "title_es": "Propiedades Frente al Agua",
+        "description_en": "Exclusive waterfront estates with direct ocean, bay, and intracoastal views across Miami Beach, Coconut Grove, and Key Biscayne.",
+        "description_es": "Exclusivas propiedades frente al agua con vistas directas al océano, la bahía y el intracoastal en Miami Beach, Coconut Grove y Key Biscayne.",
         "icon": "key"
       },
       {
         "id": "international",
-        "title_en": "International & Relocation",
-        "title_es": "Clientes Internacionales y Reubicación",
-        "description_en": "Comprehensive relocation services for international buyers, handling every aspect of the Miami real estate investment process.",
-        "description_es": "Servicios completos de reubicación para compradores internacionales, manejando cada aspecto del proceso de inversión inmobiliaria en Miami.",
+        "title_en": "International Buyer Representation",
+        "title_es": "Representación de Compradores Internacionales",
+        "description_en": "Dedicated services for international clients relocating to Miami from Europe, Latin America, and North America.",
+        "description_es": "Servicios dedicados para clientes internacionales que se relocalizan en Miami desde Europa, Latinoamérica y Norteamérica.",
         "icon": "chart"
+      },
+      {
+        "id": "investment",
+        "title_en": "Investment Properties & Portfolios",
+        "title_es": "Propiedades de Inversión y Carteras",
+        "description_en": "Strategic investment opportunities in South Florida's real estate market, including off-market deals and portfolio building.",
+        "description_es": "Oportunidades de inversión estratégica en el mercado inmobiliario del sur de Florida, incluyendo ofertas fuera del mercado y construcción de carteras.",
+        "icon": "star"
+      },
+      {
+        "id": "commercial",
+        "title_en": "Commercial Real Estate",
+        "title_es": "Bienes Raíces Comerciales",
+        "description_en": "Commercial property investments and leasing opportunities across Miami's growing business districts.",
+        "description_es": "Inversiones en propiedades comerciales y oportunidades de arriendo en los crecientes distritos comerciales de Miami.",
+        "icon": "home"
       }
     ],
     "stats": [
-      { "label_en": "Years Experience", "label_es": "Años de Experiencia", "value": "15+" },
+      { "label_en": "Years Experience", "label_es": "Años de Experiencia", "value": "22+" },
       { "label_en": "Properties Sold", "label_es": "Propiedades Vendidas", "value": "500+" },
-      { "label_en": "Total Volume", "label_es": "Volumen Total", "value": "$350M+" },
-      { "label_en": "Client Satisfaction", "label_es": "Satisfacción del Cliente", "value": "98%" }
+      { "label_en": "Markets Served", "label_es": "Mercados Atendidos", "value": "Global" },
+      { "label_en": "Languages", "label_es": "Idiomas", "value": "4" }
     ],
     "social": {
-      "instagram": "",
+      "instagram": "https://instagram.com/sebastianacosta",
       "facebook": "",
       "linkedin": "",
       "youtube": "",
-      "whatsapp": ""
+      "whatsapp": "+13052446222"
     },
     "brokerage": {
       "name": "ONE Sotheby's International Realty",
@@ -80,10 +96,10 @@
     "review_text_es": "Lee mis reseñas en Zillow"
   },
   "hero": {
-    "title_en": "Find Your Dream Home",
-    "title_es": "Encuentra tu Hogar Soñado",
-    "subtitle_en": "Premium real estate services across Chile",
-    "subtitle_es": "Servicios inmobiliarios premium en todo Chile",
+    "title_en": "Miami Luxury Real Estate",
+    "title_es": "Bienes Raíces de Lujo en Miami",
+    "subtitle_en": "Senior Luxury Property Consultant",
+    "subtitle_es": "Consultor Senior de Propiedades de Lujo",
     "background_image": "",
     "search_placeholder": "City, neighborhood or address..."
   },
@@ -94,8 +110,8 @@
     "subtitle_es": "Selección exclusiva de las mejores propiedades de Miami"
   },
   "about": {
-    "title_en": "About Alejandro",
-    "title_es": "Sobre Alejandro",
+    "title_en": "About Sebastian",
+    "title_es": "Sobre Sebastian",
     "description_en": "",
     "description_es": "",
     "image": ""
@@ -105,36 +121,52 @@
     "title_es": "Áreas de Especialización",
     "items": [
       {
-        "id": "waterfront",
-        "title_en": "Luxury Waterfront Properties",
-        "title_es": "Propiedades Frente al Agua",
-        "description_en": "Exclusive waterfront estates and condos with direct ocean, bay, and intracoastal views across Miami Beach, Coconut Grove, and Key Biscayne.",
-        "description_es": "Exclusivas propiedades y condominios frente al agua con vistas directas al océano, la bahía y el intracoastal en Miami Beach, Coconut Grove y Key Biscayne.",
+        "id": "luxury-residential",
+        "title_en": "Luxury Residential Sales",
+        "title_es": "Ventas Residenciales de Lujo",
+        "description_en": "Premium residential properties across Miami's most desirable neighborhoods, from Brickell to Coral Gables and Miami Beach.",
+        "description_es": "Propiedades residenciales premium en los vecindarios más deseables de Miami, desde Brickell hasta Coral Gables y Miami Beach.",
         "icon": "search"
       },
       {
         "id": "brickell",
-        "title_en": "Brickell & Downtown Condos",
-        "title_es": "Condominios en Brickell y Downtown",
-        "description_en": "High-rise luxury condominiums in Miami's financial district, featuring world-class amenities and stunning skyline views.",
-        "description_es": "Condominios de lujo en el distrito financiero de Miami, con amenidades de clase mundial y espectaculares vistas al skyline.",
+        "title_en": "Brickell Luxury Condos & Penthouses",
+        "title_es": "Condominios y Penthouses de Lujo en Brickell",
+        "description_en": "High-rise luxury condominiums and penthouses in Miami's financial district with world-class amenities and skyline views.",
+        "description_es": "Condominios de lujo y penthouses en el distrito financiero de Miami con amenidades de clase mundial y vistas al skyline.",
         "icon": "tag"
       },
       {
-        "id": "coral-gables",
-        "title_en": "Coral Gables Estates",
-        "title_es": "Propiedades en Coral Gables",
-        "description_en": "Mediterranean-style estates and family homes in one of Miami's most prestigious and tree-lined communities.",
-        "description_es": "Quintas de estilo mediterráneo y hogares familiares en una de las comunidades más prestigiosas y arboladas de Miami.",
+        "id": "waterfront",
+        "title_en": "High-End Waterfront Properties",
+        "title_es": "Propiedades Frente al Agua",
+        "description_en": "Exclusive waterfront estates with direct ocean, bay, and intracoastal views across Miami Beach, Coconut Grove, and Key Biscayne.",
+        "description_es": "Exclusivas propiedades frente al agua con vistas directas al océano, la bahía y el intracoastal en Miami Beach, Coconut Grove y Key Biscayne.",
         "icon": "key"
       },
       {
         "id": "international",
-        "title_en": "International & Relocation",
-        "title_es": "Clientes Internacionales y Reubicación",
-        "description_en": "Comprehensive relocation services for international buyers, handling every aspect of the Miami real estate investment process.",
-        "description_es": "Servicios completos de reubicación para compradores internacionales, manejando cada aspecto del proceso de inversión inmobiliaria en Miami.",
+        "title_en": "International Buyer Representation",
+        "title_es": "Representación de Compradores Internacionales",
+        "description_en": "Dedicated services for international clients relocating to Miami from Europe, Latin America, and North America.",
+        "description_es": "Servicios dedicados para clientes internacionales que se relocalizan en Miami desde Europa, Latinoamérica y Norteamérica.",
         "icon": "chart"
+      },
+      {
+        "id": "investment",
+        "title_en": "Investment Properties & Portfolios",
+        "title_es": "Propiedades de Inversión y Carteras",
+        "description_en": "Strategic investment opportunities in South Florida's real estate market, including off-market deals and portfolio building.",
+        "description_es": "Oportunidades de inversión estratégica en el mercado inmobiliario del sur de Florida, incluyendo ofertas fuera del mercado y construcción de carteras.",
+        "icon": "star"
+      },
+      {
+        "id": "commercial",
+        "title_en": "Commercial Real Estate",
+        "title_es": "Bienes Raíces Comerciales",
+        "description_en": "Commercial property investments and leasing opportunities across Miami's growing business districts.",
+        "description_es": "Inversiones en propiedades comerciales y oportunidades de arriendo en los crecientes distritos comerciales de Miami.",
+        "icon": "home"
       }
     ]
   },
@@ -142,18 +174,18 @@
     "title_en": "Let's Connect",
     "title_es": "Conectemos",
     "address": "1441 Brickell Ave, Suite 1400, Miami, FL 33131",
-    "phone": "+1 (305) 555-0147",
-    "email": "alejandro@vargasmiami.com",
+    "phone": "+1 (305) 244-6222",
+    "email": "sacosta@onesothebysrealty.com",
     "hours_en": "Mon-Fri: 9:00 AM - 7:00 PM | Sat: 10:00 AM - 5:00 PM",
     "hours_es": "Lun-Vie: 9:00 AM - 7:00 PM | Sáb: 10:00 AM - 5:00 PM",
     "map_lat": 25.7617,
     "map_lng": -80.1918
   },
   "footer": {
-    "description_en": "Alejandro Vargas is a Miami luxury real estate specialist affiliated with ONE Sotheby's International Realty, providing exceptional service to buyers and sellers across South Florida.",
-    "description_es": "Alejandro Vargas es un especialista en bienes raíces de lujo de Miami afiliado a ONE Sotheby's International Realty, brindando un servicio excepcional a compradores y vendedores en todo el sur de la Florida.",
+    "description_en": "Sebastian Acosta is a Miami luxury real estate advisor affiliated with ONE Sotheby's International Realty, providing exceptional service to buyers and sellers across South Florida.",
+    "description_es": "Sebastian Acosta es un asesor de bienes raíces de lujo de Miami afiliado a ONE Sotheby's International Realty, brindando un servicio excepcional a compradores y vendedores en todo el sur de la Florida.",
     "social": {
-      "instagram": "",
+      "instagram": "https://instagram.com/sebastianacosta",
       "facebook": "",
       "linkedin": ""
     },
@@ -171,7 +203,7 @@
     ]
   },
   "admin": {
-    "email": "admin@vargasmiami.com",
+    "email": "admin@sebastianacosta.com",
     "password": "miami2025"
   },
   "translations": {
@@ -201,7 +233,7 @@
       "common.loading": "Loading...",
       "common.no_results": "No properties found",
       "common.schedule_visit": "Schedule a Tour",
-      "common.contact_agent": "Contact Alejandro",
+      "common.contact_agent": "Contact Sebastian",
       "common.details": "Details",
       "common.features": "Features",
       "common.description": "Description",
@@ -240,7 +272,7 @@
       "common.loading": "Cargando...",
       "common.no_results": "No se encontraron propiedades",
       "common.schedule_visit": "Agendar una Visita",
-      "common.contact_agent": "Contactar a Alejandro",
+      "common.contact_agent": "Contactar a Sebastian",
       "common.details": "Detalles",
       "common.features": "Características",
       "common.description": "Descripción",
