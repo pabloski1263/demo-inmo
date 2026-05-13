@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import PropertyCard from "./PropertyCard";
-import { getLang } from "@/lib/utils";
+import { getLang, lt, type Lang } from "@/lib/utils";
 import { staggerContainer, springUp } from "@/lib/animations";
 import type { Property } from "@/lib/properties";
 
@@ -16,16 +16,17 @@ interface FeaturedProps {
 
 export default function FeaturedPropertiesSection({ title_en, title_es, subtitle_en, subtitle_es }: FeaturedProps) {
   const [properties, setProperties] = useState<Property[]>([]);
-  const lang = getLang();
+  const [lang, setLang] = useState<Lang>("es");
 
   useEffect(() => {
+    setLang(getLang());
     fetch("/api/properties?limit=6&sort=newest")
       .then((r) => r.json())
       .then((data) => setProperties(data.items || []));
   }, []);
 
-  const title = lang === "en" ? title_en : title_es;
-  const subtitle = lang === "en" ? subtitle_en : subtitle_es;
+  const title = lt(lang, { en: title_en, es: title_es, fr: title_en, de: title_en, it: title_en, pt: title_es });
+  const subtitle = lt(lang, { en: subtitle_en, es: subtitle_es, fr: subtitle_en, de: subtitle_en, it: subtitle_en, pt: subtitle_es });
 
   const [first, ...rest] = properties;
 
@@ -88,7 +89,7 @@ export default function FeaturedPropertiesSection({ title_en, title_es, subtitle
             href="/properties"
             className="inline-flex items-center gap-2 text-sm font-medium text-gray-700 hover:text-teal-700 transition-colors group"
           >
-            <span className="tracking-wider uppercase text-xs">{lang === "en" ? "View All Properties" : "Ver Todas las Propiedades"}</span>
+            <span className="tracking-wider uppercase text-xs">{lt(lang, { en: "View All Properties", es: "Ver Todas las Propiedades", fr: "Voir Toutes les Propriétés", de: "Alle Immobilien Anzeigen", it: "Vedi Tutte le Proprietà", pt: "Ver Todas as Propriedades" })}</span>
             <span className="w-8 h-px bg-gray-300 group-hover:bg-teal-700 transition-colors" />
           </a>
         </motion.div>

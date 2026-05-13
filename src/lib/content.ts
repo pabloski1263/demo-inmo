@@ -55,6 +55,13 @@ export interface SiteContent {
     social: { instagram: string; facebook: string; linkedin: string };
     legal_links: { label_en: string; label_es: string; url: string }[];
   };
+  chat: {
+    enabled: boolean;
+    api_key: string;
+    model: string;
+    system_prompt: string;
+    greeting: string;
+  };
   admin: {
     email: string;
     password: string;
@@ -63,6 +70,10 @@ export interface SiteContent {
   translations: {
     en: Record<string, string>;
     es: Record<string, string>;
+    fr: Record<string, string>;
+    de: Record<string, string>;
+    it: Record<string, string>;
+    pt: Record<string, string>;
   };
 }
 

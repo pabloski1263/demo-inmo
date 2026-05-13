@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 import { useRouter, useSearchParams } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import PropertyCard from "@/components/PropertyCard";
-import { getLang, formatPrice } from "@/lib/utils";
+import { getLang, formatPrice, lt, type Lang } from "@/lib/utils";
 import type { Property } from "@/lib/properties";
 
 const PropertyMap = dynamic(() => import("@/components/PropertyMap"), {
@@ -14,14 +14,19 @@ const PropertyMap = dynamic(() => import("@/components/PropertyMap"), {
 });
 
 const SORT_OPTIONS = [
-  { key: "newest", en: "Newest", es: "Más Recientes" },
-  { key: "price_asc", en: "Price: Low to High", es: "Precio: Menor a Mayor" },
-  { key: "price_desc", en: "Price: High to Low", es: "Precio: Mayor a Menor" },
-  { key: "largest", en: "Largest", es: "Más Grandes" },
+  { key: "newest", en: "Newest", es: "Más Recientes", fr: "Plus Récents", de: "Neueste", it: "Più Recenti", pt: "Mais Recentes" },
+  { key: "price_asc", en: "Price: Low to High", es: "Precio: Menor a Mayor", fr: "Prix: Croissant", de: "Preis: Aufsteigend", it: "Prezzo: Crescente", pt: "Preço: Menor para Maior" },
+  { key: "price_desc", en: "Price: High to Low", es: "Precio: Mayor a Menor", fr: "Prix: Décroissant", de: "Preis: Absteigend", it: "Prezzo: Decrescente", pt: "Preço: Maior para Menor" },
+  { key: "largest", en: "Largest", es: "Más Grandes", fr: "Plus Grands", de: "Größte", it: "Più Grandi", pt: "Maiores" },
 ];
 
 export default function PropertiesPage() {
-  const lang = getLang();
+  const [lang, setLang] = useState<Lang>("es");
+
+  useEffect(() => {
+    setLang(getLang());
+  }, []);
+
   const router = useRouter();
   const searchParams = useSearchParams();
   const listRef = useRef<HTMLDivElement>(null);
@@ -129,8 +134,44 @@ export default function PropertiesPage() {
         no_results: "No se encontraron propiedades", loading: "Cargando...",
         search: "Buscar", view_details: "Ver Detalle",
       },
+      fr: {
+        title: "Propriétés", filters: "Filtres", apply: "Appliquer", clear: "Effacer",
+        all_types: "Tous les Types", house: "Maison", apartment: "Appartement", land: "Terrain", commercial: "Commercial",
+        all_status: "Tous les Statuts", for_sale: "À Vendre", for_rent: "À Louer",
+        min_price: "Prix Min", max_price: "Prix Max", min_beds: "Ch. Min",
+        sort: "Trier par", map: "Carte", list: "Liste", results: "résultats",
+        no_results: "Aucune propriété trouvée", loading: "Chargement...",
+        search: "Rechercher", view_details: "Voir Détails",
+      },
+      de: {
+        title: "Immobilien", filters: "Filter", apply: "Anwenden", clear: "Löschen",
+        all_types: "Alle Typen", house: "Haus", apartment: "Wohnung", land: "Grundstück", commercial: "Gewerbe",
+        all_status: "Alle Status", for_sale: "Zu Verkaufen", for_rent: "Zu Vermieten",
+        min_price: "Mindestpreis", max_price: "Höchstpreis", min_beds: "Min. Zimmer",
+        sort: "Sortieren nach", map: "Karte", list: "Liste", results: "Ergebnisse",
+        no_results: "Keine Immobilien gefunden", loading: "Laden...",
+        search: "Suchen", view_details: "Details Anzeigen",
+      },
+      it: {
+        title: "Proprietà", filters: "Filtri", apply: "Applica", clear: "Cancella",
+        all_types: "Tutti i Tipi", house: "Casa", apartment: "Appartamento", land: "Terreno", commercial: "Commerciale",
+        all_status: "Tutti gli Stati", for_sale: "In Vendita", for_rent: "In Affitto",
+        min_price: "Prezzo Min", max_price: "Prezzo Max", min_beds: "Camere Min",
+        sort: "Ordina per", map: "Mappa", list: "Elenco", results: "risultati",
+        no_results: "Nessuna proprietà trovata", loading: "Caricamento...",
+        search: "Cerca", view_details: "Vedi Dettagli",
+      },
+      pt: {
+        title: "Propriedades", filters: "Filtros", apply: "Aplicar", clear: "Limpar",
+        all_types: "Todos os Tipos", house: "Casa", apartment: "Apartamento", land: "Terreno", commercial: "Comercial",
+        all_status: "Todos os Status", for_sale: "À Venda", for_rent: "Para Alugar",
+        min_price: "Preço Mín.", max_price: "Preço Máx.", min_beds: "Quar. Mín.",
+        sort: "Ordenar por", map: "Mapa", list: "Lista", results: "resultados",
+        no_results: "Nenhuma propriedade encontrada", loading: "Carregando...",
+        search: "Pesquisar", view_details: "Ver Detalhes",
+      },
     };
-    return tr[lang]?.[key] || key;
+    return tr[lang]?.[key] || tr.en?.[key] || key;
   };
 
   const inputClass = "px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 bg-white";
@@ -186,7 +227,7 @@ export default function PropertiesPage() {
               </select>
               <select value={sort} onChange={(e) => updateFilter("sort", e.target.value)} className={inputClass}>
                 {SORT_OPTIONS.map((opt) => (
-                  <option key={opt.key} value={opt.key}>{lang === "en" ? opt.en : opt.es}</option>
+                  <option key={opt.key} value={opt.key}>{lt(lang, { en: opt.en, es: opt.es, fr: opt.fr, de: opt.de, it: opt.it, pt: opt.pt })}</option>
                 ))}
               </select>
               <button onClick={clearFilters} className="px-3 py-2 text-xs text-teal-600 hover:text-teal-700 font-medium">
@@ -327,14 +368,14 @@ export default function PropertiesPage() {
                           {formatPrice(activeProperty.price, activeProperty.currency)}
                         </p>
                         <p className="text-xs text-gray-500 mt-0.5 line-clamp-1">
-                          {lang === "en" ? activeProperty.title_en : activeProperty.title_es}
+                          {lt(lang, { en: activeProperty.title_en, es: activeProperty.title_es, fr: activeProperty.title_en, de: activeProperty.title_en, it: activeProperty.title_en, pt: activeProperty.title_es })}
                         </p>
                       </div>
                     </div>
                     <div className="flex items-center gap-3 text-xs text-gray-600 mt-2">
-                      <span>{activeProperty.beds} {lang === "en" ? "beds" : "dorm."}</span>
+                      <span>{activeProperty.beds} {lt(lang, { en: "beds", es: "dorm.", fr: "ch.", de: "Zi.", it: "letti", pt: "quar." })}</span>
                       <span className="text-gray-300">·</span>
-                      <span>{activeProperty.baths} {lang === "en" ? "baths" : "baños"}</span>
+                      <span>{activeProperty.baths} {lt(lang, { en: "baths", es: "baños", fr: "sdb", de: "Bäder", it: "bagni", pt: "banh." })}</span>
                       <span className="text-gray-300">·</span>
                       <span>{activeProperty.sqft} m²</span>
                     </div>

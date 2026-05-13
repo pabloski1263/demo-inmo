@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import dynamic from "next/dynamic";
 import Navbar from "@/components/Navbar";
 import PropertyCard from "@/components/PropertyCard";
-import { formatPrice, formatArea, getLang } from "@/lib/utils";
+import { formatPrice, formatArea, getLang, lt, getStatusLabel, type Lang } from "@/lib/utils";
 import type { Property } from "@/lib/properties";
 
 const PropertyMap = dynamic(() => import("@/components/PropertyMap"), {
@@ -17,7 +17,7 @@ export default function PropertyDetailPage({ params }: { params: Promise<{ slug:
   const [property, setProperty] = useState<Property | null>(null);
   const [similar, setSimilar] = useState<Property[]>([]);
   const [loading, setLoading] = useState(true);
-  const [lang, setLang] = useState<"en" | "es">("es");
+  const [lang, setLang] = useState<Lang>("es");
 
   useEffect(() => {
     setLang(getLang());
@@ -62,16 +62,14 @@ export default function PropertyDetailPage({ params }: { params: Promise<{ slug:
     );
   }
 
-  const l = (en: string, es: string) => lang === "en" ? en : es;
-  const title = lang === "en" ? property.title_en : property.title_es;
-  const description = lang === "en" ? property.description_en : property.description_es;
-  const features = lang === "en" ? property.features_en : property.features_es;
+  const l = (en: string, es: string, fr?: string, de?: string, it?: string, pt?: string) =>
+    lt(lang, { en, es, fr: fr || en, de: de || en, it: it || en, pt: pt || es });
+  const title = lt(lang, { en: property.title_en, es: property.title_es, fr: property.title_en, de: property.title_en, it: property.title_en, pt: property.title_es });
+  const description = lt(lang, { en: property.description_en, es: property.description_es, fr: property.description_en, de: property.description_en, it: property.description_en, pt: property.description_es });
+  const features = lang === "es" ? property.features_es : property.features_en;
   const allImages = property.images?.length ? property.images : [];
 
-  const statusLabel = l(
-    { "for-sale": "For Sale", "for-rent": "For Rent", sold: "Sold", pending: "Pending" }[property.status] || property.status,
-    { "for-sale": "En Venta", "for-rent": "En Arriendo", sold: "Vendido", pending: "Pendiente" }[property.status] || property.status
-  );
+  const statusLabel = getStatusLabel(lang, property.status);
 
   return (
     <>
@@ -81,7 +79,7 @@ export default function PropertyDetailPage({ params }: { params: Promise<{ slug:
       <div className="pt-16 sm:pt-20 bg-white border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3">
           <div className="flex items-center gap-2 text-xs text-gray-500">
-            <a href="/" className="hover:text-teal-600">INMO</a>
+            <a href="/" className="hover:text-teal-600">{l("Home", "Inicio")}</a>
             <span>/</span>
             <a href="/properties" className="hover:text-teal-600">{l("Properties", "Propiedades")}</a>
             <span>/</span>

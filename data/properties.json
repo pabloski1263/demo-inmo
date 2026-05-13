@@ -17,15 +17,39 @@
     "title_es": "Icon Brickell No Two, Unidad 1501",
     "description_en": "Stunning 3-bedroom, 2-bathroom residence at Icon Brickell No Two. Floor-to-ceiling windows with breathtaking bay and city views. Open-concept living with modern kitchen, premium finishes, and in-unit washer/dryer. Building amenities include resort-style pool, state-of-the-art fitness center, spa, tennis courts, and 24-hour concierge. Located in the heart of Brickell, walking distance to fine dining, shopping, and Mary Brickell Village.",
     "description_es": "Espectacular residencia de 3 dormitorios y 2 baños en Icon Brickell No Two. Ventanales de piso a techo con impresionantes vistas a la bahía y la ciudad. Living de concepto abierto con cocina moderna, acabados premium y lavadora/secadora en la unidad. Amenidades incluyen piscina estilo resort, gimnasio, spa, canchas de tenis y conserjería 24 horas. Ubicado en el corazón de Brickell.",
-    "features_en": ["Bay and city views", "Resort-style pool", "Fitness center & spa", "Tennis courts", "24-hour concierge", "In-unit washer/dryer", "Covered parking", "Pet friendly"],
-    "features_es": ["Vistas a la bahía y ciudad", "Piscina estilo resort", "Gimnasio y spa", "Canchas de tenis", "Conserjería 24h", "Lavadora/secadora", "Estacionamiento cubierto", "Mascotas permitidas"],
+    "features_en": [
+      "Bay and city views",
+      "Resort-style pool",
+      "Fitness center & spa",
+      "Tennis courts",
+      "24-hour concierge",
+      "In-unit washer/dryer",
+      "Covered parking",
+      "Pet friendly"
+    ],
+    "features_es": [
+      "Vistas a la bahía y ciudad",
+      "Piscina estilo resort",
+      "Gimnasio y spa",
+      "Canchas de tenis",
+      "Conserjería 24h",
+      "Lavadora/secadora",
+      "Estacionamiento cubierto",
+      "Mascotas permitidas"
+    ],
     "address": "495 Brickell Ave, Unit 1501, Miami, FL 33131",
     "city": "Miami",
     "neighborhood": "Brickell",
     "region": "Miami-Dade County",
     "lat": 25.7635,
     "lng": -80.1903,
-    "images": ["https://dvvjkgh94f2v6.cloudfront.net/523fa3e6/472707977/83dcefb7.jpeg"],
+    "images": [
+      "https://dvvjkgh94f2v6.cloudfront.net/523fa3e6/472707977/83dcefb7.jpeg",
+      "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=800&q=80",
+      "https://images.unsplash.com/photo-1600566752229-250ed79470f8?w=800&q=80",
+      "https://images.unsplash.com/photo-1533106497176-45ae19e68ba2?w=800&q=80",
+      "https://images.unsplash.com/photo-1600573472591-ee6b68d14c68?w=800&q=80"
+    ],
     "agent_name": "Sebastian Acosta",
     "agent_email": "sacosta@onesothebysrealty.com",
     "agent_phone": "+1 (305) 244-6222",
@@ -38,11 +62,23 @@
     "bedrooms": 3,
     "bathrooms": 2,
     "schools": [
-      { "name": "Brickell Preparatory Academy", "type": "charter", "distance": "0.3 mi" },
-      { "name": "Southside Elementary School", "type": "public", "distance": "0.8 mi" }
+      {
+        "name": "Brickell Preparatory Academy",
+        "type": "charter",
+        "distance": "0.3 mi"
+      },
+      {
+        "name": "Southside Elementary School",
+        "type": "public",
+        "distance": "0.8 mi"
+      }
     ],
     "price_history": [
-      { "date": "2026-01-15", "price": 8500, "event": "Listed for Rent" }
+      {
+        "date": "2026-01-15",
+        "price": 8500,
+        "event": "Listed for Rent"
+      }
     ]
   },
   {
@@ -63,15 +99,39 @@
     "title_es": "Met 1 Condo, Unidad T-2416",
     "description_en": "Beautiful 2-bedroom, 2-bathroom residence at Met 1 in the heart of downtown Miami. Panoramic city and bay views from the 24th floor. Open floor plan with modern kitchen, granite countertops, stainless steel appliances, and hardwood floors. Building amenities include pool, fitness center, business center, and 24-hour security. Steps from AmericanAirlines Arena, Bayfront Park, and Brickell.",
     "description_es": "Hermosa residencia de 2 dormitorios y 2 baños en Met 1 en el corazón del downtown Miami. Vistas panorámicas a la ciudad y la bahía desde el piso 24. Planta abierta con cocina moderna, encimeras de granito, electrodomésticos de acero inoxidable y pisos de madera. Amenidades incluyen piscina, gimnasio y seguridad 24 horas.",
-    "features_en": ["Panoramic city & bay views", "Pool", "Fitness center", "24-hour security", "Hardwood floors", "Granite countertops", "Stainless steel appliances", "Business center"],
-    "features_es": ["Vistas panorámicas", "Piscina", "Gimnasio", "Seguridad 24h", "Pisos de madera", "Encimeras de granito", "Electrodomésticos acero inoxidable", "Centro de negocios"],
+    "features_en": [
+      "Panoramic city & bay views",
+      "Pool",
+      "Fitness center",
+      "24-hour security",
+      "Hardwood floors",
+      "Granite countertops",
+      "Stainless steel appliances",
+      "Business center"
+    ],
+    "features_es": [
+      "Vistas panorámicas",
+      "Piscina",
+      "Gimnasio",
+      "Seguridad 24h",
+      "Pisos de madera",
+      "Encimeras de granito",
+      "Electrodomésticos acero inoxidable",
+      "Centro de negocios"
+    ],
     "address": "300 S Biscayne Blvd, Unit T-2416, Miami, FL 33131",
     "city": "Miami",
     "neighborhood": "Downtown",
     "region": "Miami-Dade County",
     "lat": 25.7608,
     "lng": -80.1878,
-    "images": ["https://dvvjkgh94f2v6.cloudfront.net/523fa3e6/455030229/83dcefb7.jpeg"],
+    "images": [
+      "https://dvvjkgh94f2v6.cloudfront.net/523fa3e6/455030229/83dcefb7.jpeg",
+      "https://images.unsplash.com/photo-1600585152220-90363fe7e115?w=800&q=80",
+      "https://images.unsplash.com/photo-1600573472591-ee6b68d14c68?w=800&q=80",
+      "https://images.unsplash.com/photo-1600585153490-76fb20a32601?w=800&q=80",
+      "https://images.unsplash.com/photo-1533106497176-45ae19e68ba2?w=800&q=80"
+    ],
     "agent_name": "Sebastian Acosta",
     "agent_email": "sacosta@onesothebysrealty.com",
     "agent_phone": "+1 (305) 244-6222",
@@ -84,11 +144,23 @@
     "bedrooms": 2,
     "bathrooms": 2,
     "schools": [
-      { "name": "Southside Elementary School", "type": "public", "distance": "0.6 mi" }
+      {
+        "name": "Southside Elementary School",
+        "type": "public",
+        "distance": "0.6 mi"
+      }
     ],
     "price_history": [
-      { "date": "2026-02-20", "price": 725000, "event": "Listed" },
-      { "date": "2026-04-15", "price": 699000, "event": "Price Reduced" }
+      {
+        "date": "2026-02-20",
+        "price": 725000,
+        "event": "Listed"
+      },
+      {
+        "date": "2026-04-15",
+        "price": 699000,
+        "event": "Price Reduced"
+      }
     ]
   },
   {
@@ -109,15 +181,39 @@
     "title_es": "Icon Brickell No Two, Unidad 5301",
     "description_en": "High-floor 3-bedroom, 2-bathroom residence at Icon Brickell No Two with sweeping views of Biscayne Bay and the Miami skyline. Floor-to-ceiling impact windows, modern kitchen with gas cooking, and spacious master suite with walk-in closet and spa-like bath. World-class amenities include three pools, tennis courts, fitness center, spa, and social rooms.",
     "description_es": "Residencia de 3 dormitorios y 2 baños en piso alto en Icon Brickell No Two con amplias vistas de Biscayne Bay y el skyline de Miami. Ventanales de piso a techo, cocina moderna con cocina a gas y amplia suite principal con walk-in closet. Amenidades de clase mundial incluyen tres piscinas, canchas de tenis, gimnasio, spa y salones sociales.",
-    "features_en": ["Biscayne Bay views", "Three pools", "Tennis courts", "Spa", "Gas cooking", "Walk-in closet", "Impact windows", "Valet parking"],
-    "features_es": ["Vistas a Biscayne Bay", "Tres piscinas", "Canchas de tenis", "Spa", "Cocina a gas", "Walk-in closet", "Ventanas de impacto", "Estacionamiento con valet"],
+    "features_en": [
+      "Biscayne Bay views",
+      "Three pools",
+      "Tennis courts",
+      "Spa",
+      "Gas cooking",
+      "Walk-in closet",
+      "Impact windows",
+      "Valet parking"
+    ],
+    "features_es": [
+      "Vistas a Biscayne Bay",
+      "Tres piscinas",
+      "Canchas de tenis",
+      "Spa",
+      "Cocina a gas",
+      "Walk-in closet",
+      "Ventanas de impacto",
+      "Estacionamiento con valet"
+    ],
     "address": "495 Brickell Ave, Unit 5301, Miami, FL 33131",
     "city": "Miami",
     "neighborhood": "Brickell",
     "region": "Miami-Dade County",
     "lat": 25.7635,
     "lng": -80.1903,
-    "images": ["https://dvvjkgh94f2v6.cloudfront.net/523fa3e6/451594637/83dcefb7.jpeg"],
+    "images": [
+      "https://dvvjkgh94f2v6.cloudfront.net/523fa3e6/451594637/83dcefb7.jpeg",
+      "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=800&q=80",
+      "https://images.unsplash.com/photo-1600566752229-250ed79470f8?w=800&q=80",
+      "https://images.unsplash.com/photo-1615529328331-f8917597711f?w=800&q=80",
+      "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=800&q=80"
+    ],
     "agent_name": "Sebastian Acosta",
     "agent_email": "sacosta@onesothebysrealty.com",
     "agent_phone": "+1 (305) 244-6222",
@@ -130,10 +226,18 @@
     "bedrooms": 3,
     "bathrooms": 2,
     "schools": [
-      { "name": "Brickell Preparatory Academy", "type": "charter", "distance": "0.3 mi" }
+      {
+        "name": "Brickell Preparatory Academy",
+        "type": "charter",
+        "distance": "0.3 mi"
+      }
     ],
     "price_history": [
-      { "date": "2026-03-01", "price": 8300, "event": "Listed for Rent" }
+      {
+        "date": "2026-03-01",
+        "price": 8300,
+        "event": "Listed for Rent"
+      }
     ]
   },
   {
@@ -154,15 +258,39 @@
     "title_es": "Brickell Eight, Unidad E",
     "description_en": "Expansive 3-bedroom, 3-bathroom residence at Brickell Eight, one of Brickell's most sought-after condominiums. Corner unit with abundant natural light, large terrace with city views, and split bedroom floor plan for privacy. Gourmet kitchen with granite countertops, wood cabinetry, and premium appliances. Building offers pool, fitness center, tennis court, and 24-hour security.",
     "description_es": "Amplia residencia de 3 dormitorios y 3 baños en Brickell Eight, uno de los condominios más buscados de Brickell. Unidad esquinera con abundante luz natural, gran terraza con vistas a la ciudad y plano de dormitorios dividido para privacidad. Cocina gourmet con encimeras de granito y electrodomésticos premium.",
-    "features_en": ["Corner unit", "Large terrace", "City views", "Pool", "Tennis court", "Fitness center", "24-hour security", "Split bedroom plan"],
-    "features_es": ["Unidad esquinera", "Terraza amplia", "Vistas a la ciudad", "Piscina", "Cancha de tenis", "Gimnasio", "Seguridad 24h", "Dormitorios divididos"],
+    "features_en": [
+      "Corner unit",
+      "Large terrace",
+      "City views",
+      "Pool",
+      "Tennis court",
+      "Fitness center",
+      "24-hour security",
+      "Split bedroom plan"
+    ],
+    "features_es": [
+      "Unidad esquinera",
+      "Terraza amplia",
+      "Vistas a la ciudad",
+      "Piscina",
+      "Cancha de tenis",
+      "Gimnasio",
+      "Seguridad 24h",
+      "Dormitorios divididos"
+    ],
     "address": "721 SW 11th Street, Unit E, Miami, FL 33129",
     "city": "Miami",
     "neighborhood": "Brickell",
     "region": "Miami-Dade County",
     "lat": 25.7613,
     "lng": -80.1982,
-    "images": ["https://dvvjkgh94f2v6.cloudfront.net/523fa3e6/445206541/83dcefb7.jpeg"],
+    "images": [
+      "https://dvvjkgh94f2v6.cloudfront.net/523fa3e6/445206541/83dcefb7.jpeg",
+      "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&q=80",
+      "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=800&q=80",
+      "https://images.unsplash.com/photo-1600585152220-90363fe7e115?w=800&q=80",
+      "https://images.unsplash.com/photo-1615529328331-f8917597711f?w=800&q=80"
+    ],
     "agent_name": "Sebastian Acosta",
     "agent_email": "sacosta@onesothebysrealty.com",
     "agent_phone": "+1 (305) 244-6222",
@@ -175,11 +303,23 @@
     "bedrooms": 3,
     "bathrooms": 3,
     "schools": [
-      { "name": "Southside Elementary School", "type": "public", "distance": "0.5 mi" },
-      { "name": "Brickell Preparatory Academy", "type": "charter", "distance": "0.4 mi" }
+      {
+        "name": "Southside Elementary School",
+        "type": "public",
+        "distance": "0.5 mi"
+      },
+      {
+        "name": "Brickell Preparatory Academy",
+        "type": "charter",
+        "distance": "0.4 mi"
+      }
     ],
     "price_history": [
-      { "date": "2026-04-10", "price": 1495000, "event": "Listed" }
+      {
+        "date": "2026-04-10",
+        "price": 1495000,
+        "event": "Listed"
+      }
     ]
   },
   {
@@ -200,15 +340,39 @@
     "title_es": "Brickell Eight, Unidad B",
     "description_en": "Spacious 3-bedroom, 3-bathroom residence at Brickell Eight featuring an open-concept layout with large living and dining areas. Modern kitchen with granite countertops, stainless steel appliances, and ample cabinet space. Master suite with walk-in closet and en-suite bath. Building amenities include resort-style pool, fitness center, and tennis court. Minutes from Brickell City Centre and Mary Brickell Village.",
     "description_es": "Amplia residencia de 3 dormitorios y 3 baños en Brickell Eight con plano abierto y grandes áreas de living y comedor. Cocina moderna con encimeras de granito, electrodomésticos de acero inoxidable y amplio espacio de gabinetes. Suite principal con walk-in closet. Amenidades incluyen piscina estilo resort, gimnasio y cancha de tenis.",
-    "features_en": ["Open-concept layout", "Resort-style pool", "Fitness center", "Tennis court", "Granite countertops", "Walk-in closet", "Stainless steel appliances", "Near Brickell City Centre"],
-    "features_es": ["Plano abierto", "Piscina estilo resort", "Gimnasio", "Cancha de tenis", "Encimeras de granito", "Walk-in closet", "Electrodomésticos acero inoxidable", "Cerca de Brickell City Centre"],
+    "features_en": [
+      "Open-concept layout",
+      "Resort-style pool",
+      "Fitness center",
+      "Tennis court",
+      "Granite countertops",
+      "Walk-in closet",
+      "Stainless steel appliances",
+      "Near Brickell City Centre"
+    ],
+    "features_es": [
+      "Plano abierto",
+      "Piscina estilo resort",
+      "Gimnasio",
+      "Cancha de tenis",
+      "Encimeras de granito",
+      "Walk-in closet",
+      "Electrodomésticos acero inoxidable",
+      "Cerca de Brickell City Centre"
+    ],
     "address": "721 SW 11th Street, Unit B, Miami, FL 33129",
     "city": "Miami",
     "neighborhood": "Brickell",
     "region": "Miami-Dade County",
     "lat": 25.7613,
     "lng": -80.1982,
-    "images": ["https://dvvjkgh94f2v6.cloudfront.net/523fa3e6/438222301/83dcefb7.jpeg"],
+    "images": [
+      "https://dvvjkgh94f2v6.cloudfront.net/523fa3e6/438222301/83dcefb7.jpeg",
+      "https://images.unsplash.com/photo-1600585153490-76fb20a32601?w=800&q=80",
+      "https://images.unsplash.com/photo-1533106497176-45ae19e68ba2?w=800&q=80",
+      "https://images.unsplash.com/photo-1600573472591-ee6b68d14c68?w=800&q=80",
+      "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=800&q=80"
+    ],
     "agent_name": "Sebastian Acosta",
     "agent_email": "sacosta@onesothebysrealty.com",
     "agent_phone": "+1 (305) 244-6222",
@@ -221,11 +385,23 @@
     "bedrooms": 3,
     "bathrooms": 3,
     "schools": [
-      { "name": "Southside Elementary School", "type": "public", "distance": "0.5 mi" }
+      {
+        "name": "Southside Elementary School",
+        "type": "public",
+        "distance": "0.5 mi"
+      }
     ],
     "price_history": [
-      { "date": "2026-03-15", "price": 6800, "event": "Listed for Rent" },
-      { "date": "2026-05-10", "price": 6500, "event": "Price Reduced" }
+      {
+        "date": "2026-03-15",
+        "price": 6800,
+        "event": "Listed for Rent"
+      },
+      {
+        "date": "2026-05-10",
+        "price": 6500,
+        "event": "Price Reduced"
+      }
     ]
   },
   {
@@ -246,15 +422,39 @@
     "title_es": "Jade Residences at Brickell, Unidad 1007",
     "description_en": "Sophisticated 1-bedroom, 2-bathroom residence at the iconic Jade Residences at Brickell. Designed by the renowned Arquitectonica, this tower offers unparalleled luxury living. Floor-to-ceiling windows frame stunning water views. European-style kitchen with Poggenpohl cabinetry and Miele appliances. The building's world-class amenities include a private marina, spa, fitness center, pool, and 24-hour concierge.",
     "description_es": "Sofisticada residencia de 1 dormitorio y 2 baños en las icónicas Jade Residences at Brickell. Diseñada por el renombrado Arquitectonica, esta torre ofrece una vida de lujo sin igual. Ventanales de piso a techo con impresionantes vistas al agua. Cocina de estilo europeo con gabinetes Poggenpohl y electrodomésticos Miele.",
-    "features_en": ["Water views", "Private marina", "Poggenpohl cabinets", "Miele appliances", "Spa & fitness center", "Pool", "24-hour concierge", "Arquitectonica design"],
-    "features_es": ["Vistas al agua", "Marina privada", "Gabinetes Poggenpohl", "Electrodomésticos Miele", "Spa y gimnasio", "Piscina", "Conserjería 24h", "Diseño Arquitectonica"],
+    "features_en": [
+      "Water views",
+      "Private marina",
+      "Poggenpohl cabinets",
+      "Miele appliances",
+      "Spa & fitness center",
+      "Pool",
+      "24-hour concierge",
+      "Arquitectonica design"
+    ],
+    "features_es": [
+      "Vistas al agua",
+      "Marina privada",
+      "Gabinetes Poggenpohl",
+      "Electrodomésticos Miele",
+      "Spa y gimnasio",
+      "Piscina",
+      "Conserjería 24h",
+      "Diseño Arquitectonica"
+    ],
     "address": "1331 Brickell Bay Dr, Unit 1007, Miami, FL 33131",
     "city": "Miami",
     "neighborhood": "Brickell",
     "region": "Miami-Dade County",
     "lat": 25.7619,
     "lng": -80.1886,
-    "images": ["https://dvvjkgh94f2v6.cloudfront.net/523fa3e6/425359427/83dcefb7.jpeg"],
+    "images": [
+      "https://dvvjkgh94f2v6.cloudfront.net/523fa3e6/425359427/83dcefb7.jpeg",
+      "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=800&q=80",
+      "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=800&q=80",
+      "https://images.unsplash.com/photo-1615529328331-f8917597711f?w=800&q=80",
+      "https://images.unsplash.com/photo-1600585153490-76fb20a32601?w=800&q=80"
+    ],
     "agent_name": "Sebastian Acosta",
     "agent_email": "sacosta@onesothebysrealty.com",
     "agent_phone": "+1 (305) 244-6222",
@@ -268,7 +468,11 @@
     "bathrooms": 2,
     "schools": [],
     "price_history": [
-      { "date": "2026-04-01", "price": 1039000, "event": "Listed" }
+      {
+        "date": "2026-04-01",
+        "price": 1039000,
+        "event": "Listed"
+      }
     ]
   }
 ]

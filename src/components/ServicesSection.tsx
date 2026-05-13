@@ -1,7 +1,8 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { getLang } from "@/lib/utils";
+import { getLang, lt, type Lang } from "@/lib/utils";
 import { staggerContainer, springUp } from "@/lib/animations";
 import type { ServiceItem } from "@/lib/content";
 
@@ -36,8 +37,13 @@ const iconMap: Record<string, React.ReactNode> = {
 };
 
 export default function ServicesSection({ title_en, title_es, items }: ServicesSectionProps) {
-  const lang = getLang();
-  const title = lang === "en" ? title_en : title_es;
+  const [lang, setLang] = useState<Lang>("es");
+
+  useEffect(() => {
+    setLang(getLang());
+  }, []);
+
+  const title = lt(lang, { en: title_en, es: title_es, fr: title_en, de: title_en, it: title_en, pt: title_es });
 
   return (
     <section className="py-20 sm:py-28">
@@ -63,8 +69,8 @@ export default function ServicesSection({ title_en, title_es, items }: ServicesS
           className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6"
         >
           {items.map((item) => {
-            const serviceTitle = lang === "en" ? item.title_en : item.title_es;
-            const description = lang === "en" ? item.description_en : item.description_es;
+            const serviceTitle = lt(lang, { en: item.title_en, es: item.title_es, fr: item.title_en, de: item.title_en, it: item.title_en, pt: item.title_es });
+            const description = lt(lang, { en: item.description_en, es: item.description_es, fr: item.description_en, de: item.description_en, it: item.description_en, pt: item.description_es });
 
             return (
               <motion.div

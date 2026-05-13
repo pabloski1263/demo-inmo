@@ -25,7 +25,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       return;
     }
 
-    adminFetch("/api/content")
+    adminFetch("/api/auth/me")
       .then((res) => {
         if (res.status === 401) {
           router.push("/admin/login");

@@ -13,6 +13,7 @@ const sections = [
   { key: "about", label: "Nosotros" },
   { key: "services", label: "Servicios" },
   { key: "contact", label: "Contacto" },
+  { key: "chat", label: "Chat" },
   { key: "footer", label: "Footer" },
 ] as const;
 
@@ -609,6 +610,42 @@ export default function AdminContentPage() {
             <div>
               <label className={labelClass}>Longitud (mapa)</label>
               <input type="number" step="any" className={inputClass} value={content.contact.map_lng} onChange={(e) => update("contact.map_lng", Number(e.target.value))} />
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Chat */}
+      {activeSection === "chat" && (
+        <div className="bg-white border border-gray-200 rounded-xl p-6 space-y-4">
+          <h3 className="text-sm font-semibold text-gray-900">Chat Inteligente</h3>
+          <div className="flex items-center gap-3 mb-2">
+            <label className="text-xs font-medium text-gray-500 uppercase tracking-wider">Habilitado</label>
+            <button
+              onClick={() => setContent({ ...content, chat: { ...content.chat, enabled: !content.chat.enabled } })}
+              className={`relative w-10 h-5 rounded-full transition-colors ${content.chat.enabled ? "bg-teal-600" : "bg-gray-300"}`}
+            >
+              <span className={`absolute top-0.5 left-0.5 w-4 h-4 bg-white rounded-full shadow transition-transform ${content.chat.enabled ? "translate-x-5" : ""}`} />
+            </button>
+          </div>
+          <div className="grid sm:grid-cols-2 gap-4">
+            <div>
+              <label className={labelClass}>Modelo Gemini</label>
+              <input className={inputClass} value={content.chat.model} onChange={(e) => update("chat.model", e.target.value)} placeholder="gemini-2.5-flash-lite" />
+            </div>
+            <div>
+              <label className={labelClass}>API Key</label>
+              <input className={inputClass} value={content.chat.api_key} onChange={(e) => update("chat.api_key", e.target.value)} placeholder="AIza..." type="password" />
+              <p className="text-[10px] text-gray-400 mt-1">Usa GEMINI_API_KEY en .env.local como respaldo</p>
+            </div>
+            <div className="sm:col-span-2">
+              <label className={labelClass}>Mensaje de bienvenida</label>
+              <textarea rows={2} className={textAreaClass} value={content.chat.greeting} onChange={(e) => update("chat.greeting", e.target.value)} />
+            </div>
+            <div className="sm:col-span-2">
+              <label className={labelClass}>System Prompt</label>
+              <textarea rows={6} className={textAreaClass} value={content.chat.system_prompt} onChange={(e) => update("chat.system_prompt", e.target.value)} />
+              <p className="text-[10px] text-gray-400 mt-1">Define cómo se comporta el asistente. Recibirá contexto automático de las propiedades y la información del sitio.</p>
             </div>
           </div>
         </div>

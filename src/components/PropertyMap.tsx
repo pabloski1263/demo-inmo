@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 import { LngLatBounds } from "maplibre-gl";
 import { Map, useMap, MapMarker, MarkerContent, MarkerPopup, MapControls } from "@/components/ui/map";
-import { formatPrice, getLang } from "@/lib/utils";
+import { formatPrice, getLang, getStatusLabel, lt, type Lang } from "@/lib/utils";
 import type { Property } from "@/lib/properties";
 
 interface PropertyMapProps {
@@ -102,13 +102,8 @@ function PriceMarker({
 
 /* ─── Rich popup card ─── */
 function RichPopup({ property }: { property: Property }) {
-  const lang = getLang();
-  const title = lang === "en" ? property.title_en : property.title_es;
-
-  const statusLabel: Record<string, Record<string, string>> = {
-    en: { "for-sale": "For Sale", "for-rent": "For Rent", sold: "Sold", pending: "Pending" },
-    es: { "for-sale": "En Venta", "for-rent": "En Arriendo", sold: "Vendido", pending: "Pendiente" },
-  };
+  const lang = getLang() as Lang;
+  const title = lt(lang, { en: property.title_en, es: property.title_es, fr: property.title_en, de: property.title_en, it: property.title_en, pt: property.title_es });
 
   return (
     <div className="w-64 overflow-hidden rounded-xl shadow-xl border border-gray-100 bg-white">
@@ -129,7 +124,7 @@ function RichPopup({ property }: { property: Property }) {
           </div>
         )}
         <span className="absolute top-3 left-3 bg-white/90 backdrop-blur-sm text-[10px] font-semibold px-2 py-0.5 rounded-full text-gray-700 uppercase tracking-wider shadow-sm">
-          {statusLabel[lang]?.[property.status] || property.status}
+          {getStatusLabel(lang, property.status)}
         </span>
       </div>
 
@@ -157,7 +152,7 @@ function RichPopup({ property }: { property: Property }) {
             <svg className="w-3.5 h-3.5 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <rect x="3" y="3" width="18" height="18" rx="2" />
             </svg>
-            {property.sqft} m²
+            {property.sqft} sq. ft.
           </span>
         </div>
 
@@ -165,7 +160,7 @@ function RichPopup({ property }: { property: Property }) {
           href={`/properties/${property.slug}`}
           className="mt-3 block w-full text-center text-xs font-semibold text-white bg-teal-600 hover:bg-teal-700 active:bg-teal-800 rounded-lg py-2 transition-colors"
         >
-          {lang === "en" ? "View Details" : "Ver Detalle"} →
+          {lt(lang, { en: "View Details →", es: "Ver Detalle →", fr: "Voir Détails →", de: "Details →", it: "Vedi Dettagli →", pt: "Ver Detalhes →" })}
         </a>
       </div>
     </div>

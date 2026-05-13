@@ -1,9 +1,9 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { usePathname } from "next/navigation";
-import { getLang, switchLang } from "@/lib/utils";
+import { getLang, switchLang, LANG_FLAGS, LANG_LABELS, type Lang } from "@/lib/utils";
 import type { SiteContent } from "@/lib/content";
 
 const navItems = [
@@ -14,13 +14,17 @@ const navItems = [
   { key: "nav.contact", href: "#contact" },
 ];
 
+const LANG_OPTIONS: Lang[] = ["en", "es", "fr", "de", "it", "pt"];
+
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [langDropdown, setLangDropdown] = useState(false);
   const [content, setContent] = useState<SiteContent | null>(null);
-  const [lang, setLang] = useState<"en" | "es">("es");
+  const [lang, setLang] = useState<Lang>("es");
   const pathname = usePathname();
   const isHome = pathname === "/";
+  const langRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setLang(getLang());
@@ -35,23 +39,30 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Close lang dropdown on outside click
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (langRef.current && !langRef.current.contains(e.target as Node)) {
+        setLangDropdown(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   const t = (key: string) =>
     content?.translations?.[lang]?.[key] ?? content?.translations?.en?.[key] ?? key;
 
-  const handleLangToggle = () => {
-    const next = lang === "es" ? "en" : "es";
+  const handleLangSelect = (next: Lang) => {
     switchLang(next);
     setLang(next);
+    setLangDropdown(false);
   };
 
   const isSolid = isHome ? scrolled : true;
 
   const agent = content?.agent;
   const fullName = agent ? `${agent.first_name} ${agent.last_name}` : "";
-  const initials = agent
-    ? `${agent.first_name[0]}${agent.last_name[0]}`
-    : "IN";
-
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
@@ -61,15 +72,13 @@ export default function Navbar() {
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between">
-        {/* Logo — Agent photo + name */}
+        {/* Logo + Agent name */}
         <a href="/" className="flex items-center gap-2 sm:gap-3 group shrink-0">
-          {agent?.photo ? (
-            <img src={agent.photo} alt={fullName} className="w-9 h-9 sm:w-11 sm:h-11 rounded-full object-cover ring-2 ring-teal-700/20" />
-          ) : (
-            <div className="w-9 h-9 sm:w-11 sm:h-11 bg-gradient-to-br from-teal-700 to-teal-800 rounded-full flex items-center justify-center group-hover:from-teal-600 transition-all">
-              <span className="text-white font-bold text-xs sm:text-sm tracking-wider">{initials}</span>
-            </div>
-          )}
+          <img
+            src="/logo-sebastian.png"
+            alt={fullName || "Sebastián Acosta"}
+            className="h-7 sm:h-9 w-auto object-contain"
+          />
           <div className="hidden sm:block">
             <p
               className={`font-serif text-lg font-semibold leading-tight tracking-wide transition-colors ${
@@ -96,17 +105,74 @@ export default function Navbar() {
             </a>
           ))}
 
-          {/* Language switcher */}
-          <button
-            onClick={handleLangToggle}
-            className={`text-xs font-medium px-3 py-1.5 rounded-full border transition-all ${
-              isSolid
-                ? "border-gray-300 text-gray-600 hover:border-teal-600 hover:text-teal-700"
-                : "border-white/40 text-white/80 hover:border-white hover:text-white"
-            }`}
-          >
-            {lang === "es" ? "EN" : "ES"}
-          </button>
+          {/* Language dropdown */}
+          <div ref={langRef} className="relative">
+            <button
+              onClick={() => setLangDropdown(!langDropdown)}
+              className={`flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-full border transition-all ${
+                isSolid
+                  ? "border-gray-300 text-gray-600 hover:border-teal-600 hover:text-teal-700"
+                  : "border-white/40 text-white/80 hover:border-white hover:text-white"
+              }`}
+            >
+              <span>{LANG_FLAGS[lang]}</span>
+              <span>{LANG_LABELS[lang]}</span>
+              <svg className={`w-3 h-3 transition-transform ${langDropdown ? "rotate-180" : ""}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M6 9l6 6 6-6" />
+              </svg>
+            </button>
+
+            <AnimatePresence>
+              {langDropdown && (
+                <motion.div
+                  initial={{ opacity: 0, y: -4, scale: 0.95 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: -4, scale: 0.95 }}
+                  transition={{ duration: 0.15, ease: "easeOut" }}
+                  className="absolute right-0 mt-2 w-44 bg-white/95 backdrop-blur-xl border border-gray-100 rounded-xl shadow-lg overflow-hidden"
+                >
+                  {LANG_OPTIONS.map((l) => (
+                    <button
+                      key={l}
+                      onClick={() => handleLangSelect(l)}
+                      className={`flex items-center gap-2.5 w-full px-4 py-2.5 text-xs font-medium transition-colors ${
+                        lang === l
+                          ? "bg-teal-50 text-teal-700"
+                          : "text-gray-700 hover:bg-gray-50"
+                      }`}
+                    >
+                      <span className="text-sm">{LANG_FLAGS[l]}</span>
+                      <span>{LANG_LABELS[l]}</span>
+                      {lang === l && (
+                        <svg className="w-3.5 h-3.5 ml-auto text-teal-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                          <polyline points="20 6 9 17 4 12" />
+                        </svg>
+                      )}
+                    </button>
+                  ))}
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+
+          {/* WhatsApp */}
+          {content?.agent?.social?.whatsapp && (
+            <a
+              href={`https://wa.me/${content.agent.social.whatsapp.replace(/[^0-9]/g, "")}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-full border transition-all ${
+                isSolid
+                  ? "border-gray-300 text-gray-600 hover:border-green-500 hover:text-green-600"
+                  : "border-white/40 text-white/80 hover:border-green-400 hover:text-green-300"
+              }`}
+              aria-label="WhatsApp"
+            >
+              <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+              </svg>
+            </a>
+          )}
 
           <a
             href="#contact"
@@ -122,14 +188,46 @@ export default function Navbar() {
 
         {/* Mobile toggle */}
         <div className="flex md:hidden items-center gap-3">
-          <button
-            onClick={handleLangToggle}
-            className={`text-xs font-medium px-2 py-1 rounded-full border ${
-              isSolid ? "border-gray-300 text-gray-600" : "border-white/50 text-white/80"
-            }`}
-          >
-            {lang === "es" ? "EN" : "ES"}
-          </button>
+          <div ref={langRef} className="relative">
+            <button
+              onClick={() => setLangDropdown(!langDropdown)}
+              className={`flex items-center gap-1 text-xs font-medium px-2 py-1 rounded-full border ${
+                isSolid ? "border-gray-300 text-gray-600" : "border-white/50 text-white/80"
+              }`}
+            >
+              <span>{LANG_FLAGS[lang]}</span>
+              <svg className={`w-3 h-3 transition-transform ${langDropdown ? "rotate-180" : ""}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M6 9l6 6 6-6" />
+              </svg>
+            </button>
+
+            <AnimatePresence>
+              {langDropdown && (
+                <motion.div
+                  initial={{ opacity: 0, y: -4, scale: 0.95 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: -4, scale: 0.95 }}
+                  transition={{ duration: 0.15, ease: "easeOut" }}
+                  className="absolute right-0 mt-2 w-44 bg-white/95 backdrop-blur-xl border border-gray-100 rounded-xl shadow-lg overflow-hidden"
+                >
+                  {LANG_OPTIONS.map((l) => (
+                    <button
+                      key={l}
+                      onClick={() => handleLangSelect(l)}
+                      className={`flex items-center gap-2.5 w-full px-4 py-2.5 text-xs font-medium transition-colors ${
+                        lang === l
+                          ? "bg-teal-50 text-teal-700"
+                          : "text-gray-700 hover:bg-gray-50"
+                      }`}
+                    >
+                      <span className="text-sm">{LANG_FLAGS[l]}</span>
+                      <span>{LANG_LABELS[l]}</span>
+                    </button>
+                  ))}
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
             className={`p-2 transition-colors ${isSolid ? "text-gray-800" : "text-white"}`}
@@ -167,10 +265,24 @@ export default function Navbar() {
                   {t(item.key)}
                 </a>
               ))}
+              {content?.agent?.social?.whatsapp && (
+                <a
+                  href={`https://wa.me/${content.agent.social.whatsapp.replace(/[^0-9]/g, "")}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setMobileOpen(false)}
+                  className="flex items-center justify-center gap-2 px-5 py-3 border border-green-200 text-green-700 text-sm font-medium rounded-lg mt-2 hover:bg-green-50 transition-colors"
+                >
+                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                  </svg>
+                  WhatsApp
+                </a>
+              )}
               <a
                 href="#contact"
                 onClick={() => setMobileOpen(false)}
-                className="block text-center px-5 py-3 bg-teal-700 text-white text-sm font-medium rounded-lg mt-4 hover:bg-teal-600 transition-colors"
+                className="block text-center px-5 py-3 bg-teal-700 text-white text-sm font-medium rounded-lg mt-2 hover:bg-teal-600 transition-colors"
               >
                 {t("common.contact_agent")}
               </a>

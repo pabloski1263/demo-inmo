@@ -4,11 +4,12 @@ import { useState, useEffect } from "react";
 import { adminFetch } from "@/lib/admin-fetch";
 import toast from "react-hot-toast";
 import type { SiteContent } from "@/lib/content";
+import { LANG_FLAGS, LANG_LABELS, type Lang } from "@/lib/utils";
 
 export default function AdminTranslationsPage() {
   const [content, setContent] = useState<SiteContent | null>(null);
   const [loading, setLoading] = useState(true);
-  const [lang, setLang] = useState<"en" | "es">("en");
+  const [lang, setLang] = useState<Lang>("en");
   const [saving, setSaving] = useState(false);
 
   const load = async () => {
@@ -37,24 +38,23 @@ export default function AdminTranslationsPage() {
     if (!content) return;
     const key = prompt("Nombre de la clave (ej: nav.new_link):");
     if (!key) return;
-    setContent({
-      ...content,
-      translations: {
-        ...content.translations,
-        en: { ...content.translations.en, [key]: "" },
-        es: { ...content.translations.es, [key]: "" },
-      },
-    });
+    const allLangs = { ...content.translations };
+    for (const l of ["en", "es", "fr", "de", "it", "pt"] as Lang[]) {
+      allLangs[l] = { ...allLangs[l], [key]: "" };
+    }
+    setContent({ ...content, translations: allLangs });
   };
 
   const removeKey = (key: string) => {
     if (!confirm(`Eliminar "${key}"?`)) return;
     if (!content) return;
-    const en = { ...content.translations.en };
-    const es = { ...content.translations.es };
-    delete en[key];
-    delete es[key];
-    setContent({ ...content, translations: { en, es } });
+    const allLangs = { ...content.translations };
+    for (const l of ["en", "es", "fr", "de", "it", "pt"] as Lang[]) {
+      const copy = { ...allLangs[l] };
+      delete copy[key];
+      allLangs[l] = copy;
+    }
+    setContent({ ...content, translations: allLangs });
   };
 
   const handleSave = async () => {
@@ -102,23 +102,18 @@ export default function AdminTranslationsPage() {
       </div>
 
       {/* Language toggle */}
-      <div className="flex gap-2 mb-6">
-        <button
-          onClick={() => setLang("en")}
-          className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-            lang === "en" ? "bg-teal-600 text-white" : "bg-white border border-gray-200 text-gray-600 hover:bg-gray-50"
-          }`}
-        >
-          English
-        </button>
-        <button
-          onClick={() => setLang("es")}
-          className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-            lang === "es" ? "bg-teal-600 text-white" : "bg-white border border-gray-200 text-gray-600 hover:bg-gray-50"
-          }`}
-        >
-          Español
-        </button>
+      <div className="flex flex-wrap gap-2 mb-6">
+        {(["en", "es", "fr", "de", "it", "pt"] as Lang[]).map((l) => (
+          <button
+            key={l}
+            onClick={() => setLang(l)}
+            className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+              lang === l ? "bg-teal-600 text-white" : "bg-white border border-gray-200 text-gray-600 hover:bg-gray-50"
+            }`}
+          >
+            {LANG_FLAGS[l]} {LANG_LABELS[l]}
+          </button>
+        ))}
       </div>
 
       {keys.length === 0 ? (

@@ -1,6 +1,7 @@
 "use client";
 
-import { useLangTranslations } from "@/lib/utils";
+import { useState, useEffect } from "react";
+import { getLang, lt } from "@/lib/utils";
 import type { SiteContent } from "@/lib/content";
 
 interface FooterProps {
@@ -8,13 +9,18 @@ interface FooterProps {
 }
 
 export default function Footer({ content }: FooterProps) {
-  const { lang, t } = useLangTranslations(content.translations);
+  const [lang, setLang] = useState<"en" | "es" | "fr" | "de" | "it" | "pt">("es");
+
+  useEffect(() => {
+    setLang(getLang());
+  }, []);
+
+  const translations = content.translations;
+  const t = (key: string) => translations[lang]?.[key] ?? translations.en?.[key] ?? key;
+
   const agent = content.agent;
-
   const fullName = `${agent.first_name} ${agent.last_name}`;
-  const initials = `${agent.first_name[0]}${agent.last_name[0]}`;
-  const description = lang === "en" ? content.footer.description_en : content.footer.description_es;
-
+  const description = lt(lang, { en: content.footer.description_en, es: content.footer.description_es, fr: content.footer.description_en, de: content.footer.description_en, it: content.footer.description_en, pt: content.footer.description_es });
   return (
     <footer className="bg-gray-900 text-gray-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-16 sm:py-24">
@@ -22,19 +28,11 @@ export default function Footer({ content }: FooterProps) {
           {/* Brand — Agent */}
           <div className="lg:pr-8">
             <div className="flex items-center gap-3 mb-4">
-              {agent.photo ? (
-                <img src={agent.photo} alt={fullName} className="w-9 h-9 rounded-full object-cover ring-2 ring-teal-700/30" />
-              ) : (
-                <div className="w-10 h-10 bg-gradient-to-br from-teal-700 to-teal-800 rounded-full flex items-center justify-center">
-                  <span className="text-white font-bold text-xs tracking-wider">{initials}</span>
-                </div>
-              )}
-              <div>
-                <span className="text-white font-serif text-base font-semibold tracking-wide block">{fullName}</span>
-                <span className="text-[10px] text-gray-500 uppercase tracking-[1px]">
-                  {lang === "en" ? agent.title_en : agent.title_es}
-                </span>
-              </div>
+              <img
+                src="/logo-sebastian.png"
+                alt={fullName}
+                className="h-8 w-auto object-contain"
+              />
             </div>
             <p className="text-sm text-gray-500 leading-relaxed">{description}</p>
 
@@ -77,7 +75,7 @@ export default function Footer({ content }: FooterProps) {
 
           {/* Quick Links */}
           <div>
-            <h4 className="text-white text-sm font-semibold tracking-wider uppercase mb-5">{lang === "en" ? "Quick Links" : "Enlaces Rápidos"}</h4>
+            <h4 className="text-white text-sm font-semibold tracking-wider uppercase mb-5">{t("common.quick_links")}</h4>
             <ul className="space-y-3">
               <li><a href="/properties" className="text-sm text-gray-500 hover:text-white transition-colors">{t("nav.properties")}</a></li>
               <li><a href="/properties?status=for-sale" className="text-sm text-gray-500 hover:text-white transition-colors">{t("nav.buy")}</a></li>
@@ -89,7 +87,7 @@ export default function Footer({ content }: FooterProps) {
 
           {/* Properties */}
           <div>
-            <h4 className="text-white text-sm font-semibold tracking-wider uppercase mb-5">{lang === "en" ? "Properties" : "Propiedades"}</h4>
+            <h4 className="text-white text-sm font-semibold tracking-wider uppercase mb-5">{t("common.properties")}</h4>
             <ul className="space-y-3">
               <li><a href="/properties?status=for-sale&type=house" className="text-sm text-gray-500 hover:text-white transition-colors">{t("filter.house")}</a></li>
               <li><a href="/properties?status=for-sale&type=apartment" className="text-sm text-gray-500 hover:text-white transition-colors">{t("filter.apartment")}</a></li>
@@ -116,7 +114,7 @@ export default function Footer({ content }: FooterProps) {
           <div className="flex items-center gap-5">
             {content.footer.legal_links.map((link) => (
               <a key={link.url} href={link.url} className="text-xs text-gray-600 hover:text-gray-400 transition-colors">
-                {lang === "en" ? link.label_en : link.label_es}
+                {lt(lang, { en: link.label_en, es: link.label_es, fr: link.label_en, de: link.label_en, it: link.label_en, pt: link.label_es })}
               </a>
             ))}
           </div>

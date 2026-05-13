@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { getLang } from "@/lib/utils";
+import { getLang, lt, type Lang } from "@/lib/utils";
 import { staggerContainer, springUp } from "@/lib/animations";
 import type { AgentProfile } from "@/lib/content";
 
@@ -13,7 +13,7 @@ interface HeroSectionProps {
 }
 
 export default function HeroSection({ agent, phone, email }: HeroSectionProps) {
-  const [lang, setLang] = useState<"en" | "es">("es");
+  const [lang, setLang] = useState<Lang>("es");
   const [searchTab, setSearchTab] = useState<"buy" | "rent">("buy");
   const [searchQuery, setSearchQuery] = useState("");
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -32,15 +32,19 @@ export default function HeroSection({ agent, phone, email }: HeroSectionProps) {
   const opacity = useTransform(scrollYProgress, [0, 0.7], [1, 0.2]);
 
   const fullName = `${agent.first_name} ${agent.last_name}`;
-  const title = lang === "en" ? agent.title_en : agent.title_es;
+  const title = lt(lang, { en: agent.title_en, es: agent.title_es, fr: agent.title_en, de: agent.title_en, it: agent.title_en, pt: agent.title_es });
   const initials = `${agent.first_name[0]}${agent.last_name[0]}`;
 
   const t = (key: string) => {
     const translations: Record<string, Record<string, string>> = {
       en: { buy: "Buy", rent: "Rent", search: "Search", placeholder: "City, neighborhood or address..." },
       es: { buy: "Comprar", rent: "Arrendar", search: "Buscar", placeholder: "Ciudad, barrio o dirección..." },
+      fr: { buy: "Acheter", rent: "Louer", search: "Rechercher", placeholder: "Ville, quartier ou adresse..." },
+      de: { buy: "Kaufen", rent: "Mieten", search: "Suchen", placeholder: "Stadt, Stadtteil oder Adresse..." },
+      it: { buy: "Acquista", rent: "Affitta", search: "Cerca", placeholder: "Città, quartiere o indirizzo..." },
+      pt: { buy: "Comprar", rent: "Alugar", search: "Pesquisar", placeholder: "Cidade, bairro ou endereço..." },
     };
-    return translations[lang]?.[key] || key;
+    return translations[lang]?.[key] || translations.en?.[key] || key;
   };
 
   const handleSearch = (e: React.FormEvent) => {
@@ -143,7 +147,7 @@ export default function HeroSection({ agent, phone, email }: HeroSectionProps) {
                 >
                   <p className="text-xl sm:text-2xl font-bold text-gold-400">{stat.value}</p>
                   <p className="text-[10px] text-white/40 uppercase tracking-[1px] mt-0.5">
-                    {lang === "en" ? stat.label_en : stat.label_es}
+                    {lt(lang, { en: stat.label_en, es: stat.label_es, fr: stat.label_en, de: stat.label_en, it: stat.label_en, pt: stat.label_es })}
                   </p>
                 </motion.div>
               ))}
@@ -166,7 +170,7 @@ export default function HeroSection({ agent, phone, email }: HeroSectionProps) {
                 <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" />
                 </svg>
-                {lang === "en" ? "Call Now" : "Llamar"}
+                {lt(lang, { en: "Call Now", es: "Llamar", fr: "Appeler", de: "Anrufen", it: "Chiama", pt: "Ligar" })}
               </a>
               <a
                 href={`mailto:${email}`}
@@ -176,7 +180,7 @@ export default function HeroSection({ agent, phone, email }: HeroSectionProps) {
                   <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
                   <polyline points="22,6 12,13 2,6" />
                 </svg>
-                {lang === "en" ? "Email Me" : "Enviar Correo"}
+                {lt(lang, { en: "Email Me", es: "Enviar Correo", fr: "Envoyer un E-mail", de: "E-Mail Senden", it: "Invia Email", pt: "Enviar E-mail" })}
               </a>
               {agent.social.whatsapp && (
                 <a

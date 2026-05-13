@@ -1,7 +1,8 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { useLangTranslations } from "@/lib/utils";
+import { getLang, lt, type Lang } from "@/lib/utils";
 import { slideLeft, slideRight } from "@/lib/animations";
 import type { SiteContent } from "@/lib/content";
 
@@ -10,11 +11,18 @@ interface AboutSectionProps {
 }
 
 export default function AboutSection({ content }: AboutSectionProps) {
-  const { lang } = useLangTranslations(content.translations);
+  const [lang, setLang] = useState<Lang>("es");
+
+  useEffect(() => {
+    setLang(getLang());
+  }, []);
+
+  const translations = content.translations;
+  const t = (key: string) => translations[lang]?.[key] ?? translations.en?.[key] ?? key;
 
   const agent = content.agent;
-  const title = lang === "en" ? content.about.title_en : content.about.title_es;
-  const bio = lang === "en" ? agent.bio_en : agent.bio_es;
+  const title = lt(lang, { en: content.about.title_en, es: content.about.title_es, fr: content.about.title_en, de: content.about.title_en, it: content.about.title_en, pt: content.about.title_es });
+  const bio = lt(lang, { en: agent.bio_en, es: agent.bio_es, fr: agent.bio_en, de: agent.bio_en, it: agent.bio_en, pt: agent.bio_es });
   const credentials = agent.credentials;
   const languages = agent.languages;
   const photo = agent.photo;
@@ -68,7 +76,7 @@ export default function AboutSection({ content }: AboutSectionProps) {
             {credentials.length > 0 && (
               <div className="mb-8">
                 <h3 className="text-sm font-semibold text-gray-900 uppercase tracking-wider mb-3">
-                  {lang === "en" ? "Credentials" : "Credenciales"}
+                  {t("common.credentials")}
                 </h3>
                 <ul className="space-y-2">
                   {credentials.map((cred, i) => (
@@ -87,7 +95,7 @@ export default function AboutSection({ content }: AboutSectionProps) {
             {languages.length > 0 && (
               <div>
                 <h3 className="text-sm font-semibold text-gray-900 uppercase tracking-wider mb-3">
-                  {lang === "en" ? "Languages" : "Idiomas"}
+                  {t("common.languages")}
                 </h3>
                 <div className="flex flex-wrap gap-2">
                   {languages.map((language) => (
@@ -114,7 +122,7 @@ export default function AboutSection({ content }: AboutSectionProps) {
                 >
                   <p className="text-xl sm:text-2xl font-bold text-teal-700">{stat.value}</p>
                   <p className="text-[10px] text-gray-500 mt-1 uppercase tracking-[1px]">
-                    {lang === "en" ? stat.label_en : stat.label_es}
+                    {lt(lang, { en: stat.label_en, es: stat.label_es, fr: stat.label_en, de: stat.label_en, it: stat.label_en, pt: stat.label_es })}
                   </p>
                 </motion.div>
               ))}

@@ -1,7 +1,8 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { getLang } from "@/lib/utils";
+import { getLang, lt, type Lang } from "@/lib/utils";
 import { fadeUp, slideLeft, slideRight } from "@/lib/animations";
 
 interface ContactSectionProps {
@@ -19,9 +20,14 @@ interface ContactSectionProps {
 }
 
 export default function ContactSection({ title_en, title_es, address, phone, email, hours_en, hours_es, whatsapp, review_link, review_text_en, review_text_es }: ContactSectionProps) {
-  const lang = getLang();
-  const title = lang === "en" ? title_en : title_es;
-  const hours = lang === "en" ? hours_en : hours_es;
+  const [lang, setLang] = useState<Lang>("es");
+
+  useEffect(() => {
+    setLang(getLang());
+  }, []);
+
+  const title = lt(lang, { en: title_en, es: title_es, fr: title_en, de: title_en, it: title_en, pt: title_es });
+  const hours = lt(lang, { en: hours_en, es: hours_es, fr: hours_en, de: hours_en, it: hours_en, pt: hours_es });
 
   const contactItems = [
     {
@@ -31,7 +37,7 @@ export default function ContactSection({ title_en, title_es, address, phone, ema
           <circle cx="12" cy="10" r="3" />
         </svg>
       ),
-      label: lang === "en" ? "Address" : "Dirección",
+      label: lt(lang, { en: "Address", es: "Dirección", fr: "Adresse", de: "Adresse", it: "Indirizzo", pt: "Endereço" }),
       value: address,
     },
     {
@@ -40,7 +46,7 @@ export default function ContactSection({ title_en, title_es, address, phone, ema
           <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" />
         </svg>
       ),
-      label: lang === "en" ? "Phone" : "Teléfono",
+      label: lt(lang, { en: "Phone", es: "Teléfono", fr: "Téléphone", de: "Telefon", it: "Telefono", pt: "Telefone" }),
       value: phone,
     },
     {
@@ -60,7 +66,7 @@ export default function ContactSection({ title_en, title_es, address, phone, ema
           <polyline points="12 6 12 12 16 14" />
         </svg>
       ),
-      label: lang === "en" ? "Hours" : "Horarios",
+      label: lt(lang, { en: "Hours", es: "Horarios", fr: "Horaires", de: "Öffnungszeiten", it: "Orari", pt: "Horários" }),
       value: hours,
     },
   ];
@@ -118,7 +124,7 @@ export default function ContactSection({ title_en, title_es, address, phone, ema
                 </div>
                 <div className="pt-0.5">
                   <p className="text-[10px] text-gray-400 uppercase tracking-[2px] font-medium">WhatsApp</p>
-                  <p className="text-sm text-gray-800 mt-0.5">{lang === "en" ? "Send a Message" : "Enviar Mensaje"}</p>
+                  <p className="text-sm text-gray-800 mt-0.5">{lt(lang, { en: "Send a Message", es: "Enviar Mensaje", fr: "Envoyer un Message", de: "Nachricht Senden", it: "Invia un Messaggio", pt: "Enviar Mensagem" })}</p>
                 </div>
               </a>
             )}
@@ -137,8 +143,8 @@ export default function ContactSection({ title_en, title_es, address, phone, ema
                   </svg>
                 </div>
                 <div className="pt-0.5">
-                  <p className="text-[10px] text-gray-400 uppercase tracking-[2px] font-medium">{lang === "en" ? "Reviews" : "Reseñas"}</p>
-                  <p className="text-sm text-gray-800 mt-0.5">{lang === "en" ? review_text_en : review_text_es}</p>
+                  <p className="text-[10px] text-gray-400 uppercase tracking-[2px] font-medium">{lt(lang, { en: "Reviews", es: "Reseñas", fr: "Avis", de: "Bewertungen", it: "Recensioni", pt: "Avaliações" })}</p>
+                  <p className="text-sm text-gray-800 mt-0.5">{lt(lang, { en: review_text_en || "Read my reviews", es: review_text_es || "Lee mis reseñas", fr: review_text_en || "Lisez mes avis", de: review_text_en || "Lesen Sie meine Bewertungen", it: review_text_en || "Leggi le mie recensioni", pt: review_text_es || "Leia minhas avaliações" })}</p>
                 </div>
               </a>
             )}
@@ -161,7 +167,7 @@ export default function ContactSection({ title_en, title_es, address, phone, ema
                 <input
                   type="text"
                   name="subject"
-                  placeholder={lang === "en" ? "Your Name" : "Tu Nombre"}
+                  placeholder={lt(lang, { en: "Your Name", es: "Tu Nombre", fr: "Votre Nom", de: "Ihr Name", it: "Il Tuo Nome", pt: "Seu Nome" })}
                   className="w-full px-4 py-3.5 bg-white border border-gray-200 rounded-lg text-sm placeholder:text-gray-400 transition-all"
                   required
                 />
@@ -179,7 +185,7 @@ export default function ContactSection({ title_en, title_es, address, phone, ema
                 <textarea
                   name="body"
                   rows={5}
-                  placeholder={lang === "en" ? "Your Message" : "Tu Mensaje"}
+                  placeholder={lt(lang, { en: "Your Message", es: "Tu Mensaje", fr: "Votre Message", de: "Ihre Nachricht", it: "Il Tuo Messaggio", pt: "Sua Mensagem" })}
                   className="w-full px-4 py-3.5 bg-white border border-gray-200 rounded-lg text-sm placeholder:text-gray-400 transition-all resize-none"
                   required
                 />
@@ -188,7 +194,7 @@ export default function ContactSection({ title_en, title_es, address, phone, ema
                 type="submit"
                 className="w-full px-6 py-3.5 bg-teal-700 text-white font-medium rounded-lg hover:bg-teal-600 transition-all text-sm tracking-wide"
               >
-                {lang === "en" ? "Send Message" : "Enviar Mensaje"}
+                {lt(lang, { en: "Send Message", es: "Enviar Mensaje", fr: "Envoyer un Message", de: "Nachricht Senden", it: "Invia Messaggio", pt: "Enviar Mensagem" })}
               </button>
             </form>
           </motion.div>

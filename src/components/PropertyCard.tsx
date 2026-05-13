@@ -1,7 +1,7 @@
 "use client";
 
-import { useCallback } from "react";
-import { formatPrice, formatArea, getLang } from "@/lib/utils";
+import { useEffect, useState, useCallback } from "react";
+import { formatPrice, formatArea, getLang, getStatusLabel, lt, type Lang } from "@/lib/utils";
 import type { Property } from "@/lib/properties";
 
 interface PropertyCardProps {
@@ -12,12 +12,7 @@ interface PropertyCardProps {
   compact?: boolean;
 }
 
-const statusLabel: Record<string, Record<string, string>> = {
-  en: { "for-sale": "For Sale", "for-rent": "For Rent", sold: "Sold", pending: "Pending" },
-  es: { "for-sale": "En Venta", "for-rent": "En Arriendo", sold: "Vendido", pending: "Pendiente" },
-};
-
-function PropertyBadge({ status, lang }: { status: string; lang: string }) {
+function PropertyBadge({ status, lang }: { status: string; lang: Lang }) {
   const colors: Record<string, string> = {
     "for-sale": "bg-teal-700/90 text-white",
     "for-rent": "bg-blue-600/90 text-white",
@@ -27,14 +22,19 @@ function PropertyBadge({ status, lang }: { status: string; lang: string }) {
 
   return (
     <span className={`${colors[status] || "bg-gray-600/90"} text-[9px] font-medium px-2.5 py-1 rounded-full backdrop-blur-sm`}>
-      {statusLabel[lang]?.[status] || status}
+      {getStatusLabel(lang, status)}
     </span>
   );
 }
 
 export default function PropertyCard({ property, isActive, onHover, onClick, compact = false }: PropertyCardProps) {
-  const lang = getLang();
-  const title = lang === "en" ? property.title_en : property.title_es;
+  const [lang, setLang] = useState<Lang>("es");
+
+  useEffect(() => {
+    setLang(getLang());
+  }, []);
+
+  const title = lt(lang, { en: property.title_en, es: property.title_es, fr: property.title_en, de: property.title_en, it: property.title_en, pt: property.title_es });
 
   const handleClick = useCallback((e: React.MouseEvent) => {
     if (onClick) {
@@ -75,7 +75,7 @@ export default function PropertyCard({ property, isActive, onHover, onClick, com
           </p>
           <p className="text-xs text-gray-500 mt-0.5 truncate">{title}</p>
           <div className="flex items-center gap-2 text-xs text-gray-400 mt-1">
-            <span>{property.beds} {lang === "en" ? "bd" : "dorm"}</span>
+            <span>{property.beds} {lt(lang, { en: "bd", es: "dorm", fr: "ch", de: "Zi", it: "letti", pt: "quar" })}</span>
             <span className="text-gray-300">·</span>
             <span>{property.baths} ba</span>
             <span className="text-gray-300">·</span>
@@ -133,13 +133,13 @@ export default function PropertyCard({ property, isActive, onHover, onClick, com
               <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
               <polyline points="9 22 9 12 15 12 15 22" />
             </svg>
-            {property.beds} {lang === "en" ? "beds" : "dorm."}
+            {property.beds} {lt(lang, { en: "beds", es: "dorm.", fr: "ch.", de: "Zi.", it: "letti", pt: "quar." })}
           </span>
           <span className="flex items-center gap-1.5">
             <svg className="w-4 h-4 text-gray-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
               <path d="M2 15v3h20v-3M4 15V9a2 2 0 012-2h12a2 2 0 012 2v6M2 18h20" />
             </svg>
-            {property.baths} {lang === "en" ? "baths" : "baños"}
+            {property.baths} {lt(lang, { en: "baths", es: "baños", fr: "sdb", de: "Bäder", it: "bagni", pt: "banh." })}
           </span>
           <span className="flex items-center gap-1.5">
             <svg className="w-4 h-4 text-gray-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
