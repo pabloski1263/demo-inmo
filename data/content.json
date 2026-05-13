@@ -1,0 +1,184 @@
+{
+  "site": {
+    "name": "INMO Inmobiliaria",
+    "subtitle": "INMO Real Estate",
+    "logo": "",
+    "favicon": "",
+    "legal_name": "INMO SpA"
+  },
+  "hero": {
+    "title_en": "Find Your Dream Home",
+    "title_es": "Encuentra tu Hogar Soñado",
+    "subtitle_en": "Premium real estate services across Chile",
+    "subtitle_es": "Servicios inmobiliarios premium en todo Chile",
+    "background_image": "",
+    "search_placeholder": "City, neighborhood or address..."
+  },
+  "featured": {
+    "title_en": "Featured Properties",
+    "title_es": "Propiedades Destacadas",
+    "subtitle_en": "Handpicked selections for discerning buyers",
+    "subtitle_es": "Selecciones exclusivas para compradores exigentes"
+  },
+  "about": {
+    "title_en": "About INMO",
+    "title_es": "Sobre INMO",
+    "description_en": "INMO is a premier real estate agency dedicated to helping you find the perfect property. With years of experience in the Chilean market, we offer personalized service and expert guidance every step of the way.",
+    "description_es": "INMO es una agencia inmobiliaria premier dedicada a ayudarte a encontrar la propiedad perfecta. Con años de experiencia en el mercado chileno, ofrecemos servicio personalizado y asesoría experta en cada paso.",
+    "image": ""
+  },
+  "services": {
+    "title_en": "Our Services",
+    "title_es": "Nuestros Servicios",
+    "items": [
+      {
+        "id": "buy",
+        "title_en": "Buy a Home",
+        "title_es": "Comprar",
+        "description_en": "Find your dream property with our expert guidance and extensive portfolio.",
+        "description_es": "Encuentra la propiedad de tus sueños con nuestra asesoría experta y amplio portafolio.",
+        "icon": "search"
+      },
+      {
+        "id": "sell",
+        "title_en": "Sell a Property",
+        "title_es": "Vender",
+        "description_en": "Get the best value for your property with our strategic marketing approach.",
+        "description_es": "Obtén el mejor valor para tu propiedad con nuestro enfoque estratégico de marketing.",
+        "icon": "tag"
+      },
+      {
+        "id": "rent",
+        "title_en": "Rent",
+        "title_es": "Arrendar",
+        "description_en": "Discover premium rental properties tailored to your lifestyle and needs.",
+        "description_es": "Descubre propiedades en arriendo premium adaptadas a tu estilo de vida y necesidades.",
+        "icon": "key"
+      },
+      {
+        "id": "advise",
+        "title_en": "Real Estate Advice",
+        "title_es": "Asesoría",
+        "description_en": "Professional advice on market trends, investments, and property valuation.",
+        "description_es": "Asesoría profesional sobre tendencias del mercado, inversiones y valoración de propiedades.",
+        "icon": "chart"
+      }
+    ]
+  },
+  "contact": {
+    "title_en": "Contact Us",
+    "title_es": "Contáctenos",
+    "address": "Av. Apoquindo 4500, Las Condes, Santiago",
+    "phone": "+56 2 2345 6789",
+    "email": "info@inmo.cl",
+    "hours_en": "Mon-Fri: 9:00 - 18:00",
+    "hours_es": "Lun-Vie: 9:00 - 18:00",
+    "map_lat": -33.4163,
+    "map_lng": -70.5766
+  },
+  "footer": {
+    "description_en": "INMO is a modern real estate agency providing exceptional service across Chile.",
+    "description_es": "INMO es una agencia inmobiliaria moderna que brinda un servicio excepcional en todo Chile.",
+    "social": {
+      "instagram": "",
+      "facebook": "",
+      "linkedin": ""
+    },
+    "legal_links": [
+      {
+        "label_en": "Privacy Policy",
+        "label_es": "Política de Privacidad",
+        "url": "/privacy"
+      },
+      {
+        "label_en": "Terms of Service",
+        "label_es": "Términos del Servicio",
+        "url": "/terms"
+      }
+    ]
+  },
+  "admin": {
+    "email": "admin@inmo.cl",
+    "password": "inmo2025"
+  },
+  "translations": {
+    "en": {
+      "nav.properties": "Properties",
+      "nav.buy": "Buy",
+      "nav.rent": "Rent",
+      "nav.about": "About",
+      "nav.contact": "Contact",
+      "property.beds": "beds",
+      "property.baths": "baths",
+      "property.sqft": "m²",
+      "property.for_sale": "For Sale",
+      "property.for_rent": "For Rent",
+      "property.sold": "Sold",
+      "property.pending": "Pending",
+      "filter.all_types": "All Types",
+      "filter.house": "House",
+      "filter.apartment": "Apartment",
+      "filter.land": "Land",
+      "filter.commercial": "Commercial",
+      "sort.newest": "Newest",
+      "sort.price_low": "Price: Low to High",
+      "sort.price_high": "Price: High to Low",
+      "sort.largest": "Largest",
+      "common.view_all": "View All Properties",
+      "common.loading": "Loading...",
+      "common.no_results": "No properties found",
+      "common.schedule_visit": "Schedule a Visit",
+      "common.contact_agent": "Contact Agent",
+      "common.details": "Details",
+      "common.features": "Features",
+      "common.description": "Description",
+      "common.location": "Location",
+      "common.similar": "Similar Properties",
+      "common.send_message": "Send Message",
+      "footer.rights": "All rights reserved.",
+      "hero.cta_search": "Search",
+      "hero.buy": "Buy",
+      "hero.rent": "Rent",
+      "hero.search_placeholder": "City, neighborhood or address..."
+    },
+    "es": {
+      "nav.properties": "Propiedades",
+      "nav.buy": "Comprar",
+      "nav.rent": "Arrendar",
+      "nav.about": "Nosotros",
+      "nav.contact": "Contacto",
+      "property.beds": "dorm.",
+      "property.baths": "baños",
+      "property.sqft": "m²",
+      "property.for_sale": "En Venta",
+      "property.for_rent": "En Arriendo",
+      "property.sold": "Vendido",
+      "property.pending": "Pendiente",
+      "filter.all_types": "Todos los Tipos",
+      "filter.house": "Casa",
+      "filter.apartment": "Departamento",
+      "filter.land": "Terreno",
+      "filter.commercial": "Comercial",
+      "sort.newest": "Más Recientes",
+      "sort.price_low": "Precio: Menor a Mayor",
+      "sort.price_high": "Precio: Mayor a Menor",
+      "sort.largest": "Más Grandes",
+      "common.view_all": "Ver Todas las Propiedades",
+      "common.loading": "Cargando...",
+      "common.no_results": "No se encontraron propiedades",
+      "common.schedule_visit": "Agendar Visita",
+      "common.contact_agent": "Contactar Agente",
+      "common.details": "Detalles",
+      "common.features": "Características",
+      "common.description": "Descripción",
+      "common.location": "Ubicación",
+      "common.similar": "Propiedades Similares",
+      "common.send_message": "Enviar Mensaje",
+      "footer.rights": "Todos los derechos reservados.",
+      "hero.cta_search": "Buscar",
+      "hero.buy": "Comprar",
+      "hero.rent": "Arrendar",
+      "hero.search_placeholder": "Ciudad, barrio o dirección..."
+    }
+  }
+}

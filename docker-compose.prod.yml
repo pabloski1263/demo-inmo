@@ -1,0 +1,21 @@
+services:
+  app:
+    image: severant/demo-inmo:latest
+    ports:
+      - "3020:3000"
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - /root/demo-inmo/data:/app/data
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.demo-inmo.rule=Host(`demo-inmo.severant.cl`)"
+      - "traefik.http.routers.demo-inmo.tls=true"
+      - "traefik.http.routers.demo-inmo.tls.certresolver=letsencrypt"
+      - "traefik.http.services.demo-inmo.loadbalancer.server.port=3000"
+
+networks:
+  default:
+    external:
+      name: traefik-network
