@@ -4,7 +4,8 @@ import { getProperties } from "@/lib/properties";
 
 export async function POST(req: Request) {
   try {
-    const { messages } = await req.json();
+    const { messages, lang } = await req.json();
+    const currentLang = (lang as string) || "es";
 
     const content = getContent();
     const { chat } = content;
@@ -48,7 +49,7 @@ ${siteContext}
 PROPIEDADES DISPONIBLES:
 ${propsContext || "No hay propiedades disponibles actualmente."}
 
-IMPORTANTE: Siempre responde en el mismo idioma en que el usuario te escribe. Si te preguntan en español, responde en español. Si te preguntan en inglés, responde en inglés.`;
+INSTRUCCIÓN DE IDIOMA: Debes responder ÚNICAMENTE en el idioma "${currentLang}". Independientemente del idioma en que el usuario te escriba, tu respuesta debe estar siempre en "${currentLang}".`;
 
     // Prepare Gemini request with proper system_instruction
     const geminiMessages = messages.map((m: { role: string; content: string }) => ({
