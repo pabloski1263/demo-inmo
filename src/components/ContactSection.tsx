@@ -1,8 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { getLang, lt, type Lang } from "@/lib/utils";
+import { useReactiveLang, lt } from "@/lib/utils";
 import { fadeUp, slideLeft, slideRight } from "@/lib/animations";
 
 interface ContactSectionProps {
@@ -20,11 +19,7 @@ interface ContactSectionProps {
 }
 
 export default function ContactSection({ title_en, title_es, address, phone, email, hours_en, hours_es, whatsapp, review_link, review_text_en, review_text_es }: ContactSectionProps) {
-  const [lang, setLang] = useState<Lang>("es");
-
-  useEffect(() => {
-    setLang(getLang());
-  }, []);
+  const lang = useReactiveLang();
 
   const title = lt(lang, { en: title_en, es: title_es, fr: title_en, de: title_en, it: title_en, pt: title_es });
   const hours = lt(lang, { en: hours_en, es: hours_es, fr: hours_en, de: hours_en, it: hours_en, pt: hours_es });

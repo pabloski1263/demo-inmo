@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import PropertyCard from "./PropertyCard";
-import { getLang, lt, type Lang } from "@/lib/utils";
+import { useReactiveLang, lt } from "@/lib/utils";
 import { staggerContainer, springUp } from "@/lib/animations";
 import type { Property } from "@/lib/properties";
 
@@ -16,10 +16,9 @@ interface FeaturedProps {
 
 export default function FeaturedPropertiesSection({ title_en, title_es, subtitle_en, subtitle_es }: FeaturedProps) {
   const [properties, setProperties] = useState<Property[]>([]);
-  const [lang, setLang] = useState<Lang>("es");
+  const lang = useReactiveLang();
 
   useEffect(() => {
-    setLang(getLang());
     fetch("/api/properties?limit=6&sort=newest")
       .then((r) => r.json())
       .then((data) => setProperties(data.items || []));

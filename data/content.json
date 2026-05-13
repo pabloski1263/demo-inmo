@@ -132,7 +132,7 @@
   },
   "about": {
     "title_en": "About Sebastian",
-    "title_es": "Sobre Sebastian",
+    "title_es": "Sobre Sebastián",
     "description_en": "",
     "description_es": "",
     "image": ""
@@ -204,7 +204,7 @@
   },
   "footer": {
     "description_en": "Sebastian Acosta is a Miami luxury real estate advisor affiliated with ONE Sotheby's International Realty, providing exceptional service to buyers and sellers across South Florida.",
-    "description_es": "Sebastian Acosta es un asesor de bienes raíces de lujo de Miami afiliado a ONE Sotheby's International Realty, brindando un servicio excepcional a compradores y vendedores en todo el sur de la Florida.",
+    "description_es": "Sebastián Acosta es un asesor de bienes raíces de lujo de Miami afiliado a ONE Sotheby's International Realty, brindando un servicio excepcional a compradores y vendedores en todo el sur de la Florida.",
     "social": {
       "instagram": "https://instagram.com/sebastianacosta",
       "facebook": "",
@@ -225,7 +225,7 @@
   },
   "chat": {
     "enabled": true,
-    "api_key": "",
+    "api_key": "AIzaSyAc_8E7hbiJ2YYeda_NsVKlsoFXmljc4tY",
     "model": "gemini-2.5-flash-lite",
     "system_prompt": "Eres un asistente virtual de Sebastián Acosta, un asesor de bienes raíces de lujo en Miami especializado en Brickell, Coconut Grove, Coral Gables, Miami Beach y Key Biscayne. Responde preguntas sobre propiedades, el mercado inmobiliario de Miami, y los servicios de Sebastián. Usa un tono profesional pero amigable. Siempre ofrece ayudar con más información o contactar a Sebastián directamente. Responde en el mismo idioma en que te preguntan.",
     "greeting": "¡Hola! Soy el asistente virtual de Sebastián Acosta. ¿En qué puedo ayudarte? Puedo contarte sobre propiedades en Miami, el mercado inmobiliario, o agendar una consulta."

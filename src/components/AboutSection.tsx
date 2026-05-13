@@ -1,8 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { getLang, lt, type Lang } from "@/lib/utils";
+import { useReactiveLang, lt } from "@/lib/utils";
 import { slideLeft, slideRight } from "@/lib/animations";
 import type { SiteContent } from "@/lib/content";
 
@@ -11,11 +10,7 @@ interface AboutSectionProps {
 }
 
 export default function AboutSection({ content }: AboutSectionProps) {
-  const [lang, setLang] = useState<Lang>("es");
-
-  useEffect(() => {
-    setLang(getLang());
-  }, []);
+  const lang = useReactiveLang();
 
   const translations = content.translations;
   const t = (key: string) => translations[lang]?.[key] ?? translations.en?.[key] ?? key;
@@ -45,10 +40,10 @@ export default function AboutSection({ content }: AboutSectionProps) {
               <img
                 src={photo}
                 alt={title}
-                className="w-full h-[28rem] object-cover rounded-xl shadow-sm"
+                className="w-full h-80 sm:h-[28rem] object-cover rounded-xl shadow-sm"
               />
             ) : (
-              <div className="w-full h-[28rem] bg-gradient-to-br from-teal-50 via-white to-gold-50 rounded-xl flex items-center justify-center border border-gray-100">
+              <div className="w-full h-80 sm:h-[28rem] bg-gradient-to-br from-teal-50 via-white to-gold-50 rounded-xl flex items-center justify-center border border-gray-100">
                 <span className="text-7xl font-serif font-bold text-teal-300">{initials}</span>
               </div>
             )}
@@ -111,7 +106,7 @@ export default function AboutSection({ content }: AboutSectionProps) {
             )}
 
             {/* Stats */}
-            <div className="grid grid-cols-4 gap-4 mt-10 pt-10 border-t border-gray-100">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-10 pt-10 border-t border-gray-100">
               {agent.stats.map((stat) => (
                 <motion.div
                   key={stat.label_en}

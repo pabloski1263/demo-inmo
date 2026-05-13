@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import dynamic from "next/dynamic";
 import Navbar from "@/components/Navbar";
 import PropertyCard from "@/components/PropertyCard";
-import { formatPrice, formatArea, getLang, lt, getStatusLabel, type Lang } from "@/lib/utils";
+import { formatPrice, formatArea, useReactiveLang, lt, getStatusLabel } from "@/lib/utils";
 import type { Property } from "@/lib/properties";
 
 const PropertyMap = dynamic(() => import("@/components/PropertyMap"), {
@@ -17,11 +17,7 @@ export default function PropertyDetailPage({ params }: { params: Promise<{ slug:
   const [property, setProperty] = useState<Property | null>(null);
   const [similar, setSimilar] = useState<Property[]>([]);
   const [loading, setLoading] = useState(true);
-  const [lang, setLang] = useState<Lang>("es");
-
-  useEffect(() => {
-    setLang(getLang());
-  }, []);
+  const lang = useReactiveLang();
 
   useEffect(() => {
     const load = async () => {

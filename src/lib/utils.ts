@@ -1,3 +1,5 @@
+import { useState, useEffect } from "react";
+
 export type Lang = "en" | "es" | "fr" | "de" | "it" | "pt";
 
 export function cn(...classes: Array<string | undefined | null | false | 0 | "">): string {
@@ -52,6 +54,19 @@ export function useLangTranslations(translations: { en: Record<string, string>; 
 
 export function switchLang(to: Lang): void {
   document.cookie = `${LANG_COOKIE}=${to};path=/;max-age=${60 * 60 * 24 * 365}`;
+  window.dispatchEvent(new CustomEvent("langchange"));
+}
+
+/** Reactive hook — components re-render when language changes */
+export function useReactiveLang(): Lang {
+  const [lang, setLang] = useState<Lang>("es");
+  useEffect(() => {
+    setLang(getLang());
+    const handler = () => setLang(getLang());
+    window.addEventListener("langchange", handler);
+    return () => window.removeEventListener("langchange", handler);
+  }, []);
+  return lang;
 }
 
 /** Helper for inline translations — pass a record of lang → text */

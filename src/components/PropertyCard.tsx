@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
-import { formatPrice, formatArea, getLang, getStatusLabel, lt, type Lang } from "@/lib/utils";
+import { useCallback } from "react";
+import { formatPrice, formatArea, getStatusLabel, lt, useReactiveLang } from "@/lib/utils";
 import type { Property } from "@/lib/properties";
 
 interface PropertyCardProps {
@@ -12,7 +12,7 @@ interface PropertyCardProps {
   compact?: boolean;
 }
 
-function PropertyBadge({ status, lang }: { status: string; lang: Lang }) {
+function PropertyBadge({ status, lang }: { status: string; lang: ReturnType<typeof useReactiveLang> }) {
   const colors: Record<string, string> = {
     "for-sale": "bg-teal-700/90 text-white",
     "for-rent": "bg-blue-600/90 text-white",
@@ -28,11 +28,7 @@ function PropertyBadge({ status, lang }: { status: string; lang: Lang }) {
 }
 
 export default function PropertyCard({ property, isActive, onHover, onClick, compact = false }: PropertyCardProps) {
-  const [lang, setLang] = useState<Lang>("es");
-
-  useEffect(() => {
-    setLang(getLang());
-  }, []);
+  const lang = useReactiveLang();
 
   const title = lt(lang, { en: property.title_en, es: property.title_es, fr: property.title_en, de: property.title_en, it: property.title_en, pt: property.title_es });
 

@@ -1,7 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { getLang, lt } from "@/lib/utils";
+import { useReactiveLang, lt } from "@/lib/utils";
 import type { SiteContent } from "@/lib/content";
 
 interface FooterProps {
@@ -9,11 +8,7 @@ interface FooterProps {
 }
 
 export default function Footer({ content }: FooterProps) {
-  const [lang, setLang] = useState<"en" | "es" | "fr" | "de" | "it" | "pt">("es");
-
-  useEffect(() => {
-    setLang(getLang());
-  }, []);
+  const lang = useReactiveLang();
 
   const translations = content.translations;
   const t = (key: string) => translations[lang]?.[key] ?? translations.en?.[key] ?? key;

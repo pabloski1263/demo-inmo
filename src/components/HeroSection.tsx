@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { getLang, lt, type Lang } from "@/lib/utils";
+import { useReactiveLang, lt } from "@/lib/utils";
 import { staggerContainer, springUp } from "@/lib/animations";
 import type { AgentProfile } from "@/lib/content";
 
@@ -13,14 +13,10 @@ interface HeroSectionProps {
 }
 
 export default function HeroSection({ agent, phone, email }: HeroSectionProps) {
-  const [lang, setLang] = useState<Lang>("es");
+  const lang = useReactiveLang();
   const [searchTab, setSearchTab] = useState<"buy" | "rent">("buy");
   const [searchQuery, setSearchQuery] = useState("");
   const sectionRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    setLang(getLang());
-  }, []);
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -59,7 +55,7 @@ export default function HeroSection({ agent, phone, email }: HeroSectionProps) {
     <section
       id="hero"
       ref={sectionRef}
-      className="relative min-h-screen flex items-center overflow-hidden"
+      className="relative min-h-screen flex items-center overflow-hidden pt-20 sm:pt-24"
     >
       {/* Background */}
       <motion.div className="absolute inset-0" style={{ y: bgY }}>
@@ -96,11 +92,11 @@ export default function HeroSection({ agent, phone, email }: HeroSectionProps) {
                 <img
                   src={agent.photo}
                   alt={fullName}
-                  className="w-36 h-36 sm:w-48 sm:h-48 lg:w-56 lg:h-56 rounded-full object-cover border-2 border-gold-500/30 shadow-2xl shadow-gold-500/10"
+                  className="w-28 h-28 sm:w-44 sm:h-44 lg:w-52 lg:h-52 rounded-full object-cover border-2 border-gold-500/30 shadow-2xl shadow-gold-500/10"
                 />
               ) : (
-                <div className="w-36 h-36 sm:w-48 sm:h-48 lg:w-56 lg:h-56 rounded-full bg-gradient-to-br from-teal-800 to-gray-900 border-2 border-gold-500/30 shadow-2xl shadow-gold-500/10 flex items-center justify-center">
-                  <span className="text-5xl sm:text-6xl lg:text-7xl font-serif font-bold text-gold-400/80">
+                <div className="w-28 h-28 sm:w-44 sm:h-44 lg:w-52 lg:h-52 rounded-full bg-gradient-to-br from-teal-800 to-gray-900 border-2 border-gold-500/30 shadow-2xl shadow-gold-500/10 flex items-center justify-center">
+                  <span className="text-4xl sm:text-5xl lg:text-6xl font-serif font-bold text-gold-400/80">
                     {initials}
                   </span>
                 </div>

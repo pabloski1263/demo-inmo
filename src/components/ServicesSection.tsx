@@ -1,8 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { getLang, lt, type Lang } from "@/lib/utils";
+import { useReactiveLang, lt } from "@/lib/utils";
 import { staggerContainer, springUp } from "@/lib/animations";
 import type { ServiceItem } from "@/lib/content";
 
@@ -37,12 +36,7 @@ const iconMap: Record<string, React.ReactNode> = {
 };
 
 export default function ServicesSection({ title_en, title_es, items }: ServicesSectionProps) {
-  const [lang, setLang] = useState<Lang>("es");
-
-  useEffect(() => {
-    setLang(getLang());
-  }, []);
-
+  const lang = useReactiveLang();
   const title = lt(lang, { en: title_en, es: title_es, fr: title_en, de: title_en, it: title_en, pt: title_es });
 
   return (
