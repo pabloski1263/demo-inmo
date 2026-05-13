@@ -639,8 +639,28 @@ export default function AdminContentPage() {
               <p className="text-[10px] text-gray-400 mt-1">Usa GEMINI_API_KEY en .env.local como respaldo</p>
             </div>
             <div className="sm:col-span-2">
-              <label className={labelClass}>Mensaje de bienvenida</label>
-              <textarea rows={2} className={textAreaClass} value={content.chat.greeting} onChange={(e) => update("chat.greeting", e.target.value)} />
+              <label className={labelClass}>Saludo (EN)</label>
+              <textarea rows={2} className={textAreaClass} value={content.chat.greeting_en} onChange={(e) => update("chat.greeting_en", e.target.value)} />
+            </div>
+            <div className="sm:col-span-2">
+              <label className={labelClass}>Saludo (ES)</label>
+              <textarea rows={2} className={textAreaClass} value={content.chat.greeting_es} onChange={(e) => update("chat.greeting_es", e.target.value)} />
+            </div>
+            <div className="sm:col-span-2">
+              <label className={labelClass}>Saludo (FR)</label>
+              <textarea rows={2} className={textAreaClass} value={content.chat.greeting_fr} onChange={(e) => update("chat.greeting_fr", e.target.value)} />
+            </div>
+            <div className="sm:col-span-2">
+              <label className={labelClass}>Saludo (DE)</label>
+              <textarea rows={2} className={textAreaClass} value={content.chat.greeting_de} onChange={(e) => update("chat.greeting_de", e.target.value)} />
+            </div>
+            <div className="sm:col-span-2">
+              <label className={labelClass}>Saludo (IT)</label>
+              <textarea rows={2} className={textAreaClass} value={content.chat.greeting_it} onChange={(e) => update("chat.greeting_it", e.target.value)} />
+            </div>
+            <div className="sm:col-span-2">
+              <label className={labelClass}>Saludo (PT)</label>
+              <textarea rows={2} className={textAreaClass} value={content.chat.greeting_pt} onChange={(e) => update("chat.greeting_pt", e.target.value)} />
             </div>
             <div className="sm:col-span-2">
               <label className={labelClass}>System Prompt</label>

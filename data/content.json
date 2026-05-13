@@ -228,7 +228,12 @@
     "api_key": "AIzaSyAc_8E7hbiJ2YYeda_NsVKlsoFXmljc4tY",
     "model": "gemini-2.5-flash-lite",
     "system_prompt": "Eres un asistente virtual de Sebastián Acosta, un asesor de bienes raíces de lujo en Miami especializado en Brickell, Coconut Grove, Coral Gables, Miami Beach y Key Biscayne. Responde preguntas sobre propiedades, el mercado inmobiliario de Miami, y los servicios de Sebastián. Usa un tono profesional pero amigable. Siempre ofrece ayudar con más información o contactar a Sebastián directamente. Responde en el mismo idioma en que te preguntan.",
-    "greeting": "¡Hola! Soy el asistente virtual de Sebastián Acosta. ¿En qué puedo ayudarte? Puedo contarte sobre propiedades en Miami, el mercado inmobiliario, o agendar una consulta."
+    "greeting_en": "Hello! I am Sebastián Acosta's virtual assistant. How can I help you? I can tell you about Miami properties, the real estate market, or schedule a consultation.",
+    "greeting_es": "¡Hola! Soy el asistente virtual de Sebastián Acosta. ¿En qué puedo ayudarte? Puedo contarte sobre propiedades en Miami, el mercado inmobiliario, o agendar una consulta.",
+    "greeting_fr": "Bonjour ! Je suis l'assistant virtuel de Sebastián Acosta. Comment puis-je vous aider ? Je peux vous parler des propriétés à Miami, du marché immobilier, ou planifier une consultation.",
+    "greeting_de": "Hallo! Ich bin der virtuelle Assistent von Sebastián Acosta. Wie kann ich Ihnen helfen? Ich kann Ihnen über Immobilien in Miami, den Immobilienmarkt oder die Vereinbarung einer Beratung informieren.",
+    "greeting_it": "Ciao! Sono l'assistente virtuale di Sebastián Acosta. Come posso aiutarti? Posso parlarti delle proprietà a Miami, del mercato immobiliare o fissare una consulenza.",
+    "greeting_pt": "Olá! Sou o assistente virtual de Sebastián Acosta. Como posso ajudá-lo? Posso falar sobre propriedades em Miami, o mercado imobiliário ou agendar uma consulta."
   },
   "admin": {
     "email": "admin@sebastianacosta.com",

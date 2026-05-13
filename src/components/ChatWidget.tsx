@@ -2,10 +2,21 @@
 
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useReactiveLang, lt } from "@/lib/utils";
 
 interface Message {
   role: "user" | "assistant";
   content: string;
+}
+
+interface ChatConfig {
+  enabled: boolean;
+  greeting_en: string;
+  greeting_es: string;
+  greeting_fr: string;
+  greeting_de: string;
+  greeting_it: string;
+  greeting_pt: string;
 }
 
 export default function ChatWidget() {
@@ -13,20 +24,55 @@ export default function ChatWidget() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
-  const [config, setConfig] = useState<{ enabled: boolean; greeting: string } | null>(null);
+  const [config, setConfig] = useState<ChatConfig | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const lang = useReactiveLang();
 
   useEffect(() => {
     fetch("/api/chat/config")
       .then((r) => r.json())
       .then((data) => {
         setConfig(data);
-        if (data.enabled && data.greeting) {
-          setMessages([{ role: "assistant", content: data.greeting }]);
+        if (data.enabled) {
+          const greeting = lt(lang, {
+            en: data.greeting_en || "",
+            es: data.greeting_es || "",
+            fr: data.greeting_fr || "",
+            de: data.greeting_de || "",
+            it: data.greeting_it || "",
+            pt: data.greeting_pt || "",
+          });
+          if (greeting) {
+            setMessages([{ role: "assistant", content: greeting }]);
+          }
         }
       })
       .catch(() => {});
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // Update greeting when language changes
+  useEffect(() => {
+    if (!config?.enabled || messages.length === 0) return;
+    const firstMsg = messages[0];
+    if (firstMsg?.role !== "assistant") return;
+
+    const greeting = lt(lang, {
+      en: config.greeting_en || "",
+      es: config.greeting_es || "",
+      fr: config.greeting_fr || "",
+      de: config.greeting_de || "",
+      it: config.greeting_it || "",
+      pt: config.greeting_pt || "",
+    });
+    if (greeting && firstMsg.content !== greeting) {
+      setMessages((prev) => {
+        const updated = [...prev];
+        updated[0] = { ...updated[0], content: greeting };
+        return updated;
+      });
+    }
+  }, [lang, config, messages]);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -52,13 +98,47 @@ export default function ChatWidget() {
     } catch {
       setMessages((prev) => [
         ...prev,
-        { role: "assistant", content: "Lo siento, ocurrió un error. Intenta de nuevo." },
+        { role: "assistant", content: lt(lang, {
+          en: "Sorry, an error occurred. Please try again.",
+          es: "Lo siento, ocurrió un error. Intenta de nuevo.",
+          fr: "Désolé, une erreur s'est produite. Veuillez réessayer.",
+          de: "Entschuldigung, ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.",
+          it: "Spiacente, si è verificato un errore. Riprova.",
+          pt: "Desculpe, ocorreu um erro. Tente novamente.",
+        })},
       ]);
     }
     setLoading(false);
   };
 
   if (!config?.enabled) return null;
+
+  const headerTitle = lt(lang, {
+    en: "Sebastián Acosta Assistant",
+    es: "Asistente Sebastián Acosta",
+    fr: "Assistant Sebastián Acosta",
+    de: "Assistent Sebastián Acosta",
+    it: "Assistente Sebastián Acosta",
+    pt: "Assistente Sebastián Acosta",
+  });
+
+  const headerSubtitle = lt(lang, {
+    en: "Ask about properties",
+    es: "Consulta sobre propiedades",
+    fr: "Renseignez-vous sur les propriétés",
+    de: "Fragen zu Immobilien",
+    it: "Informazioni sulle proprietà",
+    pt: "Consulte sobre propriedades",
+  });
+
+  const inputPlaceholder = lt(lang, {
+    en: "Write your message...",
+    es: "Escribe tu mensaje...",
+    fr: "Écrivez votre message...",
+    de: "Schreiben Sie Ihre Nachricht...",
+    it: "Scrivi il tuo messaggio...",
+    pt: "Escreva sua mensagem...",
+  });
 
   return (
     <>
@@ -97,8 +177,8 @@ export default function ChatWidget() {
                 </svg>
               </div>
               <div>
-                <p className="text-sm font-semibold">Asistente Sebastián Acosta</p>
-                <p className="text-[10px] text-white/70">Consulta sobre propiedades</p>
+                <p className="text-sm font-semibold">{headerTitle}</p>
+                <p className="text-[10px] text-white/70">{headerSubtitle}</p>
               </div>
             </div>
 
@@ -144,7 +224,7 @@ export default function ChatWidget() {
                   type="text"
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
-                  placeholder="Escribe tu mensaje..."
+                  placeholder={inputPlaceholder}
                   disabled={loading}
                   className="flex-1 px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 disabled:opacity-50"
                 />

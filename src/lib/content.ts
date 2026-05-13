@@ -60,7 +60,12 @@ export interface SiteContent {
     api_key: string;
     model: string;
     system_prompt: string;
-    greeting: string;
+    greeting_en: string;
+    greeting_es: string;
+    greeting_fr: string;
+    greeting_de: string;
+    greeting_it: string;
+    greeting_pt: string;
   };
   admin: {
     email: string;
